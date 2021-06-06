@@ -1,0 +1,29 @@
+name:
+  en-US: Coconut Dal
+  de-DE: Kokosdal
+longName:
+  en-US: Creamy Coconut Dal
+  de-DE: Cremiges Kokosdal
+image: "spinatwraps.jpg"
+cookTime: 20
+diet: vegetarian
+ingredients:
+  - name:
+      de-DE: Rote Linsen
+      en-US: Red Lentils
+    scales: true
+    amount: 500
+    unit: g
+  - name:
+      de-DE: Kokosmilch
+      en-US: Coconut milk
+    scales: true
+    amount: 3
+    unit: l
+steps:
+  en-US:
+    - Do something first
+    - then another thing
+  de-DE:
+    - Als erstes etwas tun
+    - Dann noch etwas

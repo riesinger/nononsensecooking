@@ -1,0 +1,43 @@
+name:
+  en-US: Salmon with Green Asparagus
+  de-DE: Lachsfilet mit Grünem Spargel
+longName:
+  en-US: Jucy Salmon with Green Asparagus and Brown Butter
+  de-DE: Saftiges Lachsfilet mit Grünem Spargel und Brauner Butter
+image: "lachs-gruener-spargel.jpg"
+cookTime: 20
+diet: fish
+ingredients:
+  - name:
+      de-DE: Lachsfilet
+      en-US: Fresh Salmon
+    scales: true
+    amount: 400
+    unit: g
+  - name:
+      de-DE: Grüner Spargel
+      en-US: Green Asparagus
+    scales: true
+    amount: 600
+    unit: g
+  - name:
+      de-DE: Butter
+      en-US: Butter
+    scales: true
+    amount: 20
+    unit: g
+  - name:
+      de-DE: Salz
+      en-US: Salt
+    amount: 1
+  - name:
+      de-DE: Pfeffer
+      en-US: Pepper
+    amount: 1
+steps:
+  en-US:
+    - Do something first
+    - then another thing
+  de-DE:
+    - Als erstes etwas tun
+    - Dann noch etwas
