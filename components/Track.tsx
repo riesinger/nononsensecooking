@@ -7,11 +7,11 @@ const StyledTrack = styled.div<{ sm: number; md?: number; lg?: number }>`
   grid-template-columns: repeat(${({ sm }) => sm}, 1fr);
   gap: 2rem;
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 700px) {
     grid-template-columns: repeat(${({ sm, md }) => (md ? md : sm)}, 1fr);
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1200px) {
     grid-template-columns: repeat(
       ${({ sm, md, lg }) => (lg ? lg : md ? md : sm)},
       1fr

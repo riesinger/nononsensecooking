@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const StyledFooter = styled.footer`
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   width: 100%;
   display: flex;
   justify-content: space-between;

@@ -10,6 +10,7 @@ import { mdiClockOutline } from "@mdi/js";
 import IngredientsList from "../../components/IngredientsList";
 import ServingsChooser from "../../components/ServingsChooser";
 import { useState } from "react";
+import StepList from "../../components/StepList";
 
 export const getServerSideProps: GetServerSideProps<Recipe> = async (
   context
@@ -27,7 +28,7 @@ const StyledArticle = styled.article`
   max-width: 1000px;
   width: 100%;
   margin: 2rem auto;
-  padding: 0 4rem;
+  padding: 0 2rem;
   box-sizing: border-box;
 `;
 
@@ -50,9 +51,13 @@ const RecipeStats = styled.header`
 `;
 
 const StyledHeading = styled.h2`
+  font-size: 1.6rem;
   font-weight: 400;
-  font-size: 2rem;
   margin: 0 1rem 0 0;
+
+  @media screen and (min-width: 800px) {
+    font-size: 2rem;
+  }
 `;
 
 const IconStat = styled.span`
@@ -100,11 +105,7 @@ const SingleRecipe = ({
         ingredients={ingredients}
         servingsMultiplier={servings / DEFAULT_SERVINGS}
       />
-      <ol>
-        {steps.map((step, i) => (
-          <li key={i}>{step}</li>
-        ))}
-      </ol>
+      <StepList steps={steps} />
     </StyledArticle>
   );
 };

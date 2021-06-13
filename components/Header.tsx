@@ -1,8 +1,10 @@
+import { mdiChefHat } from "@mdi/js";
+import Icon from "@mdi/react";
 import Link from "next/link";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   margin: 0;
   width: 100%;
   display: flex;
@@ -13,9 +15,14 @@ const StyledHeader = styled.header`
 `;
 
 const StyledHeading = styled.h1`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin: 0;
-  font-weight: 600;
+  font-weight: 400;
+  margin-right: 0.5rem;
+
+  @media screen and (min-width: 800px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const SearchBar = styled.input`
@@ -28,14 +35,22 @@ const SearchBar = styled.input`
   appearance: none;
   color: var(--color-text-primary);
   width: 40ch;
+  max-width: 100%;
+`;
+
+const StyledLink = styled.a`
+  display: flex;
+  align-items: center;
+  max-width: 100%;
 `;
 
 const Header = () => (
   <StyledHeader>
     <Link href="/">
-      <a>
+      <StyledLink>
         <StyledHeading>NoNonsenseCooking</StyledHeading>
-      </a>
+        <Icon path={mdiChefHat} size={1.5} rotate={10} />
+      </StyledLink>
     </Link>
     <SearchBar placeholder="Search for recipes and ingredients" />
   </StyledHeader>
