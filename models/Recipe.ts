@@ -19,7 +19,7 @@ export interface RecipeFile {
   cookTime: number;
   diet: "meat" | "fish" | "vegetarian" | "vegan";
   steps: Localized<string[]>;
-  ingredients: Localized<Ingredient[]>;
+  ingredients: TranslatableIngredient[];
 }
 
 export type RecipeID = string;
