@@ -1,26 +1,47 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { mdiClockOutline } from "@mdi/js";
+import Icon from "@mdi/react";
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/image";
+import { useState } from "react";
+import slug from "slug";
 import styled from "styled-components";
 import IconForDiet from "../../components/IconForDiet";
-import { Recipe, RecipeID } from "../../models/Recipe";
-import languageFrom from "../../utils/languageFrom";
-import { recipeById } from "../api/recipes/[id]";
-import Icon from "@mdi/react";
-import { mdiClockOutline } from "@mdi/js";
 import IngredientsList from "../../components/IngredientsList";
 import ServingsChooser from "../../components/ServingsChooser";
-import { useState } from "react";
 import StepList from "../../components/StepList";
+import { Recipe, RecipeID } from "../../models/Recipe";
+import languageFrom from "../../utils/languageFrom";
+import { allRecipes } from "../api/recipes";
+import { recipeById } from "../api/recipes/[id]";
 
-export const getServerSideProps: GetServerSideProps<Recipe> = async (
-  context
-) => {
+export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
   const { id } = context.params;
   const recipe = await recipeById(languageFrom(context), id[0] as RecipeID);
   return {
     props: {
       ...recipe,
     },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async (context) => {
+  const recipes = await allRecipes();
+  const paths = recipes
+    .map((recipe) =>
+      context.locales.map((locale) => ({
+        params: {
+          id: [recipe.id, slug(recipe.name[locale])],
+        },
+        locale: locale,
+      }))
+    )
+    .reduce((acc, recipePaths) => {
+      acc.push(...recipePaths);
+      return acc;
+    }, []);
+  return {
+    paths,
+    fallback: false, // NOTE: Once we have many recipes, it might be worth looking into only pre-rendering some of them
   };
 };
 
@@ -73,7 +94,7 @@ const SingleRecipe = ({
   diet,
   cookTime,
   ingredients,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const DEFAULT_SERVINGS = 2;
   const [servings, setServings] = useState(DEFAULT_SERVINGS);
   function onServingsChanged(newServings: number) {

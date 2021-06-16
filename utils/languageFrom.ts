@@ -1,8 +1,8 @@
-import { GetServerSidePropsContext, NextPageContext } from "next";
+import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
 import { isSupportedLanguage, SupportedLanguage } from "../models/Localized";
 
 export default function languageFrom(
-  context: GetServerSidePropsContext<any>
+  context: GetServerSidePropsContext<any> | GetStaticPropsContext<any>
 ): SupportedLanguage {
   return isSupportedLanguage(context.locale)
     ? context.locale
