@@ -52,6 +52,6 @@ const translateIngredient =
   (ingredient: TranslatableIngredient): Ingredient => ({
     name: ingredient.name[lang],
     scales: ingredient.scales || false,
-    amount: ingredient.amount,
+    amount: ingredient.amount || null,
     unit: ingredient.unit || null,
   });
