@@ -5,4 +5,5 @@ export enum Unit {
   PIECE = "pc",
   MILILITERS = "ml",
   LITERS = "l",
+  TABLESPOONS = "tbsp",
 }
