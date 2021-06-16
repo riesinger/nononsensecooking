@@ -1,0 +1,90 @@
+name:
+  en-US: Chinese Noodles with Broccoli and Carrot
+  de-DE: Chinesische Nudeln mit Brokkoli und Karotte
+longName:
+  en-US: Quick Chinese Noodles with Broccoli and Carrot
+  de-DE: Schnelle Chinesische Nudeln mit Brokkoli und Karotte
+image: "chinese-noodles-broccoli-carrot-min.jpg"
+cookTime: 25
+diet: vegan
+ingredients:
+  - name:
+      de-DE: Brokkoli (frisch oder gefroren)
+      en-US: Broccoli (fresh or frozen)
+    amount: 200
+    unit: g
+    scales: true
+  - name:
+      de-DE: Karotten
+      en-US: Carrots
+    amount: 200
+    unit: g
+    scales: true
+  - name:
+      de-DE: Schnellkochende Chinesische Nudeln
+      en-US: Quick-cooking Chinese noodles
+    amount: 200
+    unit: g
+    scales: true
+  - name:
+      de-DE: Sesamöl
+      en-US: Sesame Oil
+    amount: 1
+    unit: tbsp
+    scales: true
+  - name:
+      de-DE: Sojasoße
+      en-US: Soj Sauce
+    amount: 4
+    unit: tbsp
+    scales: true
+  - name:
+      de-DE: Reisessig
+      en-US: Rice Vinegar
+    amount: 1
+    unit: tbsp
+    scales: true
+  - name:
+      de-DE: Srirachasoße
+      en-US: Sriracha Sauce
+    amount: 1
+    unit: tbsp
+    scales: true
+  - name:
+      de-DE: Agavendicksaft
+      en-US: Agava Syrup
+    amount: 1
+    unit: tbsp
+    scales: true
+  - name:
+      de-DE: Salz
+      en-US: Salt
+  - name:
+      de-DE: Pfeffer
+      en-US: Pepper
+  - name:
+      de-DE: Chiliflocken
+      en-US: Chili Flakes
+  - name:
+      de-DE: Paprikapulver
+      en-US: Red Pepper Powder
+  - name:
+      de-DE: Knoblauchpulver
+      en-US: Garlic Powder
+steps:
+  en-US:
+    - Cut the carrots into small strips and the broccoli into small florets. Heat the sesame oil in a pan and cook the carrots at high heat. If you use frozen broccoli, add it right away, otherwise wait 3-4 minutes before adding it to the carrot.
+    - Season the carrots and broccoli with salt, garlic powder, chili flakes, and red pepper powder. Let the vegetables cook on high heat for abount 10 minutes.
+    - Heat some salted water for the noodles.
+    - Mix soj sauce, sriracha sauce, rice vinegar, agava syrup and a bit of pepper together to make a sauce.
+    - Cook the noodles according to the instruction on the package. It shouldn't take longer than 5 minutes.
+    - Mix everything in the pan or directly on the plate.
+    - Enjoy!
+  de-DE:
+    - Schneide die Karotten in feine Streifen und den Brokkoli in kleine Röschen. Erhitze etwas Sesamöl in einer Pfanne und brate die Karotten scharf an. Wenn du gefrorenen Brokkoli verwendest, kannst du ihn direkt dazu geben. Ansonsten brate die Karotte 3-4 Minuten, bevor du den Brokkoli dazu gibst.
+    - Würze Karotten und Brokkoli mit Salz, Knoblauchpulver, Chiliflocken und Paprikapulver und lasse beides bei hoher Hitze ca. 10 Minuten kochen.
+    - Setze gesalzenes Wasser für die Nudeln auf.
+    - Mische Sojasoße, Srirachasoße, Reisessig, Agavendicksaft und etwas Pfeffer zu einer Soße zusammen
+    - Koche die Nudeln nach Packungsanleitung. Das sollte nicht länger als 5 Minuten dauern.
+    - Mische alles der Pfanne oder direkt auf dem Teller
+    - Guten Appetit!
