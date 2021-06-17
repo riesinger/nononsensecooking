@@ -1,6 +1,7 @@
 import { mdiClockOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import { useState } from "react";
 import slug from "slug";
@@ -19,6 +20,11 @@ export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
   const recipe = await recipeById(languageFrom(context), id[0] as RecipeID);
   return {
     props: {
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "recipe",
+        "footer",
+      ])),
       ...recipe,
     },
   };

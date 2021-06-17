@@ -1,0 +1,18 @@
+{
+  "home": {
+    "todaysrecipes": "Rezepte des Tages",
+    "recentlyaddedrecipes": "Neue Rezepte",
+    "mostpopularrecipes": "Beliebteste Rezepte",
+    "allrecipes": "Alle Rezepte"
+  },
+  "diet": {
+    "meat": "Enthält Fleisch",
+    "fish": "Enthält Fisch",
+    "vegetarian": "Vegetarisch",
+    "vegan": "Vegan"
+  },
+  "preparationTime": {
+    "label": "Zubereitungszeit",
+    "inMinutes": "{{ minutes}}min"
+  }
+}

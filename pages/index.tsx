@@ -5,6 +5,8 @@ import DishCard from "../components/DishCard";
 import Track from "../components/Track";
 import languageFrom from "../utils/languageFrom";
 import { recipesOfTheDayForLanguage } from "./api/recipes/recommended/for-today";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const PaddedSection = styled.section`
   width: 100%;
@@ -21,6 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     );
     return {
       props: {
+        ...(await serverSideTranslations(context.locale, ["common", "footer"])),
         recipesOfTheDay,
       },
     };
@@ -35,6 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Home({
   recipesOfTheDay,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { t } = useTranslation("common");
   return (
     <>
       <Head>
@@ -46,7 +50,7 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PaddedSection>
-        <h3>Today's recipes</h3>
+        <h3>{t("home.todaysrecipes")}</h3>
         <Track sm={1} md={2} lg={3}>
           {recipesOfTheDay?.map((recipe) => (
             <DishCard key={recipe.id} id={recipe.id} {...recipe} />
@@ -54,7 +58,7 @@ export default function Home({
         </Track>
       </PaddedSection>
       <PaddedSection>
-        <h3>Recently added</h3>
+        <h3>{t("home.recentlyaddedrecipes")}</h3>
       </PaddedSection>
     </>
   );

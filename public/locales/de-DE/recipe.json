@@ -1,0 +1,12 @@
+{
+  "servings": "Portionen",
+  "unit": {
+    "none": "{{amount}}",
+    "g": "{{amount}}g",
+    "kg": "{{amount}}kg",
+    "pc": "{{amount}} Stück",
+    "ml": "{{amount}}ml",
+    "l": "{{amount}}l",
+    "tbsp": "{{amount}} Esslöffel"
+  }
+}

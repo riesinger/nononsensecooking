@@ -2,6 +2,7 @@ import { mdiMinus, mdiPlus } from "@mdi/js";
 import { useState } from "react";
 import styled from "styled-components";
 import Icon from "@mdi/react";
+import { useTranslation } from "next-i18next";
 
 const IconButton = styled.button`
   appearance: none;
@@ -43,9 +44,10 @@ interface Props {
 }
 
 const ServingsChooser = ({ servings, onServingsChanged }: Props) => {
+  const { t } = useTranslation("recipe");
   return (
     <StyledServingsChooser>
-      <Heading>Servings</Heading>
+      <Heading>{t("servings")}</Heading>
       <ChooserInputLine>
         <IconButton
           onClick={function () {

@@ -6,20 +6,28 @@ import {
   mdiLeaf,
 } from "@mdi/js";
 import Icon from "@mdi/react";
+import { useTranslation } from "next-i18next";
 import React from "react";
 import { Recipe } from "../models/Recipe";
 
-const ICONS = {
-  meat: <Icon path={mdiFoodSteak} title="Contains meat" size={1} />,
-  fish: <Icon path={mdiFish} title="Contains fish" size={1} />,
-  vegetarian: (
-    <Icon path={mdiAlphaVCircleOutline} title="Vegetarian" size={1} />
-  ),
-  vegan: <Icon path={mdiLeaf} title="Vegan" size={1} />,
-};
-
 const IconForDiet = ({ diet }: { diet: Recipe["diet"] }) => {
-  return ICONS[diet];
+  const { t } = useTranslation();
+  switch (diet) {
+    case "meat":
+      return <Icon path={mdiFoodSteak} title={t(`diet.${diet}`)} size={1} />;
+    case "fish":
+      return <Icon path={mdiFish} title={t(`diet.${diet}`)} size={1} />;
+    case "vegetarian":
+      return (
+        <Icon
+          path={mdiAlphaVCircleOutline}
+          title={t(`diet.${diet}`)}
+          size={1}
+        />
+      );
+    case "vegan":
+      return <Icon path={mdiLeaf} title={t(`diet.${diet}`)} size={1} />;
+  }
 };
 
 export default IconForDiet;
