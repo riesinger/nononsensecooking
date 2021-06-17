@@ -1,0 +1,18 @@
+{
+  "home": {
+    "todaysrecipes": "Today's Recipes",
+    "recentlyaddedrecipes": "Recently Added",
+    "mostpopularrecipes": "Most Popular",
+    "allrecipes": "All Recipes"
+  },
+  "diet": {
+    "meat": "Contains Meat",
+    "fish": "Contains Fish",
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan"
+  },
+  "preparationTime": {
+    "label": "Preparation Time",
+    "inMinutes": "{{ minutes }}min"
+  }
+}

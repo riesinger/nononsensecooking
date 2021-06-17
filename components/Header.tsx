@@ -1,5 +1,6 @@
 import { mdiChefHat } from "@mdi/js";
 import Icon from "@mdi/react";
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -44,16 +45,19 @@ const StyledLink = styled.a`
   max-width: 100%;
 `;
 
-const Header = () => (
-  <StyledHeader>
-    <Link href="/">
-      <StyledLink>
-        <StyledHeading>NoNonsenseCooking</StyledHeading>
-        <Icon path={mdiChefHat} size={1.5} rotate={10} />
-      </StyledLink>
-    </Link>
-    <SearchBar placeholder="Search for recipes and ingredients" />
-  </StyledHeader>
-);
+const Header = () => {
+  const { t } = useTranslation("header");
+  return (
+    <StyledHeader>
+      <Link href="/">
+        <StyledLink>
+          <StyledHeading>NoNonsenseCooking</StyledHeading>
+          <Icon path={mdiChefHat} size={1.5} rotate={10} />
+        </StyledLink>
+      </Link>
+      <SearchBar placeholder={t("searchbar.placeholder")} />
+    </StyledHeader>
+  );
+};
 
 export default Header;

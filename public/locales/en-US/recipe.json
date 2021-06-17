@@ -1,0 +1,12 @@
+{
+  "servings": "Servings",
+  "unit": {
+    "none": "{{amount}}",
+    "g": "{{amount}}g",
+    "kg": "{{amount}}kg",
+    "pc": "{{amount}}pc",
+    "ml": "{{amount}}ml",
+    "l": "{{amount}}l",
+    "tbsp": "{{amount}}tbsp"
+  }
+}

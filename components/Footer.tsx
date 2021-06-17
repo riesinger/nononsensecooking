@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 const StyledFooter = styled.footer`
   padding: 1rem 2rem;
@@ -13,18 +14,21 @@ const StyledLink = styled.a`
   margin-left: 20px;
 `;
 
-const Footer = () => (
-  <StyledFooter>
-    <span>© {new Date().getFullYear()} - Pascal Riesinger</span>
-    <nav>
-      <Link href="/legal">
-        <StyledLink>Legal information</StyledLink>
-      </Link>
-      <Link href="/donate">
-        <StyledLink>Donate</StyledLink>
-      </Link>
-    </nav>
-  </StyledFooter>
-);
+const Footer = () => {
+  const { t } = useTranslation("footer");
+  return (
+    <StyledFooter>
+      <span>© {new Date().getFullYear()} - Pascal Riesinger</span>
+      <nav>
+        <Link href="/legal">
+          <StyledLink>{t("link.legal.text")}</StyledLink>
+        </Link>
+        <Link href="/donate">
+          <StyledLink>{t("link.donate.text")}</StyledLink>
+        </Link>
+      </nav>
+    </StyledFooter>
+  );
+};
 
 export default Footer;

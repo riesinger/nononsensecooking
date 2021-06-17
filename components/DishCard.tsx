@@ -14,6 +14,7 @@ import {
   mdiLeaf,
 } from "@mdi/js";
 import IconForDiet from "./IconForDiet";
+import { useTranslation } from "next-i18next";
 
 type Props = {
   id: Recipe["id"];
@@ -79,30 +80,39 @@ const IconStat = styled.span`
   gap: 0.25rem;
 `;
 
-const DishCard = ({ id, name, image, cookTime, diet }: Props) => (
-  <Link href={`/r/${id}/${slug(name)}`}>
-    <StyledCard>
-      <ImageContainer>
-        <Image
-          src={`/img/recipes/${image}`}
-          layout="fill"
-          objectFit="cover"
-          quality={80}
-          sizes="(max-width: 600px) 300px, (max-width: 1200px) 400px, (max-width: 1800px) 600px, (max-width: 2400px) 750px, (min-width: 2401px) 850px"
-        />
-      </ImageContainer>
-      <DishStats>
-        <DishName>{name}</DishName>
-        <DishStatLine>
-          <IconStat>
-            <Icon path={mdiClockOutline} size={1} title="Preparation Time" />
-            <span>{cookTime}min</span>
-          </IconStat>
-          <IconForDiet diet={diet} />
-        </DishStatLine>
-      </DishStats>
-    </StyledCard>
-  </Link>
-);
+const DishCard = ({ id, name, image, cookTime, diet }: Props) => {
+  const { t } = useTranslation("common");
+  return (
+    <Link href={`/r/${id}/${slug(name)}`}>
+      <StyledCard>
+        <ImageContainer>
+          <Image
+            src={`/img/recipes/${image}`}
+            layout="fill"
+            objectFit="cover"
+            quality={80}
+            sizes="(max-width: 600px) 300px, (max-width: 1200px) 400px, (max-width: 1800px) 600px, (max-width: 2400px) 750px, (min-width: 2401px) 850px"
+          />
+        </ImageContainer>
+        <DishStats>
+          <DishName>{name}</DishName>
+          <DishStatLine>
+            <IconStat>
+              <Icon
+                path={mdiClockOutline}
+                size={1}
+                title={t("preparationTime.label")}
+              />
+              <span>
+                {t("preparationTime.inMinutes", { minutes: cookTime })}
+              </span>
+            </IconStat>
+            <IconForDiet diet={diet} />
+          </DishStatLine>
+        </DishStats>
+      </StyledCard>
+    </Link>
+  );
+};
 
 export default DishCard;
