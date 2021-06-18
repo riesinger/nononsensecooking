@@ -2,7 +2,6 @@ import {
   mdiAlphaVCircleOutline,
   mdiFish,
   mdiFoodSteak,
-  mdiHelpCircleOutline,
   mdiLeaf,
 } from "@mdi/js";
 import Icon from "@mdi/react";

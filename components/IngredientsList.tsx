@@ -1,7 +1,4 @@
-import { isScalingIngredient } from "../models/Ingredient";
 import { Recipe } from "../models/Recipe";
-import NonScalingIngredient from "./NonScalingIngredient";
-import ScalingIngredient from "./ScalingIngredient";
 import styled from "styled-components";
 import Ingredient from "./Ingredient";
 
