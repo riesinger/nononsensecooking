@@ -1,8 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {
-  Ingredient as IngredientModel,
-  isScalingIngredient,
-} from "../models/Ingredient";
+import { Ingredient as IngredientModel } from "../models/Ingredient";
 import { Unit } from "../models/Unit";
 
 function unitUsesPlural(unit: Unit) {

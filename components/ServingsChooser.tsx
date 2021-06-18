@@ -1,8 +1,7 @@
 import { mdiMinus, mdiPlus } from "@mdi/js";
-import { useState } from "react";
-import styled from "styled-components";
 import Icon from "@mdi/react";
 import { useTranslation } from "next-i18next";
+import styled from "styled-components";
 
 const IconButton = styled.button`
   appearance: none;

@@ -12,5 +12,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 export async function recipesOfTheDayForLanguage(language: SupportedLanguage) {
   const recipes = await allRecipes();
-  return recipes.slice(0, 3).map(translateTo(language));
+  // return recipes.slice(0, 3).map(translateTo(language));
+  return recipes.map(translateTo(language));
 }

@@ -1,20 +1,12 @@
+import { mdiClockOutline } from "@mdi/js";
+import Icon from "@mdi/react";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
-import styled from "styled-components";
 import slug from "slug";
+import styled from "styled-components";
 import { Recipe } from "../models/Recipe";
-import Icon from "@mdi/react";
-import {
-  mdiAccount,
-  mdiAlphaVCircleOutline,
-  mdiClock,
-  mdiClockOutline,
-  mdiFish,
-  mdiFoodSteak,
-  mdiLeaf,
-} from "@mdi/js";
 import IconForDiet from "./IconForDiet";
-import { useTranslation } from "next-i18next";
 
 type Props = {
   id: Recipe["id"];
