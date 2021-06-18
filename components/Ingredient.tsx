@@ -3,6 +3,19 @@ import {
   Ingredient as IngredientModel,
   isScalingIngredient,
 } from "../models/Ingredient";
+import { Unit } from "../models/Unit";
+
+function unitUsesPlural(unit: Unit) {
+  return {
+    [Unit.NONE]: true,
+    [Unit.GRAM]: false,
+    [Unit.KILOGRAM]: false,
+    [Unit.LITERS]: false,
+    [Unit.MILILITERS]: false,
+    [Unit.PIECE]: true,
+    [Unit.TABLESPOONS]: false,
+  }[unit];
+}
 
 const Ingredient = ({
   id,
@@ -17,7 +30,9 @@ const Ingredient = ({
     ? Math.round(amount * servingsMultiplier * 10) / 10
     : amount;
   const ingredientName = id
-    ? t(`ingredient.${id}${adjustedAmount > 1 ? "_plural" : ""}`)
+    ? t(`ingredient.${id}`, {
+        count: unitUsesPlural(unit) ? adjustedAmount : 1,
+      })
     : name;
 
   return (
