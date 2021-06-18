@@ -8,5 +8,25 @@
     "ml": "{{amount}}ml",
     "l": "{{amount}}l",
     "tbsp": "{{amount}}tbsp"
+  },
+  "ingredient": {
+    "salt": "Salt",
+    "pepper": "Pepper",
+    "wrap": "Wrap",
+    "wrap_plural": "Wraps",
+    "onion": "Onion",
+    "onion_plural": "Onions",
+    "carrot": "Carrot",
+    "carrot_plural": "Carrots",
+    "sesameoil": "Sesame Oil",
+    "soysauce": "Soy Sauce",
+    "ricevinegar": "Rice Vinegar",
+    "srirachasauce": "Sriracha Sauce",
+    "agavasyrup": "Agava Syrup",
+    "chiliflakes": "Chili Flakes",
+    "redpepperpowder": "Paprika Powder",
+    "garlicpowder": "Garlic Powder",
+    "redlentils": "Red Lentils",
+    "coconutmilk": "Coconut Milk"
   }
 }
