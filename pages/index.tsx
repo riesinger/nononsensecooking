@@ -23,7 +23,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     );
     return {
       props: {
-        ...(await serverSideTranslations(context.locale, ["common", "footer"])),
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "footer",
+          "header",
+        ])),
         recipesOfTheDay,
       },
     };
