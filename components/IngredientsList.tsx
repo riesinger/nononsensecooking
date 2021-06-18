@@ -3,6 +3,7 @@ import { Recipe } from "../models/Recipe";
 import NonScalingIngredient from "./NonScalingIngredient";
 import ScalingIngredient from "./ScalingIngredient";
 import styled from "styled-components";
+import Ingredient from "./Ingredient";
 
 interface Props {
   ingredients: Recipe["ingredients"];
@@ -19,15 +20,8 @@ const IngredientsList = ({ ingredients, servingsMultiplier }: Props) => (
   <div>
     <List>
       {ingredients.map((ingredient) => (
-        <li key={ingredient.name}>
-          {isScalingIngredient(ingredient) ? (
-            <ScalingIngredient
-              {...ingredient}
-              servingsMultiplier={servingsMultiplier}
-            />
-          ) : (
-            <NonScalingIngredient {...ingredient} />
-          )}
+        <li key={ingredient.name || ingredient.id}>
+          <Ingredient {...ingredient} servingsMultiplier={servingsMultiplier} />
         </li>
       ))}
     </List>
