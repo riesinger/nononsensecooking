@@ -14,9 +14,7 @@ ingredients:
     amount: 200
     unit: g
     scales: true
-  - name:
-      de-DE: Karotten
-      en-US: Carrots
+  - id: carrot
     amount: 200
     unit: g
     scales: true
@@ -26,51 +24,31 @@ ingredients:
     amount: 200
     unit: g
     scales: true
-  - name:
-      de-DE: Sesamöl
-      en-US: Sesame Oil
+  - id: sesameoil
     amount: 1
     unit: tbsp
     scales: true
-  - name:
-      de-DE: Sojasoße
-      en-US: Soj Sauce
+  - id: soysauce
     amount: 4
     unit: tbsp
     scales: true
-  - name:
-      de-DE: Reisessig
-      en-US: Rice Vinegar
+  - id: ricevinegar
     amount: 1
     unit: tbsp
     scales: true
-  - name:
-      de-DE: Srirachasoße
-      en-US: Sriracha Sauce
+  - id: srirachasauce
     amount: 1
     unit: tbsp
     scales: true
-  - name:
-      de-DE: Agavendicksaft
-      en-US: Agava Syrup
+  - id: agavasyrup
     amount: 1
     unit: tbsp
     scales: true
-  - name:
-      de-DE: Salz
-      en-US: Salt
-  - name:
-      de-DE: Pfeffer
-      en-US: Pepper
-  - name:
-      de-DE: Chiliflocken
-      en-US: Chili Flakes
-  - name:
-      de-DE: Paprikapulver
-      en-US: Red Pepper Powder
-  - name:
-      de-DE: Knoblauchpulver
-      en-US: Garlic Powder
+  - id: salt
+  - id: pepper
+  - id: chiliflakes
+  - id: paprikapowder
+  - id: garlicpowder
 steps:
   en-US:
     - Cut the carrots into small strips and the broccoli into small florets. Heat the sesame oil in a pan and cook the carrots at high heat. If you use frozen broccoli, add it right away, otherwise wait 3-4 minutes before adding it to the carrot.

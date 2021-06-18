@@ -8,15 +8,11 @@ image: "placeholder-min.jpg"
 cookTime: 20
 diet: vegetarian
 ingredients:
-  - name:
-      de-DE: Rote Linsen
-      en-US: Red Lentils
+  - id: redlentils
     scales: true
     amount: 500
     unit: g
-  - name:
-      de-DE: Kokosmilch
-      en-US: Coconut milk
+  - id: coconutmilk
     scales: true
     amount: 3
     unit: l

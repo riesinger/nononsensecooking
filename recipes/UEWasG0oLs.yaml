@@ -20,20 +20,12 @@ ingredients:
     scales: true
     amount: 600
     unit: g
-  - name:
-      de-DE: Butter
-      en-US: Butter
+  - id: butter
     scales: true
     amount: 20
     unit: g
-  - name:
-      de-DE: Salz
-      en-US: Salt
-    amount: 1
-  - name:
-      de-DE: Pfeffer
-      en-US: Pepper
-    amount: 1
+  - id: salt
+  - id: pepper
 steps:
   en-US:
     - Do something first

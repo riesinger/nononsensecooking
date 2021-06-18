@@ -20,27 +20,14 @@ ingredients:
     amount: 60
     unit: g
     scales: true
-  - name:
-      de-DE: Wraps
-      en-US: Wraps
+  - id: wrap
     amount: 2
     scales: true
-  - name:
-      de-DE: Wraps
-      en-US: Wraps
-    amount: 2
-    scales: true
-  - name:
-      de-DE: Zwiebel
-      en-US: Onion
+  - id: onion
     amount: 1
     scales: true
-  - name:
-      de-DE: Pfeffer
-      en-US: Pepper
-  - name:
-      de-DE: Salz
-      en-US: Salt
+  - id: pepper
+  - id: salt
 steps:
   en-US:
     - Cut the sweet pototatos into small cubes. Put them into a pot, add some cooking oil and fry the potatos at medium heat for about 5 minutes.
