@@ -21,6 +21,7 @@ export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [
+        "header",
         "common",
         "recipe",
         "footer",
