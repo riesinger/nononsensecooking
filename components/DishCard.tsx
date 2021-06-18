@@ -53,9 +53,9 @@ const DishStats = styled.div`
   bottom: 0;
   background: linear-gradient(
     0deg,
-    hsla(var(--palette-gray-95), 75%) 0%,
-    hsla(var(--palette-gray-95), 20%) 85%,
-    hsla(var(--palette-gray-95), 5%) 100%
+    hsla(var(--palette-gray-95), 80%) 0%,
+    hsla(var(--palette-gray-95), 32%) 70%,
+    hsla(var(--palette-gray-95), 0%) 100%
   );
   color: hsl(var(--palette-gray-00));
   z-index: 2;
