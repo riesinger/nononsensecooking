@@ -5,7 +5,12 @@ import fs from "fs/promises";
 import YAML from "yaml";
 import { Recipe, RecipeFile, TranslatableRecipe } from "../../models/Recipe";
 import { SupportedLanguage } from "../../models/Localized";
-import { Ingredient, TranslatableIngredient } from "../../models/Ingredient";
+import {
+  Ingredient,
+  isTranslatableIngredientWithID,
+  TranslatableIngredient,
+} from "../../models/Ingredient";
+import { Unit } from "../../models/Unit";
 
 let _allRecipes: TranslatableRecipe[] = [];
 
@@ -49,9 +54,18 @@ export const translateTo =
 
 const translateIngredient =
   (lang: SupportedLanguage) =>
-  (ingredient: TranslatableIngredient): Ingredient => ({
-    name: ingredient.name[lang],
-    scales: ingredient.scales || false,
-    amount: ingredient.amount || null,
-    unit: ingredient.unit || null,
-  });
+  (ingredient: TranslatableIngredient): Ingredient => {
+    return isTranslatableIngredientWithID(ingredient)
+      ? {
+          id: ingredient.id,
+          scales: ingredient.scales || false,
+          amount: ingredient.amount || null,
+          unit: ingredient.unit || Unit.NONE,
+        }
+      : {
+          name: ingredient.name[lang],
+          scales: ingredient.scales || false,
+          amount: ingredient.amount || null,
+          unit: ingredient.unit || Unit.NONE,
+        };
+  };
