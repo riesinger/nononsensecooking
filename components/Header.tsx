@@ -43,6 +43,7 @@ const StyledLink = styled.a`
   display: flex;
   align-items: center;
   max-width: 100%;
+  cursor: pointer;
 `;
 
 const Header = () => {
