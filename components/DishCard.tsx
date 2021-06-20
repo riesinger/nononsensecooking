@@ -16,12 +16,13 @@ type Props = {
   diet: Recipe["diet"];
 };
 
-const StyledCard = styled.div`
+const StyledCard = styled.a`
   background: var(--color-background-alt);
   border-radius: var(--rounded-lg);
   cursor: pointer;
   overflow: hidden;
   position: relative;
+  display: block;
 
   img {
     transition: transform 0.15s linear;
@@ -75,7 +76,7 @@ const IconStat = styled.span`
 const DishCard = ({ id, name, image, cookTime, diet }: Props) => {
   const { t } = useTranslation("common");
   return (
-    <Link href={`/r/${id}/${slug(name)}`}>
+    <Link href={`/r/${id}/${slug(name)}`} passHref>
       <StyledCard>
         <ImageContainer>
           <Image

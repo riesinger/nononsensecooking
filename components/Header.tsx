@@ -50,7 +50,7 @@ const Header = () => {
   const { t } = useTranslation("header");
   return (
     <StyledHeader>
-      <Link href="/">
+      <Link href="/" passHref>
         <StyledLink>
           <StyledHeading>NoNonsenseCooking</StyledHeading>
           <Icon path={mdiChefHat} size={1.5} rotate={10} />
