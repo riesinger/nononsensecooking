@@ -1,8 +1,8 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import styled from "styled-components";
 import DishCard from "../components/DishCard";
+import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
 import Track from "../components/Track";
 import languageFrom from "../utils/languageFrom";
@@ -46,16 +46,14 @@ export default function Home({
   return (
     <>
       <SEO />
-      <PaddedSection>
-        <h3>{t("home.todaysrecipes")}</h3>
+      <PaddedSection title={t("home.todaysrecipes")}>
         <Track sm={1} md={2} lg={3}>
           {recipesOfTheDay?.map((recipe) => (
             <DishCard key={recipe.id} id={recipe.id} {...recipe} />
           ))}
         </Track>
       </PaddedSection>
-      <PaddedSection>
-        <h3>{t("home.recentlyaddedrecipes")}</h3>
+      <PaddedSection title={t("home.recentlyaddedrecipes")}></PaddedSection>
       </PaddedSection>
     </>
   );
