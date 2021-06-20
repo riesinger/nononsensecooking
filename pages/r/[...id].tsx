@@ -8,6 +8,7 @@ import slug from "slug";
 import styled from "styled-components";
 import IconForDiet from "../../components/IconForDiet";
 import IngredientsList from "../../components/IngredientsList";
+import SEO from "../../components/SEO";
 import ServingsChooser from "../../components/ServingsChooser";
 import StepList from "../../components/StepList";
 import { Recipe, RecipeID } from "../../models/Recipe";
@@ -95,6 +96,7 @@ const IconStat = styled.span`
 `;
 
 const SingleRecipe = ({
+  name,
   longName,
   steps,
   image,
@@ -109,6 +111,7 @@ const SingleRecipe = ({
   }
   return (
     <StyledArticle>
+      <SEO isRecipe title={name} img={image} />
       <RecipeStats>
         <StyledHeading>{longName}</StyledHeading>
         <IconStat>

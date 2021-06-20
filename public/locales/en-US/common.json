@@ -14,5 +14,11 @@
   "preparationTime": {
     "label": "Preparation Time",
     "inMinutes": "{{ minutes }}min"
+  },
+  "meta": {
+    "description": {
+      "recipe": "Cook {{name}} with a simple recipe from NoNonsenseCooking",
+      "main": "Find simple and delicious recipes on NoNonsenseCooking"
+    }
   }
 }

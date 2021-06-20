@@ -1,12 +1,12 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import Head from "next/head";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import DishCard from "../components/DishCard";
+import SEO from "../components/SEO";
 import Track from "../components/Track";
 import languageFrom from "../utils/languageFrom";
 import { recipesOfTheDayForLanguage } from "./api/recipes/recommended/for-today";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 
 const PaddedSection = styled.section`
   width: 100%;
@@ -45,14 +45,7 @@ export default function Home({
   const { t } = useTranslation("common");
   return (
     <>
-      <Head>
-        <title>NoNonsenseCooking</title>
-        <meta
-          name="description"
-          content="Curated, no-nonsense recipes for delicious meals"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SEO />
       <PaddedSection>
         <h3>{t("home.todaysrecipes")}</h3>
         <Track sm={1} md={2} lg={3}>
