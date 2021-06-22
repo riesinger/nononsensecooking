@@ -1,22 +1,33 @@
 FROM node:alpine as builder
 WORKDIR /app
+
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
 COPY . .
-ENV NODE_ENV=production
+
 RUN npm ci
 RUN npm run build
 RUN npm prune --production
 
 FROM node:alpine as runner
 
-ENV NODE_ENV=production
 WORKDIR /app
-COPY --from=builder /app/package* /app/
-COPY --from=builder /app/public /app/public
-COPY --from=builder /app/.next /app/.next
-COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/recipes /app/recipes
-COPY --from=builder /app/next.config.js /app/next.config.js
-COPY --from=builder /app/next-i18next.config.js /app/next-i18next.config.js
+
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN addgroup -g 1001 -S nnc
+RUN adduser -S nnc -u 1001
+
+COPY --from=builder /app/package* ./
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nnc:nnc /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder --chown=nnc /app/recipes ./recipes
+COPY --from=builder /app/next*.config.js ./
+
+USER nnc
 
 EXPOSE 3000
 CMD ["npm", "start"]
