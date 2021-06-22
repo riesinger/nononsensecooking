@@ -18,6 +18,24 @@ export async function allRecipes(): Promise<TranslatableRecipe[]> {
   return _allRecipes;
 }
 
+export async function paginatedRecipes(
+  start: number,
+  limit: number
+): Promise<TranslatableRecipe[]> {
+  return (await allRecipes()).slice(start, start + limit);
+}
+
+export async function paginatedRecipesForLanguage(
+  lang: SupportedLanguage,
+  start: number,
+  limit: number
+): Promise<Recipe[]> {
+  return (await allRecipes())
+    .map(translateTo(lang))
+    .sort((a, b) => (a.name < b.name ? -1 : 1))
+    .slice(start, start + limit);
+}
+
 async function loadRecipes(): Promise<TranslatableRecipe[]> {
   console.info("Loading all recipes");
   const recipeFiles = await fs.readdir("./recipes");
