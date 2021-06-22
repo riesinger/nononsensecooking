@@ -2,3 +2,5 @@ node_modules
 .next
 .editorconfig
 README.md
+public/img/recipes/*.jpg
+!public/img/recipes/*-min.jpg
