@@ -113,7 +113,7 @@ const SingleRecipe = ({
     <StyledArticle>
       <SEO isRecipe title={name} img={image} />
       <RecipeStats>
-        <StyledHeading>{longName}</StyledHeading>
+        <StyledHeading>{longName || name}</StyledHeading>
         <IconStat>
           <Icon path={mdiClockOutline} size={1} title="Preparation Time" />
           <span>{cookTime}min</span>
