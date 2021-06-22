@@ -28,6 +28,13 @@
     "garlicpowder": "Knoblauchpulver",
     "redlentils": "Rote Linsen",
     "coconutmilk": "Kokosmilch",
-    "butter": "Butter"
+    "butter": "Butter",
+    "potatoes": "Kartoffeln",
+    "egg": "Ei",
+    "egg_plural": "Eier",
+    "bellpepper": "Paprika",
+    "bellpepper_plural": "Paprikas",
+    "nutmeg": "Muskatnuss",
+    "sunfloweroil": "Sonnenblumenöl"
   }
 }

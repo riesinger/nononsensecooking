@@ -24,10 +24,17 @@
     "srirachasauce": "Sriracha Sauce",
     "agavasyrup": "Agava Syrup",
     "chiliflakes": "Chili Flakes",
-    "redpepperpowder": "Paprika Powder",
+    "paprikapowder": "Paprika Powder",
     "garlicpowder": "Garlic Powder",
     "redlentils": "Red Lentils",
     "coconutmilk": "Coconut Milk",
-    "butter": "Butter"
+    "butter": "Butter",
+    "potatoes": "Potatoes",
+    "egg": "Egg",
+    "egg_plural": "Eggs",
+    "bellpepper": "Bell Pepper",
+    "bellpepper_plural": "Bell Peppers",
+    "nutmeg": "Nutmeg",
+    "sunfloweroil": "Sunflower Seed Oil"
   }
 }
