@@ -24,7 +24,7 @@ const Ingredient = ({
 }: IngredientModel & { servingsMultiplier: number }) => {
   const { t } = useTranslation("recipe");
   const adjustedAmount = scales
-    ? Math.round(amount * servingsMultiplier * 10) / 10
+    ? Math.round(amount * servingsMultiplier * 100) / 100
     : amount;
   const ingredientName = id
     ? t(`ingredient.${id}`, {
