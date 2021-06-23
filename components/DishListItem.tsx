@@ -35,7 +35,7 @@ const Dish = styled.a`
 `;
 
 const ImageContainer = styled.div`
-  width: ${HEIGHT * 1.6}rem;
+  width: ${HEIGHT * 1.667}rem;
   height: ${HEIGHT}rem;
   position: relative;
   overflow: hidden;
@@ -77,8 +77,8 @@ const DishListItem = ({ id, name, image, cookTime, diet }: Props) => {
             src={`/img/recipes/${image}`}
             layout="fill"
             objectFit="cover"
-            quality={80}
-            sizes="(max-width: 600px) 300px, (max-width: 1200px) 400px, (max-width: 1800px) 600px, (max-width: 2400px) 750px, (min-width: 2401px) 850px"
+            quality={60}
+            sizes="(max-width: 600px) 100px, (min-width: 601px) 160px"
           />
         </ImageContainer>
         <DishStats>
