@@ -3,7 +3,10 @@
     "todaysrecipes": "Today's Recipes",
     "recentlyaddedrecipes": "Recently Added",
     "mostpopularrecipes": "Most Popular",
-    "allrecipes": "All Recipes"
+    "allrecipes": "All Recipes",
+    "pageindicator": "Page {{currentPage}} of {{totalPages}}",
+    "previouspage": "Previous page",
+    "nextpage": "Next page"
   },
   "diet": {
     "meat": "Contains Meat",
