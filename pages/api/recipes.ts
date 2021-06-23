@@ -11,6 +11,11 @@ import { Unit } from "../../models/Unit";
 
 let _allRecipes: TranslatableRecipe[] = [];
 
+export interface Paginated<T> {
+  totalItems: number;
+  items: T[];
+}
+
 export async function allRecipes(): Promise<TranslatableRecipe[]> {
   if (_allRecipes.length == 0) {
     _allRecipes = await loadRecipes();
@@ -21,19 +26,28 @@ export async function allRecipes(): Promise<TranslatableRecipe[]> {
 export async function paginatedRecipes(
   start: number,
   limit: number
-): Promise<TranslatableRecipe[]> {
-  return (await allRecipes()).slice(start, start + limit);
+): Promise<Paginated<TranslatableRecipe>> {
+  const r = await allRecipes();
+  const totalItems = r.length;
+  const items = r.slice(start, start + limit);
+  return {
+    totalItems,
+    items,
+  };
 }
 
 export async function paginatedRecipesForLanguage(
   lang: SupportedLanguage,
   start: number,
   limit: number
-): Promise<Recipe[]> {
-  return (await allRecipes())
-    .map(translateTo(lang))
-    .sort((a, b) => (a.name < b.name ? -1 : 1))
-    .slice(start, start + limit);
+): Promise<Paginated<Recipe>> {
+  const r = await paginatedRecipes(start, limit);
+  return {
+    totalItems: r.totalItems,
+    items: r.items
+      .map(translateTo(lang))
+      .sort((a, b) => (a.name < b.name ? -1 : 1)),
+  };
 }
 
 async function loadRecipes(): Promise<TranslatableRecipe[]> {

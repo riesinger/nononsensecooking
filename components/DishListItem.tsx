@@ -24,7 +24,6 @@ const Dish = styled.a`
   align-items: center;
   height: ${HEIGHT}rem;
   overflow: hidden;
-  margin: 2rem 0;
 
   img {
     transition: transform 0.15s linear;
@@ -39,18 +38,13 @@ const ImageContainer = styled.div`
   width: ${HEIGHT * 1.6}rem;
   height: ${HEIGHT}rem;
   position: relative;
+  overflow: hidden;
+  border-radius: var(--rounded);
 `;
 
 const DishStats = styled.div`
   width: 100%;
   bottom: 0;
-  background: linear-gradient(
-    0deg,
-    hsla(var(--palette-gray-95), 80%) 0%,
-    hsla(var(--palette-gray-95), 32%) 70%,
-    hsla(var(--palette-gray-95), 0%) 100%
-  );
-  color: hsl(var(--palette-gray-00));
   z-index: 2;
   padding: 1rem 2rem;
 `;

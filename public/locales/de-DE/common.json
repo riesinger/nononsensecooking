@@ -3,7 +3,10 @@
     "todaysrecipes": "Rezepte des Tages",
     "recentlyaddedrecipes": "Neue Rezepte",
     "mostpopularrecipes": "Beliebteste Rezepte",
-    "allrecipes": "Alle Rezepte"
+    "allrecipes": "Alle Rezepte",
+    "pageindicator": "Seite {{currentPage}} von {{totalPages}}",
+    "previouspage": "Vorherige Seite",
+    "nextpage": "Nächste Seite"
   },
   "diet": {
     "meat": "Enthält Fleisch",
@@ -13,7 +16,7 @@
   },
   "preparationTime": {
     "label": "Zubereitungszeit",
-    "inMinutes": "{{ minutes}}min"
+    "inMinutes": "{{minutes}}min"
   },
   "meta": {
     "description": {
