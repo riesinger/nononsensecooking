@@ -2,6 +2,7 @@ import {
   mdiAlphaVCircleOutline,
   mdiFish,
   mdiFoodSteak,
+  mdiHelpCircleOutline,
   mdiLeaf,
 } from "@mdi/js";
 import Icon from "@mdi/react";
@@ -32,6 +33,10 @@ const IconForDiet = ({
       );
     case "vegan":
       return <Icon path={mdiLeaf} title={t(`diet.${diet}`)} size={size} />;
+    default:
+      return (
+        <Icon path={mdiHelpCircleOutline} title="UNKNOWN DIET" size={size} />
+      );
   }
 };
 
