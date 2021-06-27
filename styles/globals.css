@@ -34,6 +34,7 @@ body {
   font-size: var(--font-size-base);
   font-family: var(--font-stack-sans);
   background-color: var(--color-background);
+  color: var(--color-text-primary);
 }
 
 #__next {
@@ -83,62 +84,12 @@ code {
   --palette-blue-80: var(--base-blue), 25%;
   --palette-blue-90: var(--base-blue), 15%;
 
-  --base-red: 353, 100%;
-  --palette-red-10: var(--base-red), 95%;
-  --palette-red-20: var(--base-red), 85%;
-  --palette-red-30: var(--base-red), 75%;
-  --palette-red-40: var(--base-red), 65%;
-  --palette-red-50: var(--base-red), 55%;
-  --palette-red-60: var(--base-red), 45%;
-  --palette-red-70: var(--base-red), 35%;
-  --palette-red-80: var(--base-red), 25%;
-  --palette-red-90: var(--base-red), 15%;
-
-  --base-green: 139, 71%;
-  --palette-green-10: var(--base-green), 95%;
-  --palette-green-20: var(--base-green), 85%;
-  --palette-green-30: var(--base-green), 75%;
-  --palette-green-40: var(--base-green), 65%;
-  --palette-green-50: var(--base-green), 55%;
-  --palette-green-60: var(--base-green), 45%;
-  --palette-green-70: var(--base-green), 35%;
-  --palette-green-80: var(--base-green), 25%;
-  --palette-green-90: var(--base-green), 15%;
-
-  --base-yellow: 53, 95%;
-  --palette-yellow-10: var(--base-yellow), 95%;
-  --palette-yellow-20: var(--base-yellow), 85%;
-  --palette-yellow-30: var(--base-yellow), 75%;
-  --palette-yellow-40: var(--base-yellow), 65%;
-  --palette-yellow-50: var(--base-yellow), 55%;
-  --palette-yellow-60: var(--base-yellow), 45%;
-  --palette-yellow-70: var(--base-yellow), 35%;
-  --palette-yellow-80: var(--base-yellow), 25%;
-  --palette-yellow-90: var(--base-yellow), 15%;
-
-  --base-orange: 34, 100%;
-  --palette-orange-10: var(--base-orange), 95%;
-  --palette-orange-20: var(--base-orange), 85%;
-  --palette-orange-30: var(--base-orange), 75%;
-  --palette-orange-40: var(--base-orange), 65%;
-  --palette-orange-50: var(--base-orange), 55%;
-  --palette-orange-60: var(--base-orange), 45%;
-  --palette-orange-70: var(--base-orange), 35%;
-  --palette-orange-80: var(--base-orange), 25%;
-  --palette-orange-90: var(--base-orange), 15%;
-
   --color-primary: hsla(var(--palette-blue-40), 100%);
   --color-text-on-primary: hsla(var(--palette-gray-00), 100%);
   --color-primary-muted: hsla(var(--palette-blue-45), 8%);
-
-  --color-negative: hsla(var(--palette-red-40), 100%);
-  --color-positive: hsla(var(--palette-green-40), 100%);
-
-  --color-filetable-fake-shadow: rgba(0, 0, 0, 0.1);
 }
 
-:root,
-body.theme-light {
+:root {
   /* Light default colors, are overriden in the media query below */
   --color-background: hsla(var(--palette-gray-00), 100%);
   --color-background-alt: hsla(var(--palette-blue-50), 8%);
@@ -155,17 +106,6 @@ body.theme-light {
     --color-text-primary: hsla(var(--palette-gray-00), 100%);
     --color-text-secondary: hsla(var(--palette-gray-20), 100%);
   }
-}
-
-body.theme-dark {
-  --color-background: hsla(var(--palette-gray-95), 100%);
-  --color-background-alt: hsla(var(--palette-blue-40), 8%);
-  --color-text-primary: hsla(var(--palette-gray-00), 100%);
-  --color-text-secondary: hsla(var(--palette-gray-20), 100%);
-}
-
-body {
-  color: var(--color-text-primary);
 }
 
 /* SHADOWS */
