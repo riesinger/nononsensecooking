@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import slug from "slug";
 import YAML from "yaml";
 import {
   Ingredient,
@@ -73,6 +74,7 @@ export const translateTo =
   (recipe: TranslatableRecipe): Recipe => ({
     id: recipe.id,
     name: recipe.name[lang],
+    fullSlug: `${recipe.id}/${slug(recipe.name[lang])}`,
     longName: recipe.longName[lang],
     image: recipe.image,
     cookTime: recipe.cookTime,

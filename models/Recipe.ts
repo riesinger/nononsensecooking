@@ -4,6 +4,7 @@ import { Localized } from "./Localized";
 export interface Recipe {
   id: RecipeID;
   name: string;
+  fullSlug: string;
   longName: string;
   image: string;
   cookTime: number;

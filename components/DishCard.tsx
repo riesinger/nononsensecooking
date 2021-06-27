@@ -3,13 +3,12 @@ import Icon from "@mdi/react";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
-import slug from "slug";
 import styled from "styled-components";
 import { Recipe } from "../models/Recipe";
 import IconForDiet from "./IconForDiet";
 
 type Props = {
-  id: Recipe["id"];
+  slug: Recipe["fullSlug"];
   name: Recipe["name"];
   image: Recipe["image"];
   cookTime: Recipe["cookTime"];
@@ -73,10 +72,10 @@ const IconStat = styled.span`
   gap: 0.25rem;
 `;
 
-const DishCard = ({ id, name, image, cookTime, diet }: Props) => {
+const DishCard = ({ slug, name, image, cookTime, diet }: Props) => {
   const { t } = useTranslation("common");
   return (
-    <Link href={`/r/${id}/${slug(name)}`} passHref>
+    <Link href={`/r/${slug}`} passHref>
       <StyledCard>
         <ImageContainer>
           <Image

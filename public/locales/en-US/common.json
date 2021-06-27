@@ -23,5 +23,9 @@
       "recipe": "Cook {{name}} with a simple recipe from NoNonsenseCooking",
       "main": "Find simple and delicious recipes on NoNonsenseCooking"
     }
+  },
+  "search": {
+    "pagetitle": "Search Results",
+    "sectiontitle": "Search results for {{searchTerm}}"
   }
 }

@@ -60,12 +60,13 @@ export default function Home({
   const { t } = useTranslation("common");
   const router = useRouter();
   const start = parseInt(useQueryParam(router, "start", 0), 10);
-  const nextPageLink = `/?start=${start + ALL_RECIPES_PAGE_SIZE >= totalRecipes ? start : start + ALL_RECIPES_PAGE_SIZE}`;
+  const nextPageLink = `/?start=${
+    start + ALL_RECIPES_PAGE_SIZE >= totalRecipes
+      ? start
+      : start + ALL_RECIPES_PAGE_SIZE
+  }`;
   const nextLinkEnabled = start + ALL_RECIPES_PAGE_SIZE < totalRecipes;
-  const prevPageLink = `/?start=${Math.max(
-    0,
-    start - ALL_RECIPES_PAGE_SIZE
-  )}`;
+  const prevPageLink = `/?start=${Math.max(0, start - ALL_RECIPES_PAGE_SIZE)}`;
   const prevLinkEnabled = start > 0;
   return (
     <>
@@ -73,11 +74,16 @@ export default function Home({
       <PaddedSection title={t("home.todaysrecipes")}>
         <Track sm={1} md={2} lg={3}>
           {recipesOfTheDay.map((recipe: Recipe) => (
-            <DishCard key={recipe.id} id={recipe.id} {...recipe} />
+            <DishCard
+              key={recipe.id}
+              id={recipe.id}
+              slug={recipe.fullSlug}
+              {...recipe}
+            />
           ))}
         </Track>
       </PaddedSection>
-      <PaddedSection title={t("home.recentlyaddedrecipes")}></PaddedSection>
+      {/* <PaddedSection title={t("home.recentlyaddedrecipes")}></PaddedSection> */}
       <PaginatedSection
         title={t("home.allrecipes")}
         totalPages={totalPages}
@@ -89,7 +95,12 @@ export default function Home({
       >
         <DishList>
           {paginatedRecipes.map((recipe: Recipe) => (
-            <DishListItem key={recipe.id} id={recipe.id} {...recipe} />
+            <DishListItem
+              key={recipe.id}
+              id={recipe.id}
+              slug={recipe.fullSlug}
+              {...recipe}
+            />
           ))}
         </DishList>
       </PaginatedSection>

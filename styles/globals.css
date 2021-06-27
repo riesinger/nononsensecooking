@@ -142,6 +142,7 @@ body.theme-light {
   /* Light default colors, are overriden in the media query below */
   --color-background: hsla(var(--palette-gray-00), 100%);
   --color-background-alt: hsla(var(--palette-blue-50), 8%);
+  --color-background-alt-solid: hsla(221, 89%, 96%, 100%);
   --color-text-primary: hsla(var(--palette-gray-90), 100%);
   --color-text-secondary: hsla(var(--palette-gray-70), 100%);
 }
@@ -150,6 +151,7 @@ body.theme-light {
   :root {
     --color-background: hsla(var(--palette-gray-95), 100%);
     --color-background-alt: hsla(var(--palette-blue-40), 8%);
+    --color-background-alt-solid: hsla(219, 23%, 14%, 100%);
     --color-text-primary: hsla(var(--palette-gray-00), 100%);
     --color-text-secondary: hsla(var(--palette-gray-20), 100%);
   }

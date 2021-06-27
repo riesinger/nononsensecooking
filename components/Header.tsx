@@ -3,6 +3,7 @@ import Icon from "@mdi/react";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import styled from "styled-components";
+import SearchBar from "./SearchBar";
 
 const StyledHeader = styled.header`
   padding: 1rem 2rem;
@@ -19,24 +20,11 @@ const StyledHeading = styled.h1`
   font-size: 1.3rem;
   margin: 0;
   font-weight: 400;
-  margin-right: 0.5rem;
+  margin-left: 0.75rem;
 
   @media screen and (min-width: 800px) {
     font-size: 1.5rem;
   }
-`;
-
-const SearchBar = styled.input`
-  font-family: var(--font-stack);
-  font-size: var(--font-size-base);
-  background: var(--color-background-alt);
-  border-radius: var(--rounded);
-  border: none;
-  padding: 0.75rem 1rem;
-  appearance: none;
-  color: var(--color-text-primary);
-  width: 40ch;
-  max-width: 100%;
 `;
 
 const StyledLink = styled.a`
@@ -46,14 +34,27 @@ const StyledLink = styled.a`
   cursor: pointer;
 `;
 
+const IconContainer = styled.div`
+  background: var(--color-primary);
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--rounded);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsla(var(--palette-gray-00), 100%);
+`;
+
 const Header = () => {
   const { t } = useTranslation("header");
   return (
     <StyledHeader>
       <Link href="/" passHref>
         <StyledLink>
+          <IconContainer>
+            <Icon path={mdiChefHat} size={1.5} rotate={10} />
+          </IconContainer>
           <StyledHeading>NoNonsenseCooking</StyledHeading>
-          <Icon path={mdiChefHat} size={1.5} rotate={10} />
         </StyledLink>
       </Link>
       <SearchBar placeholder={t("searchbar.placeholder")} />

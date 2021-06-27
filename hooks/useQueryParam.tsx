@@ -10,8 +10,9 @@ export function useQueryParam(
   if (!query[name]) {
     return fallback;
   }
-  if (query[name] instanceof Array) {
-    return query[name][0];
+  const param = query[name];
+  if (param instanceof Array) {
+    return param[0];
   }
-  return query[name];
+  return param;
 }
