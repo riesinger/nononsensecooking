@@ -3,6 +3,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import PageLoadingIndicator from "../components/PageLoadingIndicator";
 import "../styles/globals.css";
 
 const Main = styled.main`
@@ -12,6 +13,7 @@ const Main = styled.main`
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <PageLoadingIndicator />
       <Head>
         <link rel="stylesheet" href="/inter.css" />
       </Head>
