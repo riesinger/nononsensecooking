@@ -1,0 +1,14 @@
+{
+  "pagetitle": "Datenschutz & Impressum",
+  "section": {
+    "legal": {
+      "title": "Impressum",
+      "owner": "Inhaber",
+      "mail": "e-Mail",
+      "contactformoreinformation": "Kontaktieren Sie mich für weitere Informationen bitte per e-Mail"
+    },
+    "privacy": {
+      "title": "Datenschutz"
+    }
+  }
+}

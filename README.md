@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NoNonsense.cooking
 
-## Getting Started
+NoNonsenseCooking is a modern website for curated recipes trying to cut out all of the unnecessary bloat of typical cooking websites.
 
-First, run the development server:
+## Contributing
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Do you want to add your favorite recipe? It's quite easy!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+First, fork this repository and clone it: `gh repo fork riesinger/nononsensecooking`. Then, install all the dependencies with `npm install` and run the script `npm run new-recipe`. This will create an empty recipe YAML file in the `recipes` directory. Edit the file to contain your recipe. You can take the other recipes as an inspiration on how to fill out the YAML file.
+If you have an image for your recipe, place a 1600x1040px version of it in the `public/img/recipes` directory. Make sure to minify it and add a `-min` suffix to it, otherwise it won't be included in the production build.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+To run the service locally, run `npm start dev` and head to `http://localhost:3000`. You should be able to see your recipe in the "All Recipes" section or via the search. Note that you need to restart your dev server when you add a new recipe.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+_Please don't copy recipes from the internet or cookbooks. Also, only use images you took yourself._
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
+This content of this repository is covered under two licenses.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The recipes and images are licensed under a [Creative Commons Attibution 4.0 license (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). This applies to everything in the `./recipes` and `./public/img/recipes` directories.
+You can find a copy of the license in the `LICENSE-recipes` file.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The source code for the site is licensed under the MIT License.
+You can find a copy of the license in the `LICENSE-code` file.
