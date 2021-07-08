@@ -9,18 +9,41 @@ const StyledFooter = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: .5rem;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
 `;
 
 const StyledLink = styled.a`
   color: var(--color-primary);
-  margin-left: 20px;
+  white-space: pre;
 `;
 
 const LicenseNotice = styled.span`
   font-size: 1rem;
   display: inline-block;
-  /* max-width: 500px; */
   line-height: 1.5;
+
+  @media screen and (max-width: 800px) {
+    text-align: center;
+  }
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    gap: .5rem;
+  }
 `;
 
 const Footer = () => {
@@ -28,7 +51,7 @@ const Footer = () => {
   return (
     <StyledFooter>
       <LicenseNotice>{t("licensenotice")}</LicenseNotice>
-      <nav>
+      <Nav>
         <StyledLink href="https://github.com/riesinger/nononsensecooking" rel="noopener">Github</StyledLink>
         <Link href="/legal" passHref>
           <StyledLink>{t("link.legal.text")}</StyledLink>
@@ -36,7 +59,7 @@ const Footer = () => {
         <Link href="/donate" passHref>
           <StyledLink>{t("link.donate.text")}</StyledLink>
         </Link>
-      </nav>
+      </Nav>
     </StyledFooter>
   );
 };
