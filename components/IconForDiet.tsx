@@ -23,7 +23,7 @@ const IconForDiet = ({
       return <Icon path={mdiFoodSteak} title={t(`diet.${diet}`)} size={size} />;
     case "fish":
       return <Icon path={mdiFish} title={t(`diet.${diet}`)} size={size} />;
-    case "vegetarian":
+    case "vegan":
       return (
         <Icon
           path={mdiAlphaVCircleOutline}
@@ -31,7 +31,7 @@ const IconForDiet = ({
           size={size}
         />
       );
-    case "vegan":
+    case "vegetarian":
       return <Icon path={mdiLeaf} title={t(`diet.${diet}`)} size={size} />;
     default:
       return (
