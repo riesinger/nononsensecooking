@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Indicator = styled.div<{ loading: boolean }>`
+const Indicator = styled.div<{ isLoading: boolean }>`
   width: 100%;
   height: 5px;
   background: var(--color-primary);
@@ -12,8 +12,8 @@ const Indicator = styled.div<{ loading: boolean }>`
   left: 0;
   z-index: 50;
   transition: transform 0.3s ease-in-out;
-  transform: scaleX(${({ loading }) => (loading ? "0.9" : 0)});
-  visibility: ${({ loading }) => (loading ? "visible" : "hidden")};
+  transform: scaleX(${({ isLoading }) => (isLoading ? "0.9" : 0)});
+  visibility: ${({ isLoading }) => (isLoading ? "visible" : "hidden")};
   transform-origin: left;
 `;
 
@@ -40,7 +40,7 @@ const PageLoadingIndicator = () => {
       router.events.off("routeChangeError", handleStop);
     };
   }, [router]);
-  return <Indicator loading={loading} />;
+  return <Indicator isLoading={loading} />;
 };
 
 export default PageLoadingIndicator;
