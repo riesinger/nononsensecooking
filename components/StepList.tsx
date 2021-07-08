@@ -7,7 +7,7 @@ interface Props {
 
 const List = styled.ol`
   line-height: 1.5;
-  margin: 2rem 0;
+  margin: 2rem 0 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,11 @@ const Step = styled.li`
 
   @media screen and (min-width: 800px) {
     flex-direction: row;
+  }
+
+
+  &:last-of-type {
+    margin-bottom: 0;
   }
 `;
 
@@ -42,9 +47,16 @@ const StepCounter = styled.span`
     margin-right: 2rem;
     margin-bottom: 0;
   }
+
 `;
 
-const StepDescription = styled.span``;
+const StepDescription = styled.span`
+  text-align: center;
+
+  @media screen and (min-width: 800px) {
+    text-align: left;
+  }
+`;
 
 const StepList = ({ steps }: Props) => (
   <List>
