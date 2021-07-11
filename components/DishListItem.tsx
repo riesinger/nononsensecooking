@@ -40,6 +40,7 @@ const ImageContainer = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: var(--rounded);
+  background: var(--color-background-alt);
 `;
 
 const DishStats = styled.div`

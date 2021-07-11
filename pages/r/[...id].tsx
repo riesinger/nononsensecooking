@@ -68,6 +68,7 @@ const ImageContainer = styled.div`
   position: relative;
   border-radius: var(--rounded-lg);
   overflow: hidden;
+  background: var(--color-background-alt);
 `;
 
 const RecipeStats = styled.header`
