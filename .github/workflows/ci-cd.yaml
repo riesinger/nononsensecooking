@@ -29,10 +29,32 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v1
-      - name: Login to Tailscale
-        uses: tailscale/github-action@main
-        with:
-          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+      # We're not using tailscale/github-action below, since that one doesn't support accepting subnet routes
+      - name: Download Tailscale
+        shell: bash
+        id: download
+        env:
+          VERSION: 1.10.1
+        run: |
+          MINOR=$(echo $VERSION | awk -F '.' {'print $2'})
+          if [ $((MINOR % 2)) -eq 0 ]; then
+            URL="https://pkgs.tailscale.com/stable/tailscale_${VERSION}_amd64.tgz"
+          else
+            URL="https://pkgs.tailscale.com/unstable/tailscale_${VERSION}_amd64.tgz"
+          fi
+          curl $URL -o tailscale.tgz
+          tar -C ~ -xzf tailscale.tgz
+          rm tailscale.tgz
+          mv "$HOME/tailscale_${VERSION}_amd64" ~/.tailscale
+          echo "PATH=$PATH:$HOME/.tailscale" >> $GITHUB_ENV
+      - name: Run Tailscale
+        shell: bash
+        env:
+          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
+        run: |
+          sudo $(which tailscaled) 2>~/.tailscale/tailscaled.log &
+          sleep 3
+          sudo $(which tailscale) up --authkey $TAILSCALE_AUTHKEY --hostname "github-$(cat /etc/hostname)" --accept-routes
       - name: Helm deploy
         uses: deliverybot/helm@v1
         with:
@@ -42,5 +64,6 @@ jobs:
           token: "${{ github.token }}"
           track: stable # TODO: This won't always be 'stable'
           value-files: helm/values.yaml
+          helm: helm3
         env:
           KUBECONFIG_FILE: "${{ secrets.KUBECONFIG }}"
