@@ -1,0 +1,46 @@
+name: CI & CD
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ghcr.io/riesinger/nononsensecooking:latest
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v1
+      - name: Login to Tailscale
+        uses: tailscale/github-action@main
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+      - name: Helm deploy
+        uses: deliverybot/helm@v1
+        with:
+          release: nononsensecooking
+          namespace: nononsensecooking
+          chart: helm
+          token: "${{ github.token }}"
+          track: stable # TODO: This won't always be 'stable'
+          value-files: helm/values.yaml
+        env:
+          KUBECONFIG_FILE: "${{ secrets.KUBECONFIG }}"

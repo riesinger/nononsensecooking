@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: frontend
+          image: {{ printf "%s:%s" .Values.image ( .Values.tag | toString ) }}
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 1
+            requests:
+              memory: 128Mi
+              cpu: 10m
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.liveness.path }}
+              port: {{ .Values.port }}
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelay }}
+            periodSeconds: {{ .Values.probes.liveness.period }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}

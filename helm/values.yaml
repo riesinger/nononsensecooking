@@ -1,0 +1,18 @@
+name: nononsensecooking
+replicas: 2
+image: ghcr.io/riesinger/nononsensecooking
+tag: latest
+port: 3000
+resources:
+  limits:
+    memory: 512Mi
+    cpu: 1
+  requests:
+    memory: 128Mi
+    cpu: 10m
+probes:
+  liveness:
+    path: /api/health
+    initialDelay: 3
+    period: 5
+    failureThresold: 1

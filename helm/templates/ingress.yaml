@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`nononsensecooking.k3s.riesinger.me`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: {{ .Release.Name }}
+          port: 80
+          strategy: RoundRobin

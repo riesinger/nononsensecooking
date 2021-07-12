@@ -1,0 +1,4 @@
+apiVersion: v2
+description: Helm chart for NoNonsense.cooking
+name: nononsensecooking
+version: 0.1.0
