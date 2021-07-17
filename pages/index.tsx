@@ -13,8 +13,8 @@ import { usePagination } from "../hooks/usePagination";
 import { useQueryParam } from "../hooks/useQueryParam";
 import { Recipe } from "../models/Recipe";
 import languageFrom from "../utils/languageFrom";
-import { paginatedRecipesForLanguage } from "./api/recipes";
-import { recipesOfTheDayForLanguage } from "./api/recipes/recommended/for-today";
+import { paginatedRecipesForLanguage } from "../utils/readRecipes";
+import { recipesOfTheDayForLanguage } from "../utils/for-today";
 
 const ALL_RECIPES_PAGE_SIZE = 10;
 
