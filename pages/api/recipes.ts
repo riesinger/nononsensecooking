@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import path from "path";
 import slug from "slug";
 import YAML from "yaml";
 import {
@@ -14,7 +15,7 @@ let _allRecipes: TranslatableRecipe[] = [];
 
 // When running locally, we're running out of the project's root directory.
 // On vercel, the CWD for this route is the .next directory, which hoists everything inside './public' directly into itself
-const recipesBasePath = process.env.VERCEL ? './recipes' : './public/recipes';
+const recipesBasePath = path.resolve('./public', 'recipes');
 
 export interface Paginated<T> {
   totalItems: number;
