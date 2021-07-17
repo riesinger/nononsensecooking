@@ -53,12 +53,12 @@ export async function paginatedRecipesForLanguage(
 
 async function loadRecipes(): Promise<TranslatableRecipe[]> {
   console.info("Loading all recipes");
-  const recipeFiles = await fs.readdir("./recipes");
+  const recipeFiles = await fs.readdir("./public/recipes");
   console.info("Found", recipeFiles.length, "recipes");
   return await Promise.all(
     recipeFiles.map(async (recipeFile) => {
       const recipe: RecipeFile = YAML.parse(
-        await fs.readFile("./recipes/" + recipeFile, "utf-8")
+        await fs.readFile("./public/recipes/" + recipeFile, "utf-8")
       );
       const id = recipeFile.split(".")[0];
       return {
