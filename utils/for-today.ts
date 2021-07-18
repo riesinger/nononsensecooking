@@ -1,5 +1,5 @@
 import { SupportedLanguage } from "../models/Localized";
-import { allRecipes, translateTo } from "./readRecipes";
+import { allRecipes, translateTo } from "./recipes";
 
 function shuffleArray(arr: any[]) {
   arr.sort(() => Math.random() - 0.5);

@@ -15,7 +15,7 @@ let _allRecipes: TranslatableRecipe[] = [];
 
 // When running locally, we're running out of the project's root directory.
 // On vercel, the CWD for this route is the .next directory, which hoists everything inside './public' directly into itself
-const recipesBasePath = path.resolve('./public', 'recipes');
+const recipesBasePath = path.resolve("./public", "recipes");
 
 export interface Paginated<T> {
   totalItems: number;
@@ -80,13 +80,21 @@ export const translateTo =
     id: recipe.id,
     name: recipe.name[lang],
     fullSlug: `${recipe.id}/${slug(recipe.name[lang])}`,
-    longName: recipe.longName[lang],
+    longName: recipe.longName?.[lang] || null,
     image: recipe.image,
     cookTime: recipe.cookTime,
     diet: recipe.diet,
-    steps: recipe.steps[lang],
-    ingredients: recipe.ingredients.map(translateIngredient(lang)),
+    steps: recipe.steps?.[lang] || null,
+    ingredients: recipe.ingredients?.map(translateIngredient(lang)) || null,
   });
+
+export const translateAllTo =
+  (lang: SupportedLanguage) =>
+  (recipes: TranslatableRecipe[]): Recipe[] =>
+    recipes.map((recipe) => {
+      console.log(recipe);
+      return translateTo(lang)(recipe);
+    });
 
 const translateIngredient =
   (lang: SupportedLanguage) =>

@@ -13,21 +13,34 @@ import { usePagination } from "../hooks/usePagination";
 import { useQueryParam } from "../hooks/useQueryParam";
 import { Recipe } from "../models/Recipe";
 import languageFrom from "../utils/languageFrom";
-import { paginatedRecipesForLanguage } from "../utils/readRecipes";
-import { recipesOfTheDayForLanguage } from "../utils/for-today";
+import { translateAllTo } from "../utils/recipes";
 
 const ALL_RECIPES_PAGE_SIZE = 10;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const recipesOfTheDay = await recipesOfTheDayForLanguage(
-    languageFrom(context)
-  );
+  const baseUrl = process.env.VERCEL_URL;
+  const language = languageFrom(context);
+  const recipeIndex = await (
+    await fetch(baseUrl + "/recipes/index.json")
+  ).json();
+  console.log(recipeIndex);
+  const translatedRecipeIndex = translateAllTo(language)(recipeIndex);
+
+  // TODO: Re-implement a proper recipes-of-the-day functionality
+  const recipesOfTheDay = translatedRecipeIndex.slice(0, 3);
+  // const recipesOfTheDay = await recipesOfTheDayForLanguage(
+  //   languageFrom(context)
+  // );
   const start = parseInt(useQueryParam(context, "start", 0), 10);
-  const paginatedRecipesResult = await paginatedRecipesForLanguage(
-    languageFrom(context),
-    start,
-    ALL_RECIPES_PAGE_SIZE
-  );
+  const paginatedRecipesResult = {
+    items: translatedRecipeIndex,
+    totalItems: translatedRecipeIndex.length,
+  };
+  // const paginatedRecipesResult = await paginatedRecipesForLanguage(
+  //   languageFrom(context),
+  //   start,
+  //   ALL_RECIPES_PAGE_SIZE
+  // );
   const { totalPages, currentPage, items } = usePagination<Recipe>(
     paginatedRecipesResult,
     ALL_RECIPES_PAGE_SIZE,
