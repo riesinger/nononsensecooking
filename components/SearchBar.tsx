@@ -1,7 +1,14 @@
 import { mdiMagnify } from "@mdi/js";
 import Icon from "@mdi/react";
+import debounce from "lodash/debounce";
 import { useRouter } from "next/router";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import styled from "styled-components";
 import SearchResult from "./SearchResult";
 
@@ -69,9 +76,17 @@ const SearchBar = ({ placeholder }: Props) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const debouncedFetchSearchResults = useCallback(
+    debounce(fetchSearchResults, 250, {
+      maxWait: 1500,
+    }),
+    []
+  );
+
   useEffect(() => {
     function handler() {
       setSearchResults([]);
+      debouncedFetchSearchResults.cancel();
     }
     router.events.on("routeChangeStart", handler);
     return () => {
@@ -86,6 +101,10 @@ const SearchBar = ({ placeholder }: Props) => {
     const searchTerm = encodeURIComponent(event.target.value);
     console.log("Search term", searchTerm);
 
+    debouncedFetchSearchResults(searchTerm);
+  }
+
+  async function fetchSearchResults(searchTerm: string) {
     const results = await (
       await fetch(`/api/search?query=${searchTerm}`, {
         headers: {
