@@ -15,7 +15,7 @@ let _allRecipes: TranslatableRecipe[] = [];
 
 // When running locally, we're running out of the project's root directory.
 // On vercel, the CWD for this route is the .next directory, which hoists everything inside './public' directly into itself
-const recipesBasePath = path.resolve('./public', 'recipes');
+const recipesBasePath = path.resolve("./public", "recipes");
 
 export interface Paginated<T> {
   totalItems: number;
@@ -60,7 +60,7 @@ async function loadRecipes(): Promise<TranslatableRecipe[]> {
   console.info("Loading all recipes");
   const recipeFiles = await fs.readdir(recipesBasePath);
   console.info("Found", recipeFiles.length, "recipes");
-  return await Promise.all(
+  const recipes = await Promise.all(
     recipeFiles.map(async (recipeFile) => {
       const recipe: RecipeFile = YAML.parse(
         await fs.readFile(recipesBasePath + "/" + recipeFile, "utf-8")
@@ -72,6 +72,7 @@ async function loadRecipes(): Promise<TranslatableRecipe[]> {
       };
     })
   );
+  return recipes.filter((r) => r.id !== "index");
 }
 
 export const translateTo =
