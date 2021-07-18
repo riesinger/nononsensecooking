@@ -9,7 +9,7 @@ const StyledFooter = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 
   @media screen and (max-width: 800px) {
     flex-direction: column;
@@ -42,7 +42,7 @@ const Nav = styled.nav`
 
   @media screen and (max-width: 800px) {
     flex-direction: column;
-    gap: .5rem;
+    gap: 0.5rem;
   }
 `;
 
@@ -52,11 +52,16 @@ const Footer = () => {
     <StyledFooter>
       <LicenseNotice>{t("licensenotice")}</LicenseNotice>
       <Nav>
-        <StyledLink href="https://github.com/riesinger/nononsensecooking" rel="noopener">Github</StyledLink>
-        <Link href="/legal" passHref>
+        <StyledLink
+          href="https://github.com/riesinger/nononsensecooking"
+          rel="noopener"
+        >
+          Github
+        </StyledLink>
+        <Link href="/legal" passHref prefetch={false}>
           <StyledLink>{t("link.legal.text")}</StyledLink>
         </Link>
-        <Link href="/donate" passHref>
+        <Link href="/donate" passHref prefetch={false}>
           <StyledLink>{t("link.donate.text")}</StyledLink>
         </Link>
       </Nav>

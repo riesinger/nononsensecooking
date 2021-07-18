@@ -1,0 +1,19 @@
+name: Spinatwraps
+longName: Spinatwraps gefüllt mit Dillcreme
+image: "spinatwraps-min.jpg"
+cookTime: 20
+diet: vegetarian
+ingredients:
+  - name: Spinat
+    amount: 300
+    unit: g
+    scales: true
+  - name: Crème fraîche
+    amount: 200
+    unit: g
+    scales: true
+  - id: pepper
+  - id: salt
+steps:
+  - Als erstes etwas tun
+  - Dann noch etwas

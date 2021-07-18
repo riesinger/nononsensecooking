@@ -1,8 +1,8 @@
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { SupportedLanguage } from "../../models/Localized";
-import { allRecipes, translateTo } from "./recipes";
-import { getLanguage } from "./utils/getLanguage";
+import { fetchRecipeIndex } from "../../utils/recipes";
+import { localeFrom } from "./utils/localeFrom";
 import { methodIs } from "./utils/methodIs";
 
 const searchOptions = {
@@ -28,7 +28,7 @@ export async function searchRecipes(
   language: SupportedLanguage,
   searchTerm: string
 ) {
-  const recipes = (await allRecipes()).map(translateTo(language));
+  const recipes = await fetchRecipeIndex(language);
   const fuse = new Fuse(recipes, searchOptions);
 
   return fuse.search(sanitize(searchTerm));
@@ -36,7 +36,7 @@ export async function searchRecipes(
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (!methodIs("GET", req, res)) return;
-  const lang = getLanguage(req);
+  const lang = localeFrom(req);
   const { query } = req.query;
   res.status(200).json(await searchRecipes(lang, query as string));
 };

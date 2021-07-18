@@ -1,0 +1,23 @@
+name: Salmon with Green Asparagus
+longName: Jucy Salmon with Green Asparagus and Brown Butter
+image: "lachs-gruener-spargel-min.jpg"
+cookTime: 20
+diet: fish
+ingredients:
+  - name: Fresh Salmon
+    scales: true
+    amount: 400
+    unit: g
+  - name: Green Asparagus
+    scales: true
+    amount: 600
+    unit: g
+  - id: butter
+    scales: true
+    amount: 20
+    unit: g
+  - id: salt
+  - id: pepper
+steps:
+  - Do something first
+  - then another thing

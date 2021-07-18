@@ -1,11 +1,10 @@
-import { Ingredient, TranslatableIngredient } from "./Ingredient";
-import { Localized } from "./Localized";
+import { Ingredient } from "./Ingredient";
 
 export interface Recipe {
-  id: RecipeID;
+  id: string;
   name: string;
-  fullSlug: string;
-  longName: string;
+  slug: string;
+  longName: string | undefined;
   image: string;
   cookTime: number;
   diet: "meat" | "fish" | "vegetarian" | "vegan";
@@ -14,24 +13,20 @@ export interface Recipe {
 }
 
 export interface RecipeFile {
-  name: Localized<string>;
-  longName: Localized<string>;
+  name: string;
+  longName: string | undefined;
   image: string;
   cookTime: number;
   diet: "meat" | "fish" | "vegetarian" | "vegan";
-  steps: Localized<string[]>;
-  ingredients: TranslatableIngredient[];
+  steps: string[];
+  ingredients: Ingredient[];
 }
 
-export type RecipeID = string;
-
-export interface TranslatableRecipe {
-  id: RecipeID;
-  name: Localized<string>;
-  longName: Localized<string>;
+export interface RecipeInIndex {
+  id: string;
+  name: string;
+  slug: string;
   image: string;
-  cookTime: number;
-  diet: "meat" | "fish" | "vegetarian" | "vegan";
-  steps: Localized<string[]>;
-  ingredients: TranslatableIngredient[];
+  cookTime: string;
+  diet: string;
 }

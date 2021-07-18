@@ -1,31 +1,4 @@
-import { Localized } from "./Localized";
 import { Unit } from "./Unit";
-
-export interface TranslatableIngredientBase {
-  scales: boolean;
-  unit?: Unit;
-  amount?: number;
-}
-
-export interface TranslatableIngredientWithNames
-  extends TranslatableIngredientBase {
-  name: Localized<string>;
-}
-
-export interface TranslatableIngredientWithID
-  extends TranslatableIngredientBase {
-  id: string;
-}
-
-export type TranslatableIngredient =
-  | TranslatableIngredientWithNames
-  | TranslatableIngredientWithID;
-
-export function isTranslatableIngredientWithID(
-  ingredient: TranslatableIngredient
-): ingredient is TranslatableIngredientWithID {
-  return (ingredient as TranslatableIngredientWithID)?.id !== undefined;
-}
 
 export interface IngredientBase {
   name?: string;
