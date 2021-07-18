@@ -1,4 +1,4 @@
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -50,7 +50,15 @@ const Footer = () => {
   const { t } = useTranslation("footer");
   return (
     <StyledFooter>
-      <LicenseNotice>{t("licensenotice")}</LicenseNotice>
+      <LicenseNotice>
+        <Trans t={t} i18nKey="licensenotice">
+          The content on this page is licensed under a{" "}
+          <a href="https://creativecommons.org/licenses/by/4.0/legalcode">
+            CC BY 4.0
+          </a>{" "}
+          license
+        </Trans>
+      </LicenseNotice>
       <Nav>
         <StyledLink
           href="https://github.com/riesinger/nononsensecooking"
