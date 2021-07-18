@@ -18,7 +18,9 @@ import { translateAllTo } from "../utils/recipes";
 const ALL_RECIPES_PAGE_SIZE = 10;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const baseUrl = process.env.VERCEL_URL;
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : `http://localhost:3000`;
   console.log("Base URL is", baseUrl);
   const language = languageFrom(context);
   const recipeIndex = await (
