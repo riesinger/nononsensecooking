@@ -1,0 +1,23 @@
+name: Lachsfilet mit grünem Spargel
+longName: Saftiges Lachsfilet mit grünem Spargel und brauner Butter
+image: "lachs-gruener-spargel-min.jpg"
+cookTime: 20
+diet: fish
+ingredients:
+  - name: Lachsfilet
+    scales: true
+    amount: 400
+    unit: g
+  - name: Grüner Spargel
+    scales: true
+    amount: 600
+    unit: g
+  - id: butter
+    scales: true
+    amount: 20
+    unit: g
+  - id: salt
+  - id: pepper
+steps:
+  - Als erstes etwas tun
+  - Dann noch etwas

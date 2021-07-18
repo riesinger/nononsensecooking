@@ -1,0 +1,14 @@
+name: Einfaches Bananeneis
+image: "banana-icecream.jpg"
+cookTime: 5
+diet: vegetarian
+ingredients:
+  - id: banana
+    amount: 2
+    scales: true
+  - id: milk
+steps:
+  - Schäle die Bananen und schneide sie in Scheiben
+  - Friere die Scheiben für mindestens 4 Stunden ein
+  - Püriere die Bananen in einer Küchenmaschine oder mit einem Pürierstab
+  - Füge Milch hinzu, bis das Eis die gewünschte Konsistenz erreicht

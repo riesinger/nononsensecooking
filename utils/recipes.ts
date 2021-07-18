@@ -2,111 +2,72 @@ import fs from "fs/promises";
 import path from "path";
 import slug from "slug";
 import YAML from "yaml";
-import {
-  Ingredient,
-  isTranslatableIngredientWithID,
-  TranslatableIngredient,
-} from "../models/Ingredient";
 import { SupportedLanguage } from "../models/Localized";
-import { Recipe, RecipeFile, TranslatableRecipe } from "../models/Recipe";
+import { Recipe, RecipeInIndex } from "../models/Recipe";
 import { Unit } from "../models/Unit";
 
-let _allRecipes: TranslatableRecipe[] = [];
+const VERCEL_URL = process.env.VERCEL_URL;
+const recipeFilesBasePath = path.resolve("./public/recipes");
 
-// When running locally, we're running out of the project's root directory.
-// On vercel, the CWD for this route is the .next directory, which hoists everything inside './public' directly into itself
-const recipesBasePath = path.resolve("./public", "recipes");
+export async function fetchRecipeIndex(
+  lang: SupportedLanguage
+): Promise<RecipeInIndex[]> {
+  const baseUrl = VERCEL_URL
+    ? `https://${VERCEL_URL}`
+    : "http://localhost:3000";
+  const recipeIndexPath = `/recipes/index_${lang}.json`;
+  const allRecipes = await (await fetch(baseUrl + recipeIndexPath)).json();
 
-export interface Paginated<T> {
-  totalItems: number;
-  items: T[];
+  return allRecipes;
 }
 
-export async function allRecipes(): Promise<TranslatableRecipe[]> {
-  if (_allRecipes.length == 0) {
-    _allRecipes = await loadRecipes();
-  }
-  return _allRecipes;
-}
-
-export async function paginatedRecipes(
-  start: number,
-  limit: number
-): Promise<Paginated<TranslatableRecipe>> {
-  const r = await allRecipes();
-  const totalItems = r.length;
-  const items = r.slice(start, start + limit);
-  return {
-    totalItems,
-    items,
-  };
-}
-
-export async function paginatedRecipesForLanguage(
-  lang: SupportedLanguage,
-  start: number,
-  limit: number
-): Promise<Paginated<Recipe>> {
-  const r = await paginatedRecipes(start, limit);
-  return {
-    totalItems: r.totalItems,
-    items: r.items
-      .map(translateTo(lang))
-      .sort((a, b) => (a.name < b.name ? -1 : 1)),
-  };
-}
-
-async function loadRecipes(): Promise<TranslatableRecipe[]> {
-  console.info("Loading all recipes");
-  const recipeFiles = await fs.readdir(recipesBasePath);
-  console.info("Found", recipeFiles.length, "recipes");
+// TODO: Properly type fieldsToInclude
+export async function loadRecipesFromDisk(
+  locale: SupportedLanguage,
+  fieldsToInclude: string[] = undefined
+): Promise<Partial<Recipe>[]> {
+  const recipeFiles = await fs.readdir(path.join(recipeFilesBasePath, locale));
   return await Promise.all(
-    recipeFiles.map(async (recipeFile) => {
-      const recipe: RecipeFile = YAML.parse(
-        await fs.readFile(recipesBasePath + "/" + recipeFile, "utf-8")
+    recipeFiles.map(async (filename) => {
+      const file = await fs.readFile(
+        path.join(recipeFilesBasePath, locale, filename),
+        "utf-8"
       );
-      const id = recipeFile.split(".")[0];
-      return {
-        id,
-        ...recipe,
-      };
+      const id = filename.split(".")[0];
+      const recipeData = YAML.parse(file);
+      const recipe = parseRecipeData(id, recipeData);
+      return Object.fromEntries(
+        Object.entries(recipe).filter(([key, _]) =>
+          fieldsToInclude ? fieldsToInclude.includes(key) : true
+        )
+      );
     })
   );
 }
 
-export const translateTo =
-  (lang: SupportedLanguage) =>
-  (recipe: TranslatableRecipe): Recipe => ({
-    id: recipe.id,
-    name: recipe.name[lang],
-    fullSlug: `${recipe.id}/${slug(recipe.name[lang])}`,
-    longName: recipe.longName?.[lang] || null,
-    image: recipe.image,
-    cookTime: recipe.cookTime,
-    diet: recipe.diet,
-    steps: recipe.steps?.[lang] || null,
-    ingredients: recipe.ingredients?.map(translateIngredient(lang)) || null,
-  });
+export async function readSingleRecipeFromDisk(
+  lang: SupportedLanguage,
+  id: string
+) {
+  const file = await fs.readFile(
+    path.join(recipeFilesBasePath, lang, `${id}.yaml`),
+    "utf-8"
+  );
+  const recipeData = YAML.parse(file);
+  return parseRecipeData(id, recipeData);
+}
 
-export const translateAllTo =
-  (lang: SupportedLanguage) =>
-  (recipes: TranslatableRecipe[]): Recipe[] =>
-    recipes.map(translateTo(lang));
+const parseRecipeData = (id: string, recipeData: any): Recipe => ({
+  ...recipeData,
+  id,
+  slug: `${id}/${slug(recipeData.name)}`,
+  ingredients: parseIngredients(recipeData.ingredients),
+});
 
-const translateIngredient =
-  (lang: SupportedLanguage) =>
-  (ingredient: TranslatableIngredient): Ingredient => {
-    return isTranslatableIngredientWithID(ingredient)
-      ? {
-          id: ingredient.id,
-          scales: ingredient.scales || false,
-          amount: ingredient.amount || null,
-          unit: ingredient.unit || Unit.NONE,
-        }
-      : {
-          name: ingredient.name[lang],
-          scales: ingredient.scales || false,
-          amount: ingredient.amount || null,
-          unit: ingredient.unit || Unit.NONE,
-        };
-  };
+const parseIngredients = (
+  ingredients: Recipe["ingredients"]
+): Recipe["ingredients"] =>
+  ingredients.map((ingredient) => ({
+    ...ingredient,
+    unit: ingredient.unit || Unit.NONE,
+  }));

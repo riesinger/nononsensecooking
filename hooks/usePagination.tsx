@@ -1,4 +1,4 @@
-import { Paginated } from "../pages/api/recipes";
+import { Paginated } from "../models/Paginated";
 
 export function usePagination<T>(
   results: Paginated<T>,

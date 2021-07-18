@@ -1,0 +1,17 @@
+name: Kokosdal
+longName: Cremiges Kokosdal
+image: "placeholder-min.jpg"
+cookTime: 20
+diet: vegetarian
+ingredients:
+  - id: redlentils
+    scales: true
+    amount: 500
+    unit: g
+  - id: coconutmilk
+    scales: true
+    amount: 3
+    unit: l
+steps:
+  - Als erstes etwas tun
+  - Dann noch etwas

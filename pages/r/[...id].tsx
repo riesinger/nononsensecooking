@@ -4,21 +4,23 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import { useState } from "react";
-import slug from "slug";
 import styled from "styled-components";
 import IconForDiet from "../../components/IconForDiet";
 import IngredientsList from "../../components/IngredientsList";
 import SEO from "../../components/SEO";
 import ServingsChooser from "../../components/ServingsChooser";
 import StepList from "../../components/StepList";
-import { Recipe, RecipeID } from "../../models/Recipe";
+import { SupportedLanguage } from "../../models/Localized";
+import { Recipe } from "../../models/Recipe";
 import languageFrom from "../../utils/languageFrom";
-import { allRecipes } from "../api/recipes";
-import { recipeById } from "../api/recipes/[id]";
+import {
+  loadRecipesFromDisk,
+  readSingleRecipeFromDisk,
+} from "../../utils/recipes";
 
 export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
   const { id } = context.params;
-  const recipe = await recipeById(languageFrom(context), id[0] as RecipeID);
+  const recipe = await readSingleRecipeFromDisk(languageFrom(context), id[0]);
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [
@@ -33,20 +35,21 @@ export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-  const recipes = await allRecipes();
-  const paths = recipes
-    .map((recipe) =>
-      context.locales.map((locale) => ({
+  let paths = [];
+  for (const locale of context.locales) {
+    const recipes = await loadRecipesFromDisk(locale as SupportedLanguage, [
+      "id",
+      "slug",
+    ]);
+    for (const recipe of recipes) {
+      paths.push({
         params: {
-          id: [recipe.id, slug(recipe.name[locale])],
+          id: recipe.slug.split("/"),
         },
-        locale: locale,
-      }))
-    )
-    .reduce((acc, recipePaths) => {
-      acc.push(...recipePaths);
-      return acc;
-    }, []);
+        locale,
+      });
+    }
+  }
   return {
     paths,
     fallback: false, // NOTE: Once we have many recipes, it might be worth looking into only pre-rendering some of them

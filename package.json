@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run generate-recipe-index",
     "build": "next build",
     "start": "next start",
-    "new-recipe": "node ./scripts/new-recipe.mjs"
+    "new-recipe": "node ./scripts/new-recipe.mjs",
+    "generate-recipe-index": "node ./scripts/generate-recipe-index.mjs"
   },
   "dependencies": {
     "@mdi/js": "^5.9.55",

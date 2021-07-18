@@ -1,0 +1,23 @@
+name: Spinach Wraps
+longName: Spinach Wraps filled with Dill Cream
+image: "spinatwraps-min.jpg"
+cookTime: 20
+diet: vegetarian
+ingredients:
+  - name: Spinach
+    amount: 300
+    unit: g
+    scales: true
+  - name: Crème fraîche
+    amount: 200
+    unit: g
+    scales: true
+  - id: pepper
+    amount: 1
+    scales: false
+  - id: salt
+    amount: 1
+    scales: false
+steps:
+  - Do something first
+  - then another thing

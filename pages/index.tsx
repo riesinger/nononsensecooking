@@ -11,38 +11,26 @@ import SEO from "../components/SEO";
 import Track from "../components/Track";
 import { usePagination } from "../hooks/usePagination";
 import { useQueryParam } from "../hooks/useQueryParam";
-import { Recipe } from "../models/Recipe";
+import { Recipe, RecipeInIndex } from "../models/Recipe";
 import languageFrom from "../utils/languageFrom";
-import { translateAllTo } from "../utils/recipes";
+import { fetchRecipeIndex } from "../utils/recipes";
 
 const ALL_RECIPES_PAGE_SIZE = 10;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : `http://localhost:3000`;
   const language = languageFrom(context);
-  const recipeIndex = await (
-    await fetch(baseUrl + "/recipes/index.json")
-  ).json();
-  const translatedRecipeIndex = translateAllTo(language)(recipeIndex);
+  const recipeIndex = await fetchRecipeIndex(language);
 
   // TODO: Re-implement a proper recipes-of-the-day functionality
-  const recipesOfTheDay = translatedRecipeIndex.slice(0, 3);
-  // const recipesOfTheDay = await recipesOfTheDayForLanguage(
-  //   languageFrom(context)
-  // );
+  const recipesOfTheDay = recipeIndex.slice(0, 3);
+
   const start = parseInt(useQueryParam(context, "start", 0), 10);
   const paginatedRecipesResult = {
-    items: translatedRecipeIndex,
-    totalItems: translatedRecipeIndex.length,
+    items: recipeIndex,
+    totalItems: recipeIndex.length,
   };
-  // const paginatedRecipesResult = await paginatedRecipesForLanguage(
-  //   languageFrom(context),
-  //   start,
-  //   ALL_RECIPES_PAGE_SIZE
-  // );
-  const { totalPages, currentPage, items } = usePagination<Recipe>(
+
+  const { totalPages, currentPage, items } = usePagination<RecipeInIndex>(
     paginatedRecipesResult,
     ALL_RECIPES_PAGE_SIZE,
     start
@@ -91,7 +79,7 @@ export default function Home({
             <DishCard
               key={recipe.id}
               id={recipe.id}
-              slug={recipe.fullSlug}
+              slug={recipe.slug}
               {...recipe}
             />
           ))}
@@ -112,7 +100,7 @@ export default function Home({
             <DishListItem
               key={recipe.id}
               id={recipe.id}
-              slug={recipe.fullSlug}
+              slug={recipe.slug}
               {...recipe}
             />
           ))}

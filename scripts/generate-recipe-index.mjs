@@ -1,41 +1,51 @@
 import fs from "fs/promises";
 import path from "path";
+import slug from "slug";
 import YAML from "yaml";
+import { i18n } from "../next.config.js";
 
 const basePath = "./public/recipes";
+const supportedLocales = i18n.locales;
+const fieldsToIncludeInIndex = [
+  "id",
+  "name",
+  "image",
+  "cookTime",
+  "diet",
+  "slug",
+];
 
-async function loadRecipes() {
-  console.info("Loading all recipes");
-  const recipeFiles = await fs.readdir(basePath);
-  console.info("Found", recipeFiles.length, "recipes");
+// TODO: Re-use the loadRecipes function from utils
+async function loadRecipes(locale, fieldsToInclude) {
+  const recipeFiles = await fs.readdir(path.join(basePath, locale));
   return await Promise.all(
-    recipeFiles.map(async (recipeFile) => {
-      const recipe = YAML.parse(
-        await fs.readFile(basePath + "/" + recipeFile, "utf-8")
+    recipeFiles.map(async (filename) => {
+      const file = await fs.readFile(
+        path.join(basePath, locale, filename),
+        "utf-8"
       );
-      const id = recipeFile.split(".")[0];
-      return {
-        id,
-        ...recipe,
-      };
+      const recipeData = YAML.parse(file);
+      const id = filename.split(".")[0];
+      const s = `${id}/${slug(recipeData.name)}`;
+      const recipe = { id, slug: s, ...recipeData };
+      return Object.fromEntries(
+        Object.entries(recipe).filter(([key, _]) =>
+          fieldsToInclude.includes(key)
+        )
+      );
     })
   );
 }
 
 async function generateIndex() {
-  const recipes = await loadRecipes();
-  const slimRecipes = recipes
-    .map((r) => ({
-      id: r.id,
-      name: r.name,
-      image: r.image,
-      cookTime: r.cookTime,
-      diet: r.diet,
-    }))
-    .filter((r) => r.id !== "index");
-  const targetFile = path.join(basePath, "index.json");
-  console.log("Writing to", targetFile);
-  await fs.writeFile(targetFile, JSON.stringify(slimRecipes));
+  for (const locale of supportedLocales) {
+    console.log("🛠 Generating index for locale", locale);
+    const recipes = await loadRecipes(locale, fieldsToIncludeInIndex);
+    console.log("   👀 Found", recipes.length, "recipes");
+    const targetFile = path.join(basePath, `index_${locale}.json`);
+    console.log("   📝 Writing to", targetFile);
+    await fs.writeFile(targetFile, JSON.stringify(recipes));
+  }
 }
 
 generateIndex().catch(console.error);

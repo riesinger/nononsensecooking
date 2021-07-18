@@ -8,7 +8,7 @@ import { Recipe } from "../models/Recipe";
 import IconForDiet from "./IconForDiet";
 
 type Props = {
-  slug: Recipe["fullSlug"];
+  slug: Recipe["slug"];
   name: Recipe["name"];
   image: Recipe["image"];
   cookTime: Recipe["cookTime"];
