@@ -7,8 +7,8 @@
     "prebuild": "npm run generate-recipe-index",
     "build": "next build",
     "start": "next start",
-    "new-recipe": "node ./scripts/new-recipe.mjs",
-    "generate-recipe-index": "node ./scripts/generate-recipe-index.mjs"
+    "new-recipe": "ts-node ./scripts/new-recipe.ts",
+    "generate-recipe-index": "ts-node ./scripts/generate-recipe-index.ts"
   },
   "dependencies": {
     "@mdi/js": "^5.9.55",
@@ -25,9 +25,12 @@
     "yaml": "^1.10.2"
   },
   "devDependencies": {
+    "@types/inquirer": "^7.3.3",
     "@types/react": "^17.0.9",
     "@types/slug": "^5.0.0",
     "@types/styled-components": "^5.1.9",
-    "nanoid": "^3.1.23"
+    "inquirer": "^8.1.2",
+    "nanoid": "^3.1.23",
+    "ts-node": "^10.1.0"
   }
 }
