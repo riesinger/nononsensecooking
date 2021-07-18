@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import inquirer from "inquirer";
 import { customAlphabet } from "nanoid";
 import path from "path";
-import config from "../next.config.js";
+import config from "../next-i18next.config.js";
 
 const supportedLocales = config.i18n.locales;
 const supportedDiets = ["meat", "fish", "vegetarian", "vegan"];
