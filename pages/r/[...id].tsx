@@ -6,19 +6,26 @@ import Image from "next/image";
 import { useState } from "react";
 import slug from "slug";
 import styled from "styled-components";
+import YAML from "yaml";
 import IconForDiet from "../../components/IconForDiet";
 import IngredientsList from "../../components/IngredientsList";
 import SEO from "../../components/SEO";
 import ServingsChooser from "../../components/ServingsChooser";
 import StepList from "../../components/StepList";
-import { Recipe, RecipeID } from "../../models/Recipe";
+import { Recipe } from "../../models/Recipe";
 import languageFrom from "../../utils/languageFrom";
-import { allRecipes } from "../api/recipes";
-import { recipeById } from "../api/recipes/[id]";
+import { translateTo } from "../../utils/recipes";
 
 export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
   const { id } = context.params;
-  const recipe = await recipeById(languageFrom(context), id[0] as RecipeID);
+  const language = languageFrom(context);
+  const baseUrl = process.env.VERCEL_URL;
+  const recipe = await (await fetch(`${baseUrl}/recipes/${id[0]}.yaml`)).text();
+  console.log(recipe);
+  const recipeWithId = { id: id[0], ...YAML.parse(recipe) };
+  const translatedRecipe = translateTo(language)(recipeWithId);
+  console.log(translatedRecipe);
+  // const recipe = await recipeById(languageFrom(context), id[0] as RecipeID);
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [
@@ -27,13 +34,14 @@ export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
         "recipe",
         "footer",
       ])),
-      ...recipe,
+      ...translatedRecipe,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-  const recipes = await allRecipes();
+  const baseUrl = process.env.VERCEL_URL;
+  const recipes = await (await fetch(`${baseUrl}/recipes/index.json`)).json();
   const paths = recipes
     .map((recipe) =>
       context.locales.map((locale) => ({
