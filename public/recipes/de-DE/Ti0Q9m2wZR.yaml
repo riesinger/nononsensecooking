@@ -1,0 +1,34 @@
+name: Schupfnudeln mit Gemüsesahnesoße
+image: "schupfnudeln-vegetable-sauce.jpg"
+cookTime: 25
+diet: vegetarian
+ingredients:
+  - name: Schupfnudeln
+    amount: 500
+    unit: g
+    scales: true
+  - name: Schmelzkäse
+    amount: 100
+    unit: g
+    scales: true
+  - id: carrot
+    amount: 2
+    scales: true
+  - id: zucchini
+    amount: 0.5
+    scales: true
+  - id: vegetablebroth
+    amount: 150
+    unit: ml
+    scales: true
+  - id: salt
+  - id: pepper
+  - id: garlicpowder
+  - id: paprikapowder
+steps:
+  - Die Zucchini und Karotten in feine Stifte schneiden
+  - Schupfnudeln mit etwas Öl oder Butter in einer Pfanne bei mittlerer Hitze anbraten, bis sie goldgelb und knusprig werden
+  - In der Zwischenzeit das Gemüse in einem Topf mit Deckel bei mittlerer Hitze für 3-5 Minuten andünsten
+  - Die Gemüsebrühe und den Schmelzkäse zu Karotten und Zucchini hinzugeben und fleißig umrühren, bis sich der Schmelzkäse vollständig aufgelöst hat. Falls die Soße zu dünnflüssig ist, kannst Du noch ein wenig Mehl oder Stärke hinzugeben
+  - Die Soße mit Salz, Pfeffer, Knoblauch- und Paprikapulver abschmecken
+  - Guten Appetit!
