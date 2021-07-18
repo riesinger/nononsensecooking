@@ -19,6 +19,7 @@ const ALL_RECIPES_PAGE_SIZE = 10;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const baseUrl = process.env.VERCEL_URL;
+  console.log("Base URL is", baseUrl);
   const language = languageFrom(context);
   const recipeIndex = await (
     await fetch(baseUrl + "/recipes/index.json")
