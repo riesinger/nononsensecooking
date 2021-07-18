@@ -21,12 +21,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : `http://localhost:3000`;
-  console.log("Base URL is", baseUrl);
   const language = languageFrom(context);
   const recipeIndex = await (
     await fetch(baseUrl + "/recipes/index.json")
   ).json();
-  console.log(recipeIndex);
   const translatedRecipeIndex = translateAllTo(language)(recipeIndex);
 
   // TODO: Re-implement a proper recipes-of-the-day functionality
