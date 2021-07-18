@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import slug from "slug";
 import YAML from "yaml";
-import config from "../next.config.js";
+import { default as config } from "../next.config.js";
 
 const basePath = "./public/recipes";
 const supportedLocales = config.i18n.locales;
