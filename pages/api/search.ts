@@ -1,7 +1,7 @@
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { SupportedLanguage } from "../../models/Localized";
-import { allRecipes, translateTo } from "./recipes";
+import { translateTo } from "../../utils/recipes";
 import { getLanguage } from "./utils/getLanguage";
 import { methodIs } from "./utils/methodIs";
 
@@ -28,7 +28,13 @@ export async function searchRecipes(
   language: SupportedLanguage,
   searchTerm: string
 ) {
-  const recipes = (await allRecipes()).map(translateTo(language));
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
+  const rawRecipes = await (
+    await fetch(`${baseUrl}/recipes/index.json`)
+  ).json();
+  const recipes = rawRecipes.map(translateTo(language));
   const fuse = new Fuse(recipes, searchOptions);
 
   return fuse.search(sanitize(searchTerm));

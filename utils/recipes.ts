@@ -91,10 +91,7 @@ export const translateTo =
 export const translateAllTo =
   (lang: SupportedLanguage) =>
   (recipes: TranslatableRecipe[]): Recipe[] =>
-    recipes.map((recipe) => {
-      console.log(recipe);
-      return translateTo(lang)(recipe);
-    });
+    recipes.map(translateTo(lang));
 
 const translateIngredient =
   (lang: SupportedLanguage) =>
