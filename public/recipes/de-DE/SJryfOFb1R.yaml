@@ -1,17 +1,34 @@
 name: Kokosdal
-longName: Cremiges Kokosdal
-image: "placeholder-min.jpg"
-cookTime: 20
-diet: vegetarian
+image: "coconut-dal.jpg"
+cookTime: 25
+diet: vegan
 ingredients:
   - id: redlentils
     scales: true
-    amount: 500
+    amount: 160
     unit: g
   - id: coconutmilk
     scales: true
-    amount: 3
-    unit: l
+    amount: 200
+    unit: g
+  - id: dicedtomatos
+    scales: true
+    amount: 400
+    unit: g
+  - id: garammasala
+    scales: true
+    amount: 1
+    unit: tbsp
+  - id: onion
+    scales: true
+    amount: 1
+  - id: salt
+  - id: pepper
+  - id: chiliflakes
 steps:
-  - Als erstes etwas tun
-  - Dann noch etwas
+  - Wasche die Linsen gut ab und stelle sie beiseite
+  - Schneide die Zwiebel in feine Würfel und schwitze sie für 1-2 Minuten in einem Topf mit ein wenig Öl an
+  - Gebe das Garam Masala hinzu und röste es für 2-3 Minuten mit an
+  - Als nächstes die Linsen, Tomaten und Kokosmilch hinzugeben und 15-20 Minuten köcheln lassen, bis die Linsen weich geworden sind. Dabei häufig umrühren, damit die Linsen nicht anbrennen
+  - Mit Salz, Pfeffer und Chiliflocken abschmecken
+  - Guten Appetit!
