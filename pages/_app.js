@@ -10,6 +10,8 @@ const Main = styled.main`
   flex: 1 0 auto;
 `;
 
+const isProduction = process.env.NODE_ENV === "production";
+
 function MyApp({ Component, pageProps }) {
   return (
     <>
@@ -37,12 +39,21 @@ function MyApp({ Component, pageProps }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5686f5" />
         <meta name="msapplication-TileColor" content="#5686f5" />
         <meta name="theme-color" content="#5686f5" />
+        {isProduction ? (
+          <script
+            data-goatcounter="https://analytics.nononsense.cooking/count"
+            async
+            src="https://analytics.nononsense.cooking/count.js"
+          ></script>
+        ) : (
+          false
+        )}
       </Head>
       <Header></Header>
       <Main>
         <Component {...pageProps} />
       </Main>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

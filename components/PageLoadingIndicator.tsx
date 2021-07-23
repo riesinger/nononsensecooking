@@ -2,6 +2,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+// type declaration for the goatcounter object on the window object
+declare global {
+  var goatcounter: {
+    count: Function;
+  };
+}
+
 const Indicator = styled.div<{ isLoading: boolean }>`
   width: 100%;
   height: 5px;
@@ -29,14 +36,24 @@ const PageLoadingIndicator = () => {
     setLoading(false);
   }
 
+  function sendAnalyticsEvent() {
+    if (window.goatcounter?.count) {
+      window.goatcounter.count();
+    } else {
+      console.warn("Goatcounter isn't loaded yet");
+    }
+  }
+
   useEffect(() => {
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleStop);
+    router.events.on("routeChangeComplete", sendAnalyticsEvent);
     router.events.on("routeChangeError", handleStop);
 
     return () => {
       router.events.off("routeChangeStart", handleStart);
       router.events.off("routeChangeComplete", handleStop);
+      router.events.off("routeChangeComplete", sendAnalyticsEvent);
       router.events.off("routeChangeError", handleStop);
     };
   }, [router]);
