@@ -9,7 +9,6 @@ type Props = {
 };
 
 const HOST = "https://nononsense.cooking";
-const isProduction = process.env.NODE_ENV === "production";
 
 const SEO = ({ title, isRecipe, img }: Props) => {
   const { t } = useTranslation("common");
@@ -46,15 +45,6 @@ const SEO = ({ title, isRecipe, img }: Props) => {
         name="keywords"
         content="Cooking, recipes, Kochen, Rezepte, Einfach, Simpel"
       />
-      {isProduction ? (
-        <script
-          data-goatcounter="https://analytics.nononsense.cooking/count"
-          async
-          src="https://analytics.nononsense.cooking/count.js"
-        ></script>
-      ) : (
-        false
-      )}
     </Head>
   );
 };
