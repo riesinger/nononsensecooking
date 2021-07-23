@@ -71,7 +71,7 @@ const IconStat = styled.span`
 const DishListItem = ({ slug, name, image, cookTime, diet }: Props) => {
   const { t } = useTranslation("common");
   return (
-    <Link href={`/r/${slug}`} passHref>
+    <Link href={`/r/${slug}`} passHref prefetch={false}>
       <Dish>
         <ImageContainer>
           <Image
