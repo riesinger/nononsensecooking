@@ -38,7 +38,9 @@ const PageLoadingIndicator = () => {
 
   function sendAnalyticsEvent() {
     if (window.goatcounter?.count) {
+      console.log("Sending pageview");
       window.goatcounter.count();
+      console.log("Pageview sent");
     } else {
       console.log("Goatcounter isn't loaded yet");
     }
