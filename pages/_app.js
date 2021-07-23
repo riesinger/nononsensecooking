@@ -42,7 +42,12 @@ function MyApp({ Component, pageProps }) {
       <Main>
         <Component {...pageProps} />
       </Main>
-      <Footer></Footer>
+      <Footer />
+      <script
+        data-goatcounter="https://analytics.nononsense.cooking/count"
+        async
+        src="https://analytics.nononsense.cooking/count.js"
+      ></script>
     </>
   );
 }
