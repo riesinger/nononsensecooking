@@ -38,11 +38,9 @@ const PageLoadingIndicator = () => {
 
   function sendAnalyticsEvent() {
     if (window.goatcounter?.count) {
-      console.log("Sending pageview");
       window.goatcounter.count();
-      console.log("Pageview sent");
     } else {
-      console.log("Goatcounter isn't loaded yet");
+      console.warn("Goatcounter isn't loaded yet");
     }
   }
 
@@ -55,7 +53,7 @@ const PageLoadingIndicator = () => {
     return () => {
       router.events.off("routeChangeStart", handleStart);
       router.events.off("routeChangeComplete", handleStop);
-      router.events.on("routeChangeComplete", sendAnalyticsEvent);
+      router.events.off("routeChangeComplete", sendAnalyticsEvent);
       router.events.off("routeChangeError", handleStop);
     };
   }, [router]);
