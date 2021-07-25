@@ -94,7 +94,11 @@ export class GoatcounterClient {
   }
 
   private async parseExportV1(data: string) {
-    const pagehits = parse(data, { columns: true, autoParse: true });
+    const pagehits = parse(data, {
+      columns: true,
+      autoParse: true,
+      skipEmptyLines: true,
+    });
     return pagehits.map(
       (rawHit: RawPageHitV1): ParsedPageHit => ({
         path: rawHit["1Path"].toString(),
@@ -104,7 +108,17 @@ export class GoatcounterClient {
   }
 
   private async parseExportV2(data: string) {
-    throw new Error("parseExportV2 is unimplemented");
+    const pagehits = parse(data, {
+      columns: true,
+      autoParse: true,
+      skipEmptyLines: true,
+    });
+    return pagehits.map(
+      (rawHit: RawPageHitV2): ParsedPageHit => ({
+        path: rawHit["2Path"].toString(),
+        bot: rawHit.Bot !== "0",
+      })
+    );
   }
 
   private accumulatePagehits = (pagehits: ParsedPageHit[]) =>
@@ -144,6 +158,23 @@ interface RawPageHitV1 {
   "Screen size": string;
   Location: string;
   Date: string;
+}
+
+interface RawPageHitV2 {
+  "2Path": string;
+  Title: string;
+  Event: string;
+  Bot: string;
+  Session: string;
+  FirstVisit: string;
+  Referrer: string;
+  Browser: string;
+  "Screen size": string;
+  Location: string;
+  Date: string;
+  "User-Agent": string;
+  System: string;
+  "Referrer scheme": string;
 }
 
 interface ParsedPageHit {
