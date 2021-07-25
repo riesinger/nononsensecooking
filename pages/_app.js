@@ -1,5 +1,6 @@
 import { appWithTranslation } from "next-i18next";
 import Head from "next/head";
+import Script from "next/script";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -40,16 +41,16 @@ function MyApp({ Component, pageProps }) {
         <meta name="msapplication-TileColor" content="#5686f5" />
         <meta name="theme-color" content="#5686f5" />
         {isProduction ? (
-          <script
+          <Script
             data-goatcounter="https://analytics.nononsense.cooking/count"
             async
             src="https://analytics.nononsense.cooking/count.js"
-          ></script>
+          ></Script>
         ) : (
           false
         )}
       </Head>
-      <Header></Header>
+      <Header />
       <Main>
         <Component {...pageProps} />
       </Main>
