@@ -1,5 +1,8 @@
 {
   "searchbar": {
     "placeholder": "Suche nach Rezepten"
+  },
+  "link": {
+    "allrecipes": "Alle Rezepte"
   }
 }

@@ -76,36 +76,17 @@ export default function Home({
       <PaddedSection title={t("home.todaysrecipes")}>
         <Track sm={1} md={2} lg={3}>
           {recipesOfTheDay.map((recipe: Recipe) => (
-            <DishCard
-              key={recipe.id}
-              id={recipe.id}
-              slug={recipe.slug}
-              {...recipe}
-            />
+            <DishCard {...recipe} key={recipe.id} />
           ))}
         </Track>
       </PaddedSection>
-      {/* <PaddedSection title={t("home.recentlyaddedrecipes")}></PaddedSection> */}
-      <PaginatedSection
-        title={t("home.allrecipes")}
-        totalPages={totalPages}
-        currentPage={currentPage}
-        prevPageLink={prevPageLink}
-        prevLinkEnabled={prevLinkEnabled}
-        nextPageLink={nextPageLink}
-        nextLinkEnabled={nextLinkEnabled}
-      >
-        <DishList>
-          {paginatedRecipes.map((recipe: Recipe) => (
-            <DishListItem
-              key={recipe.id}
-              id={recipe.id}
-              slug={recipe.slug}
-              {...recipe}
-            />
+      <PaddedSection title={t("home.mostpopularrecipes")}>
+        <Track sm={1} md={2} lg={3}>
+          {mostPopularRecipes.map((recipe: Recipe) => (
+            <DishCard {...recipe} key={recipe.id} />
           ))}
-        </DishList>
-      </PaginatedSection>
+        </Track>
+      </PaddedSection>
     </>
   );
 }
