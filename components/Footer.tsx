@@ -14,7 +14,7 @@ const StyledFooter = styled.footer`
   @media screen and (max-width: 800px) {
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
   }
 `;
@@ -30,7 +30,7 @@ const LicenseNotice = styled.span`
   line-height: 1.5;
 
   @media screen and (max-width: 800px) {
-    text-align: center;
+    /* text-align: center; */
   }
 `;
 
@@ -43,6 +43,7 @@ const Nav = styled.nav`
   @media screen and (max-width: 800px) {
     flex-direction: column;
     gap: 0.5rem;
+    align-items: flex-start;
   }
 `;
 
