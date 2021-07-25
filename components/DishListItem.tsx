@@ -35,7 +35,7 @@ const Dish = styled.a`
 `;
 
 const ImageContainer = styled.div`
-  width: ${HEIGHT * 1.667}rem;
+  width: ${HEIGHT * 1.539}rem;
   height: ${HEIGHT}rem;
   position: relative;
   overflow: hidden;
