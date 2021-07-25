@@ -7,11 +7,11 @@ import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
 import { Recipe } from "../models/Recipe";
 import languageFrom from "../utils/languageFrom";
-import { fetchRecipeIndex } from "../utils/recipes";
+import { loadRecipesFromDisk } from "../utils/recipes";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const locale = languageFrom(context);
-  const recipeIndex = await fetchRecipeIndex(locale);
+  const recipeIndex = await loadRecipesFromDisk(locale);
 
   return {
     props: {

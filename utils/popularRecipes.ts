@@ -1,10 +1,9 @@
 import { SupportedLanguage } from "../models/Localized";
-import { RecipeInIndex } from "../models/Recipe";
+import { Recipe } from "../models/Recipe";
 import { GoatcounterClient, TimeoutError } from "./goatCounterApiClient";
-import { fetchRecipeIndex } from "./recipes";
+import { loadRecipesFromDisk } from "./recipes";
 
-// TODO: Read the max try count from the config
-const maxTries = 3;
+const maxTries = process.env.NODE_ENV === "production" ? 5 : 3;
 
 /**
  * Fetches the most popular recipes by exporting metrics from GoatCounter and summing up pagehits on recipe pages
@@ -22,13 +21,10 @@ export async function fetchMostPopularRecipes(locale: SupportedLanguage) {
   return await withRetries(maxTries, async () => {
     const accumulatedPagehits =
       await goatcounterClient.fetchMostPopularRecipesForLocale(locale);
-    const recipeIndex = await fetchRecipeIndex(locale);
-    return (
-      recipeIndex
-        // .filter(excludeRecipesNotMatchingIds(Object.keys(accumulatedPagehits)))
-        .sort(byNumberOfPageHits(accumulatedPagehits))
-        .slice(0, 3)
-    );
+    const recipeIndex = await loadRecipesFromDisk(locale);
+    return recipeIndex
+      .sort(byNumberOfPageHits(accumulatedPagehits))
+      .slice(0, 3);
   });
 }
 
@@ -38,13 +34,8 @@ export async function fetchMostPopularRecipes(locale: SupportedLanguage) {
  * @returns Recipe index sorted by descending amount of page hits and subsorted by the recipe names
  */
 const byNumberOfPageHits =
-  (hits: { [recipeId: string]: number }) =>
-  (a: RecipeInIndex, b: RecipeInIndex) =>
+  (hits: { [recipeId: string]: number }) => (a: Recipe, b: Recipe) =>
     (hits[b.id] || 0) - (hits[a.id] || 0) || a.name.localeCompare(b.name);
-
-const excludeRecipesNotMatchingIds =
-  (ids: string[]) => (recipe: RecipeInIndex) =>
-    ids.includes(recipe.id);
 
 async function withRetries(maxTries: number, fn: Function) {
   for (let tries = 0; tries < maxTries; tries++) {
