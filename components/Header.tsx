@@ -112,6 +112,8 @@ const Menu = styled.div<{ open: boolean }>`
     visibility: visible;
     pointer-events: all;
     padding: 0;
+    opacity: 1;
+    transform: scale(1);
     box-shadow: none;
     width: auto;
     top: 0%;
