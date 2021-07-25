@@ -20,6 +20,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 const DonatePage = styled.div`
   max-width: 700px;
   margin: 0 auto;
+  padding: 0 2rem;
 `;
 
 const IntroParagraph = styled.p`
