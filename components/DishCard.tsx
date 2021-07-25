@@ -51,19 +51,34 @@ const DishStats = styled.div`
   );
   color: hsl(var(--palette-gray-00));
   z-index: 2;
-  padding: 1rem 2rem;
+  padding: 0.75rem 1rem;
+
+  @media screen and (min-width: 600px) {
+    padding: 1rem 2rem;
+  }
 `;
 
 const DishName = styled.h4`
   margin: 0 0 1rem 0;
   font-weight: 400;
-  font-size: 1.5rem;
+
+  font-size: 1.25rem;
+
+  @media screen and (min-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const DishStatLine = styled.span`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  font-size: 0.9rem;
+
+  @media screen and (min-width: 600px) {
+    font-size: 1rem;
+  }
 `;
 
 const IconStat = styled.span`
