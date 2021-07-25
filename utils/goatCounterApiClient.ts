@@ -98,7 +98,7 @@ export class GoatcounterClient {
     return pagehits.map(
       (rawHit: RawPageHitV1): ParsedPageHit => ({
         path: rawHit["1Path"].toString(),
-        bot: rawHit.Bot === "1",
+        bot: rawHit.Bot !== "0",
       })
     );
   }
