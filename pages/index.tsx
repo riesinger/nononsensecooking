@@ -1,40 +1,23 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useRouter } from "next/router";
 import DishCard from "../components/DishCard";
-import DishList from "../components/DishList";
-import DishListItem from "../components/DishListItem";
 import { PaddedSection } from "../components/PaddedSection";
-import { PaginatedSection } from "../components/PaginatedSection";
 import SEO from "../components/SEO";
 import Track from "../components/Track";
-import { usePagination } from "../hooks/usePagination";
-import { useQueryParam } from "../hooks/useQueryParam";
-import { Recipe, RecipeInIndex } from "../models/Recipe";
+import { Recipe } from "../models/Recipe";
 import languageFrom from "../utils/languageFrom";
+import { fetchMostPopularRecipes } from "../utils/popularRecipes";
 import { fetchRecipeIndex } from "../utils/recipes";
 
 const ALL_RECIPES_PAGE_SIZE = 10;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const language = languageFrom(context);
-  const recipeIndex = await fetchRecipeIndex(language);
-
+export const getStaticProps: GetStaticProps = async (context) => {
+  const locale = languageFrom(context);
+  const recipeIndex = await fetchRecipeIndex(locale);
   // TODO: Re-implement a proper recipes-of-the-day functionality
   const recipesOfTheDay = recipeIndex.slice(0, 3);
-
-  const start = parseInt(useQueryParam(context, "start", 0), 10);
-  const paginatedRecipesResult = {
-    items: recipeIndex,
-    totalItems: recipeIndex.length,
-  };
-
-  const { totalPages, currentPage, items } = usePagination<RecipeInIndex>(
-    paginatedRecipesResult,
-    ALL_RECIPES_PAGE_SIZE,
-    start
-  );
+  const mostPopularRecipes = await fetchMostPopularRecipes(locale);
 
   return {
     props: {
@@ -44,32 +27,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         "header",
       ])),
       recipesOfTheDay,
-      paginatedRecipes: items,
-      totalRecipes: paginatedRecipesResult.totalItems,
-      totalPages,
-      currentPage,
+      paginatedRecipes: [],
+      mostPopularRecipes,
     },
+    revalidate: 24 * 60 * 60, // One day in seconds
   };
 };
 
 export default function Home({
   recipesOfTheDay,
-  paginatedRecipes,
-  totalPages,
-  currentPage,
-  totalRecipes,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  mostPopularRecipes,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation("common");
-  const router = useRouter();
-  const start = parseInt(useQueryParam(router, "start", 0), 10);
-  const nextPageLink = `/?start=${
-    start + ALL_RECIPES_PAGE_SIZE >= totalRecipes
-      ? start
-      : start + ALL_RECIPES_PAGE_SIZE
-  }`;
-  const nextLinkEnabled = start + ALL_RECIPES_PAGE_SIZE < totalRecipes;
-  const prevPageLink = `/?start=${Math.max(0, start - ALL_RECIPES_PAGE_SIZE)}`;
-  const prevLinkEnabled = start > 0;
   return (
     <>
       <SEO />

@@ -35,3 +35,6 @@ yarn-error.log*
 
 # Recipe indices
 public/recipes/index*.json
+
+# Environment files
+.env*.local
