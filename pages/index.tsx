@@ -8,15 +8,20 @@ import Track from "../components/Track";
 import { Recipe } from "../models/Recipe";
 import languageFrom from "../utils/languageFrom";
 import { fetchMostPopularRecipes } from "../utils/popularRecipes";
-import { fetchRecipeIndex } from "../utils/recipes";
+import { loadRecipesFromDisk } from "../utils/recipes";
 
-const ALL_RECIPES_PAGE_SIZE = 10;
+function shuffle(a: any[]) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const locale = languageFrom(context);
-  const recipeIndex = await fetchRecipeIndex(locale);
-  // TODO: Re-implement a proper recipes-of-the-day functionality
-  const recipesOfTheDay = recipeIndex.slice(0, 3);
+  const allRecipes = await loadRecipesFromDisk(locale);
+  const recipesOfTheDay = shuffle(allRecipes).slice(0, 3);
   const mostPopularRecipes = await fetchMostPopularRecipes(locale);
 
   return {
