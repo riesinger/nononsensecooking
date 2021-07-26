@@ -10,6 +10,15 @@ import languageFrom from "../utils/languageFrom";
 import { fetchMostPopularRecipes } from "../utils/popularRecipes";
 import { loadRecipesFromDisk } from "../utils/recipes";
 
+const revalidationTimesInSeconds = {
+  development: 60,
+  preview: 2 * 60,
+  default: 26 * 60 * 60,
+};
+
+const REVALIDATION_TIME =
+  revalidationTimesInSeconds[process.env.VERCEL_ENV || "default"];
+
 function shuffle(a: any[]) {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -32,10 +41,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
         "header",
       ])),
       recipesOfTheDay,
-      paginatedRecipes: [],
       mostPopularRecipes,
     },
-    revalidate: 24 * 60 * 60, // One day in seconds
+    revalidate: REVALIDATION_TIME,
   };
 };
 

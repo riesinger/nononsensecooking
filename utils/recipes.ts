@@ -7,7 +7,7 @@ import { Recipe, RecipeInIndex } from "../models/Recipe";
 import { Unit } from "../models/Unit";
 
 const VERCEL_URL = process.env.VERCEL_URL;
-const recipeFilesBasePath = path.resolve("./public/recipes");
+const recipeFilesBasePath = "public/recipes";
 
 export async function fetchRecipeIndex(
   lang: SupportedLanguage
@@ -26,7 +26,9 @@ export async function loadRecipesFromDisk(
   locale: SupportedLanguage,
   fieldsToInclude: string[] = undefined
 ): Promise<Partial<Recipe>[]> {
-  const recipeFiles = await fs.readdir(path.join(recipeFilesBasePath, locale));
+  const recipeFiles = await fs.readdir(
+    path.join(process.cwd(), recipeFilesBasePath, locale)
+  );
   return await Promise.all(
     recipeFiles.map(async (filename) => {
       const file = await fs.readFile(
