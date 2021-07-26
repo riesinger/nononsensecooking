@@ -45,10 +45,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   }
   const recipesOfTheDay = shuffle(allRecipes).slice(0, 3);
-  const mostPopularRecipes = await orderRecipesByMostPopular(
-    locale,
-    allRecipes
-  );
+  const mostPopularRecipes = (
+    await orderRecipesByMostPopular(locale, allRecipes)
+  ).slice(0, 3);
 
   return {
     props: {
