@@ -5,12 +5,12 @@ import DishList from "../components/DishList";
 import DishListItem from "../components/DishListItem";
 import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
-import { useQueryParam } from "../hooks/useQueryParam";
+import { useQueryParam as getQueryParam } from "../hooks/useQueryParam";
 import languageFrom from "../utils/languageFrom";
 import { sanitize, searchRecipes } from "./api/search";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const unsanitizedSearchTerm = useQueryParam(context, "query", "");
+  const unsanitizedSearchTerm = getQueryParam(context, "query", "");
   const searchTerm = sanitize(unsanitizedSearchTerm);
   const results = await searchRecipes(languageFrom(context), searchTerm);
   return {

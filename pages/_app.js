@@ -18,7 +18,6 @@ function MyApp({ Component, pageProps }) {
     <>
       <PageLoadingIndicator />
       <Head>
-        <link rel="stylesheet" href="/inter.css" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

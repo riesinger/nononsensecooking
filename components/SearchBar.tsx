@@ -76,11 +76,13 @@ const SearchBar = ({ placeholder }: Props) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  // This eslint rule seems to not be able to pickup the dependency on searchTerm
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFetchSearchResults = useCallback(
     debounce(fetchSearchResults, 250, {
       maxWait: 1500,
     }),
-    []
+    [searchTerm]
   );
 
   useEffect(() => {
@@ -92,7 +94,7 @@ const SearchBar = ({ placeholder }: Props) => {
     return () => {
       router.events.off("routeChangeStart", handler);
     };
-  }, []);
+  }, [debouncedFetchSearchResults, router]);
 
   async function onChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchTerm(event.target.value);

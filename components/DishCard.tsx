@@ -99,6 +99,7 @@ const DishCard = ({ slug, name, image, cookTime, diet }: Props) => {
             objectFit="cover"
             quality={80}
             sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, (max-width: 1800px) 500, (max-width: 2400px) 600px, (min-width: 2401px) 700px"
+            alt=""
           />
         </ImageContainer>
         <DishStats>

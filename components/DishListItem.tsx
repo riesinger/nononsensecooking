@@ -80,6 +80,7 @@ const DishListItem = ({ slug, name, image, cookTime, diet }: Props) => {
             objectFit="cover"
             quality={60}
             sizes="(max-width: 600px) 100px, (min-width: 601px) 160px"
+            alt=""
           />
         </ImageContainer>
         <DishStats>

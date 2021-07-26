@@ -34,9 +34,12 @@ export async function searchRecipes(
   return fuse.search(sanitize(searchTerm));
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function search(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (!methodIs("GET", req, res)) return;
   const lang = localeFrom(req);
   const { query } = req.query;
   res.status(200).json(await searchRecipes(lang, query as string));
-};
+}
