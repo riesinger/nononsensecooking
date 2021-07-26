@@ -18,14 +18,18 @@ const fieldsToIncludeInIndex = [
 async function generateIndex() {
   for (const locale of supportedLocales) {
     console.log("🛠 Generating index for locale", locale);
-    const recipes = await loadRecipesFromDisk(
-      locale as SupportedLanguage,
-      fieldsToIncludeInIndex
+    const recipes = await loadRecipesFromDisk(locale as SupportedLanguage);
+    const trimmedRecipes = recipes.map((recipe) =>
+      Object.fromEntries(
+        Object.entries(recipe).filter(([key, _]) =>
+          fieldsToIncludeInIndex.includes(key)
+        )
+      )
     );
-    console.log("   👀 Found", recipes.length, "recipes");
+    console.log("   👀 Found", trimmedRecipes.length, "recipes");
     const targetFile = path.join(basePath, `index_${locale}.json`);
     console.log("   📝 Writing to", targetFile);
-    await fs.writeFile(targetFile, JSON.stringify(recipes));
+    await fs.writeFile(targetFile, JSON.stringify(trimmedRecipes));
   }
 }
 
