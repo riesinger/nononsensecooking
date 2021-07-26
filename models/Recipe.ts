@@ -22,11 +22,7 @@ export interface RecipeFile {
   ingredients: Ingredient[];
 }
 
-export interface RecipeInIndex {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-  cookTime: string;
-  diet: string;
-}
+export type RecipeInIndex = Pick<
+  Recipe,
+  "id" | "name" | "slug" | "image" | "cookTime" | "diet"
+>;

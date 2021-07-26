@@ -5,10 +5,10 @@ import DishCard from "../components/DishCard";
 import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
 import Track from "../components/Track";
-import { Recipe } from "../models/Recipe";
+import { Recipe, RecipeInIndex } from "../models/Recipe";
 import languageFrom from "../utils/languageFrom";
-import { fetchMostPopularRecipes } from "../utils/popularRecipes";
-import { loadRecipesFromDisk } from "../utils/recipes";
+import { orderRecipesByMostPopular } from "../utils/popularRecipes";
+import { fetchRecipeIndex, loadRecipesFromDisk } from "../utils/recipes";
 
 const revalidationTimesInSeconds = {
   development: 60,
@@ -29,9 +29,25 @@ function shuffle(a: any[]) {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const locale = languageFrom(context);
-  const allRecipes = await loadRecipesFromDisk(locale);
+
+  let allRecipes: Array<Recipe | RecipeInIndex> = [];
+  try {
+    allRecipes = await loadRecipesFromDisk(locale);
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      // We're running in ISR mode and regenerating the page in a lambda.
+      // Load the recipe index via HTTP in this case.
+      // This is not the nicest workaround, but since we cannot use HTTP to fetch the index at SSG time and cannot read the files from disk at ISR time,
+      // we either have to do it this way or switch to an actual CMS
+      allRecipes = await fetchRecipeIndex(locale);
+    } else {
+      throw err;
+    }
+  }
   const recipesOfTheDay = shuffle(allRecipes).slice(0, 3);
-  const mostPopularRecipes = await fetchMostPopularRecipes(locale);
+  const mostPopularRecipes = (
+    await orderRecipesByMostPopular(locale, allRecipes)
+  ).slice(0, 3);
 
   return {
     props: {

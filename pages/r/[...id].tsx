@@ -37,10 +37,7 @@ export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
 export const getStaticPaths: GetStaticPaths = async (context) => {
   let paths = [];
   for (const locale of context.locales) {
-    const recipes = await loadRecipesFromDisk(locale as SupportedLanguage, [
-      "id",
-      "slug",
-    ]);
+    const recipes = await loadRecipesFromDisk(locale as SupportedLanguage);
     for (const recipe of recipes) {
       paths.push({
         params: {
@@ -130,6 +127,7 @@ const SingleRecipe = ({
           layout="fill"
           objectFit="cover"
           sizes="(max-width: 400px) 400px, (max-width: 600px) 600px, (max-width: 800px) 800px, (min-width: 801px) 900px"
+          alt=""
         />
       </ImageContainer>
       <ServingsChooser

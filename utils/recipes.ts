@@ -23,9 +23,8 @@ export async function fetchRecipeIndex(
 
 // TODO: Properly type fieldsToInclude
 export async function loadRecipesFromDisk(
-  locale: SupportedLanguage,
-  fieldsToInclude: string[] = undefined
-): Promise<Partial<Recipe>[]> {
+  locale: SupportedLanguage
+): Promise<Recipe[]> {
   const recipeFiles = await fs.readdir(
     path.join(process.cwd(), recipeFilesBasePath, locale)
   );
@@ -37,12 +36,7 @@ export async function loadRecipesFromDisk(
       );
       const id = filename.split(".")[0];
       const recipeData = YAML.parse(file);
-      const recipe = parseRecipeData(id, recipeData);
-      return Object.fromEntries(
-        Object.entries(recipe).filter(([key, _]) =>
-          fieldsToInclude ? fieldsToInclude.includes(key) : true
-        )
-      );
+      return parseRecipeData(id, recipeData);
     })
   );
 }
