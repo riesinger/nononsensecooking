@@ -27,5 +27,15 @@
   "search": {
     "pagetitle": "Search Results",
     "sectiontitle": "Search results for {{searchTerm}}"
+  },
+  "notfound": {
+    "pagetitle": "Page not found",
+    "displaytitle": "404 - Page not found 👀",
+    "explanation": "Unfortunately, we couldn't find the page you were looking for. Hopefully, the following links can help you get back on track:",
+    "links": {
+      "home": "Back to the home page",
+      "allrecipes": "All Recipes",
+      "github": "Submit an issue on GitHub"
+    }
   }
 }

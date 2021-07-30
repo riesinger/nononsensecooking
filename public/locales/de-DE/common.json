@@ -27,5 +27,15 @@
   "search": {
     "pagetitle": "Suchergebnisse",
     "sectiontitle": "Suchergebnisse für {{searchTerm}}"
+  },
+  "notfound": {
+    "pagetitle": "Seite nicht gefunden",
+    "displaytitle": "404 - Seite nicht gefunden 👀",
+    "explanation": "Leider konnten wir die Seite, die Du besuchen möchtest nicht finden. Hoffentlich helfen dir diese Links weiter:",
+    "links": {
+      "home": "Zurück zur Startseite",
+      "allrecipes": "Alle Rezepte",
+      "github": "Fehler auf GitHub melden"
+    }
   }
 }
