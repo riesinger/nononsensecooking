@@ -2,7 +2,13 @@
   "pagetitle": "Legal & Privacy",
   "section": {
     "legal": {
-      "title": "Legal information"
+      "title": "Legal information",
+      "owner": "Owner",
+      "mail": "eMail",
+      "contactformoreinformation": "Please contact me via eMail for more information"
+    },
+    "privacy": {
+      "title": "Privacy Policy"
     }
   }
 }
