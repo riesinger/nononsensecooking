@@ -39,6 +39,10 @@ body {
   color: var(--color-text-primary);
 }
 
+a {
+  color: var(--color-primary);
+}
+
 #__next {
   min-height: 100vh;
   display: flex;

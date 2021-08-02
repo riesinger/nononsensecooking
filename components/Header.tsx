@@ -40,6 +40,7 @@ const HomeLink = styled.a`
   align-items: center;
   max-width: 100%;
   cursor: pointer;
+  color: var(--color-text-primary);
 `;
 
 const IconContainer = styled.div`
