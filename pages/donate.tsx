@@ -2,6 +2,7 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
+import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
@@ -16,12 +17,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     },
   };
 };
-
-const DonatePage = styled.div`
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 0 2rem;
-`;
 
 const IntroParagraph = styled.p`
   max-width: 70ch;
@@ -82,8 +77,7 @@ export default function Legal({}: InferGetStaticPropsType<
   return (
     <>
       <SEO title={t("pagetitle")} />
-      <DonatePage>
-        <PageTitle>{t("displayPageTitle")}</PageTitle>
+      <PaddedSection width="narrow" title={t("displayPageTitle")}>
         <IntroParagraph>{t("introduction")}</IntroParagraph>
 
         <DonationSection>
@@ -116,7 +110,7 @@ export default function Legal({}: InferGetStaticPropsType<
             ))}
           </DonationOptionsList>
         </DonationSection>
-      </DonatePage>
+      </PaddedSection>
     </>
   );
 }
