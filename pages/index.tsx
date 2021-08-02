@@ -71,14 +71,14 @@ export default function Home({
   return (
     <>
       <SEO />
-      <PaddedSection title={t("home.todaysrecipes")}>
+      <PaddedSection title={t("home.todaysrecipes")} smallHeadings>
         <Track sm={1} md={2} lg={3}>
           {recipesOfTheDay.map((recipe: Recipe) => (
             <DishCard {...recipe} key={recipe.id} />
           ))}
         </Track>
       </PaddedSection>
-      <PaddedSection title={t("home.mostpopularrecipes")}>
+      <PaddedSection title={t("home.mostpopularrecipes")} smallHeadings>
         <Track sm={1} md={2} lg={3}>
           {mostPopularRecipes.map((recipe: Recipe) => (
             <DishCard {...recipe} key={recipe.id} />

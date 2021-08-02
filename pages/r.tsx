@@ -33,7 +33,7 @@ export default function Home({
   return (
     <>
       <SEO title={t("home.allrecipes")} />
-      <PaddedSection title={t("home.allrecipes")}>
+      <PaddedSection title={t("home.allrecipes")} smallHeadings>
         <DishList>
           {recipes.map((recipe: Recipe) => (
             <DishListItem
