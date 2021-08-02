@@ -24,6 +24,7 @@ const Dish = styled.a`
   align-items: center;
   height: ${HEIGHT}rem;
   overflow: hidden;
+  color: var(--color-text-primary);
 
   img {
     transition: transform 0.15s linear;
