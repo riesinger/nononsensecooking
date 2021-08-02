@@ -8,7 +8,16 @@
       "contactformoreinformation": "Please contact me via eMail for more information"
     },
     "privacy": {
-      "title": "Privacy Policy"
+      "title": "Privacy policy",
+      "introduction": "The following sections are meant to inform you of the data we collect about you when you use this site.<br/>NoNonsenseCooking was created, because too many recipe websites are overloaded with trackers and advertisements. That's why it is really important for us to minimize our data collection without hindering development of this site. We won't ever collect any information with which we could identify you as a person, but only statistical information, making some of the features on this site possible in the first place (for example the most popular recipe function).",
+      "vercel": {
+        "title": "Vercel",
+        "content": "This website is hosted on a platform provided by Vercel Inc. (340 S Lemon Ave #4133 Walnut, CA 91789). We disabled the built-in Vercel Analytics feature, so we won't get any information about you from Vercel. Still, Vercel is allowed to collect some limited information about you for the purpose of providing the platform. You can read Vercel's full privacy policy <2>here</2>."
+      },
+      "goatcounter": {
+        "title": "GoatCounter",
+        "content": "We use a self-hosted installation of GoatCounter, hosted by the owner of this site. GoatCounter is a web analytics tool, but compared to some other analytics tools, it is not used to track you across the Internet. We only collect usage data on this site and cannot identify you as a person with the data we collect. The usage data is stored on a server in Germany, which makes it subject to the very strong european data protection laws. When visiting this website, we collect the following information from your device: The URL you're visiting, the Referrer header, the User-Agent header, your screen size, your region, estimated from your IP address and a hash of your IP address, the User-Agent header and a random number. Neither your IP address, nor the calculated hash will ever be stored on persistent media (a harddrive), but will be kept in memory only for a maximum of 8 hours. No information is stored in your browser using cookies the localStorage etc. You can read GoatCounter's privacy policy <2>here</2>. There's an additional document provided by the author of GoatCounter about the collected data, which you can read <5>here</5>. If you don't want your information collected but still use this site, you can disable JavaScript in your browser. This will prohibit the loading of GoatCounter entirely."
+      }
     }
   }
 }
