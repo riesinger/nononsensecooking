@@ -1,0 +1,40 @@
+name: Gefüllte Zucchini mit Quinoa, Feta und Spinat
+image: "stuffed-zucchini-quinoa.jpg"
+cookTime: 45
+diet: vegetarian
+ingredients:
+  - id: zucchini
+    amount: 2
+    scales: true
+  - id: quinoa
+    amount: 150
+    unit: g
+    scales: true
+  - id: feta
+    amount: 75
+    unit: g
+    scales: true
+  - id: freshspinach
+    amount: 80
+    unit: g
+    scales: true
+  - id: onion
+    amount: 1
+    scales: true
+  - id: oliveoil
+  - id: salt
+  - id: pepper
+  - id: garlicpowder
+steps:
+  - Heize den Ofen auf 160°C vor
+  - Koche den Quinoa in der doppelten Menge ungesalzenem Wasser für 20-25 Minuten
+  - Wenn du längliche Zucchinis nutzt, halbiere diese, bei runden Zucchinis schneide einen "Deckel" ab. Höhle die Zucchinis mit einem Löffel aus und lege das Innere beiseite
+  - Wasche jetzt den Spinat und hacke ihn grob, bevor Du ihn für 2 Minuten in einer Pfanne auf mittlerer Hitze andünstest
+  - Schneide in der Zwischenzeit die Zwiebel in sehr feine Würfel
+  - Wenn der Spinat zusammengefallen ist, fülle ihn in eine Schüssel um und gebe etwas Olivenöl, die Zwiebel und das Innere der Zucchini in die Pfanne. Würze beides mit etwas Salz und Knoblauchpulver
+  - Lege die Zucchinis auf ein Backbleck und backe sie für 10 Minuten im Ofen vor
+  - Schneide den Feta in feine Würfel und gebe ihn zum Spinat hinzu
+  - Sobald die Zwiebeln glasig werden kannst du Zwiebeln und Zucchini ebenfalls in die Schüssel hinzugeben
+  - Mische den gekochten Quinoa mit dem restlichen Inhalt der Schüssel und Würze die Füllung erneut mit Salz, Pfeffer und etwas Knoblauchpulve
+  - Jetzt kannst du die Zucchinis füllen und für weitere 10 Minuten backen
+  - Guten Appetit!

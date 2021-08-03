@@ -1,0 +1,40 @@
+name: Zucchinis stuffed with Quinoa, Feta and Spinach
+image: "stuffed-zucchini-quinoa.jpg"
+cookTime: 45
+diet: vegetarian
+ingredients:
+  - id: zucchini
+    amount: 2
+    scales: true
+  - id: quinoa
+    amount: 150
+    unit: g
+    scales: true
+  - id: feta
+    amount: 75
+    unit: g
+    scales: true
+  - id: freshspinach
+    amount: 80
+    unit: g
+    scales: true
+  - id: onion
+    amount: 1
+    scales: true
+  - id: oliveoil
+  - id: salt
+  - id: pepper
+  - id: garlicpowder
+steps:
+  - Pre-heat your oven to 160°C (320°F)
+  - Cook the quinoa in twice the amount of unsalted water for 20-25 minutes
+  - If you use longish zucchinis, cut them in halves, for round zucchinis, cut off a "lid". Carve out the zucchinis with a spoon
+  - Wash the spinach and chop it coarsely, before sautéing it for 2 minutes in a pan on medium heat
+  - In the meantime, dice the onion
+  - Once the spinach has shrunk, transfer it in to a bowl and add some olive oil, the onion and the inside of the zucchini to the pan. Season both with a litte bit of salt and garlic powder
+  - Put the zucchinis onto a baking tray and pre-bake them in the oven for 10 minutes
+  - Cut the feta into small cubes and add it to the spinach
+  - Once the onions get transparent, you can also transfer them and the zucchini into the bowl
+  - Now mix the cooked quinoa into the same bowl and season the stuffing with salt, pepper and some more garlic powder
+  - Stuff the zucchinis and bake them for another 10 minutes
+  - Enjoy!
