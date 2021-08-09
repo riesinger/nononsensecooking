@@ -47,6 +47,13 @@
     "quinoa": "Quinoa",
     "feta": "Feta",
     "freshspinach": "Fresh Spinach",
-    "oliveoil": "Olive oil"
+    "oliveoil": "Olive oil",
+    "lime": "Lime",
+    "lime_plural": "Limes",
+    "tacoshell": "Taco Shell",
+    "tacoshell_plural": "Taco Shells",
+    "avocado": "Avocado",
+    "avocado_plural": "Avocados",
+    "tofu": "Tofu"
   }
 }

@@ -47,6 +47,12 @@
     "quinoa": "Quinoa",
     "feta": "Feta",
     "freshspinach": "Frischer Blattspinat",
-    "oliveoil": "Olivenöl"
+    "oliveoil": "Olivenöl",
+    "lime": "Limette",
+    "lime_plural": "Limetten",
+    "tacoshell": "Taco-Schale",
+    "tacoshell_plural": "Taco-Schalen",
+    "avocado": "Avocado",
+    "avocado_plural": "Avocados"
   }
 }

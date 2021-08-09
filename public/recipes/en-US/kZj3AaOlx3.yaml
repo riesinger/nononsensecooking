@@ -1,0 +1,55 @@
+name: Tacos with vegetables and tofu
+longName:
+image: "tacos-vegetables-tofu.jpg"
+cookTime: 35
+diet: vegan
+ingredients:
+  - id: tacoshell
+    amount: 6
+    scales: true
+  - id: tofu
+    amount: 200
+    unit: g
+    scales: true
+  - id: zucchini
+    amount: 0.5
+    scales: true
+  - id: onion
+    amount: 1
+    scales: true
+  - id: bellpepper
+    amount: 1
+    scales: true
+  - id: lime
+    amount: 1
+    scales: true
+  - id: avocado
+    amount: 1
+    scales: true
+  - id: oliveoil
+    amount: 2
+    unit: tbsp
+    scales: true
+  - id: soysauce
+    amount: 2
+    unit: tbsp
+    scales: true
+  - id: agavasyrup
+    amount: 1
+    unit: tbsp
+  - id: salt
+  - id: pepper
+  - id: paprikapowder
+  - id: garlicpowder
+steps:
+  - Pre-heat your oven to the temperature indicated on your taco shell's packaging
+  - For the tofu marinade, mix soy sauce, a little olive oil and agava syrup and season with garlic powder, paprika powder, salt and paprika powder.
+  - Cut the tofu into small cubes and mix them to the marinade. Put it aside for now
+  - Next, cut the bell bell pepper and the zucchini into thin strips and the onion into half rings
+  - Oil up a pan and fry the vegetables for 8-10 minutes on medium heat
+  - At the same time, fry the marinated tofu for 6-8 minutes, until it gets slightly crispy
+  - Squeeze the juice from the lime while the tofu and vegetables are frying
+  - Cut the avocado in half, and scoop out the flesh with a spoon. Put it in a bowl with some garlic powder, salt, pepper and the lime juice and mash it with a fork
+  - Follow the instructions on the package of your taco shells to prepare them
+  - Once the taco shells are ready, you can fill them with avocado cream, the vegetables and tofu
+  - Enjoy!
