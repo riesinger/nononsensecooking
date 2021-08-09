@@ -38,3 +38,6 @@ public/recipes/index*.json
 
 # Environment files
 .env*.local
+
+# un-minified images
+*.bak.jpg
