@@ -3,6 +3,7 @@ longName:
 image: "chocolatepudding-mango.jpg"
 cookTime: 10
 diet: vegetarian
+ingredients:
   - name: Leftover Christmas Cookies
     amount: 4
     scales: true
@@ -18,4 +19,3 @@ steps:
   - Add two tablespoons of the mango puree on top of the pudding
   - Refrigerate the glasses for about an hour, until the pudding has gotten firm
   - Enjoy!
-
