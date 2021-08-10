@@ -6,6 +6,15 @@ import config from "../next-i18next.config.js";
 
 const supportedLocales = config.i18n.locales;
 const supportedDiets = ["meat", "fish", "vegetarian", "vegan"];
+const defaultCookTime = 25;
+
+const nameQuestions = supportedLocales.map((locale) => ({
+  type: "input",
+  name: `locale.${locale}.name`,
+  message: `What's the name of the recipe in ${locale}?`,
+  when: (answers: { localesToGenerate: string[] }) =>
+    answers.localesToGenerate.includes(locale),
+}));
 
 const questions = [
   {
@@ -15,11 +24,18 @@ const questions = [
     choices: supportedLocales,
     default: supportedLocales,
   },
+  ...nameQuestions,
   {
     type: "list",
     name: "diet",
     message: "What diet is the new recipe?",
     choices: supportedDiets,
+  },
+  {
+    type: "number",
+    name: "cookTime",
+    message: "How long does this dish take to cook? (minutes)",
+    default: defaultCookTime,
   },
 ];
 
@@ -29,12 +45,18 @@ const nanoid = customAlphabet(
 );
 const basePath = path.resolve("./public/recipes");
 
-const recipeTemplate = (diet: typeof supportedDiets) =>
+type TemplateParameters = {
+  name: string;
+  diet: typeof supportedDiets;
+  cookTime: number;
+};
+
+const recipeTemplate = ({ name, diet, cookTime }: TemplateParameters) =>
   `
-name: 
-longName: 
+name: ${name}
+longName:
 image: ""
-cookTime: 20
+cookTime: ${cookTime}
 diet: ${diet}
 ingredients:
   - name:
@@ -50,7 +72,12 @@ async function main() {
   const recipeId = nanoid();
   for (const locale of answers.localesToGenerate) {
     const newRecipeFile = `${basePath}/${locale}/${recipeId}.yaml`;
-    await fs.writeFile(newRecipeFile, recipeTemplate(answers.diet));
+    const parameters = {
+      ...answers.locale[locale],
+      cookTime: answers.cookTime,
+      diet: answers.diet,
+    };
+    await fs.writeFile(newRecipeFile, recipeTemplate(parameters));
     console.log("Created", newRecipeFile);
   }
 }
