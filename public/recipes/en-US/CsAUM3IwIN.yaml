@@ -1,0 +1,21 @@
+name: Chocolate pudding dessert with mango
+longName:
+image: "chocolatepudding-mango.jpg"
+cookTime: 10
+diet: vegetarian
+  - name: Leftover Christmas Cookies
+    amount: 4
+    scales: true
+  - name: Instant Chocolate Pudding Powder
+  - id: milk
+  - name: Mango
+    amount: 0.5
+    scales: true
+steps:
+  - Crumble a few leftover christmas cookies into some glasses
+  - Cook the chocolate pudding according to the instructions on the packaging with some milk and pour it into the glasses evenly
+  - Peel the mango and remove its stone. Then puree it in a blender
+  - Add two tablespoons of the mango puree on top of the pudding
+  - Refrigerate the glasses for about an hour, until the pudding has gotten firm
+  - Enjoy!
+
