@@ -123,7 +123,7 @@ const SingleRecipe = ({
       </RecipeStats>
       <ImageContainer>
         <Image
-          src={`/img/recipes/${image}`}
+          src={`/img/recipes/${image || "placeholder-min.jpg"}`}
           layout="fill"
           objectFit="cover"
           sizes="(max-width: 400px) 400px, (max-width: 600px) 600px, (max-width: 800px) 800px, (min-width: 801px) 900px"

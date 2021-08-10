@@ -76,7 +76,7 @@ const DishListItem = ({ slug, name, image, cookTime, diet }: Props) => {
       <Dish>
         <ImageContainer>
           <Image
-            src={`/img/recipes/${image}`}
+            src={`/img/recipes/${image || "placeholder-min.jpg"}`}
             layout="fill"
             objectFit="cover"
             quality={60}
