@@ -13,6 +13,7 @@ const fieldsToIncludeInIndex = [
   "cookTime",
   "diet",
   "slug",
+  "publishedAt",
 ];
 
 async function generateIndex() {

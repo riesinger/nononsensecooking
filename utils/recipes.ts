@@ -3,7 +3,7 @@ import path from "path";
 import slug from "slug";
 import YAML from "yaml";
 import { SupportedLanguage } from "../models/Localized";
-import { Recipe, RecipeInIndex } from "../models/Recipe";
+import { Recipe, RecipeFile, RecipeInIndex } from "../models/Recipe";
 import { Unit } from "../models/Unit";
 
 const VERCEL_URL = process.env.VERCEL_URL;
@@ -84,11 +84,12 @@ export async function readSingleRecipeFromDisk(
   return parseRecipeData(id, recipeData);
 }
 
-const parseRecipeData = (id: string, recipeData: any): Recipe => ({
+const parseRecipeData = (id: string, recipeData: RecipeFile): Recipe => ({
   ...recipeData,
   id,
   slug: `${id}/${slug(recipeData.name)}`,
   ingredients: parseIngredients(recipeData.ingredients),
+  publishedAt: recipeData.publishedAt,
 });
 
 const parseIngredients = (
