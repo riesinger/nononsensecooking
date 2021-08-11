@@ -54,7 +54,6 @@ type TemplateParameters = {
 const recipeTemplate = ({ name, diet, cookTime }: TemplateParameters) =>
   `
 name: ${name}
-longName:
 image: ""
 cookTime: ${cookTime}
 diet: ${diet}
