@@ -55,6 +55,7 @@ const recipeTemplate = ({ name, diet, cookTime }: TemplateParameters) =>
   `
 name: ${name}
 image: ""
+publishedAt: "${new Date().toISOString()}"
 cookTime: ${cookTime}
 diet: ${diet}
 ingredients:
