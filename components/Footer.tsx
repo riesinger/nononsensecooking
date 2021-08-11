@@ -1,5 +1,8 @@
+import { mdiRss } from "@mdi/js";
+import Icon from "@mdi/react";
 import { Trans, useTranslation } from "next-i18next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const StyledFooter = styled.footer`
@@ -49,6 +52,7 @@ const Nav = styled.nav`
 
 const Footer = () => {
   const { t } = useTranslation("footer");
+  const router = useRouter();
   return (
     <StyledFooter>
       <LicenseNotice>
@@ -73,6 +77,11 @@ const Footer = () => {
         <Link href="/donate" passHref prefetch={false}>
           <StyledLink>{t("link.donate.text")}</StyledLink>
         </Link>
+        <StyledLink
+          href={`/rss/feed.${router.locale || router.defaultLocale}.xml`}
+        >
+          <Icon path={mdiRss} size={1} title={t("link.rss.title")} />
+        </StyledLink>
       </Nav>
     </StyledFooter>
   );
