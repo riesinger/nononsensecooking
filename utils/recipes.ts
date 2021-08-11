@@ -9,6 +9,11 @@ import { Unit } from "../models/Unit";
 const VERCEL_URL = process.env.VERCEL_URL;
 const recipeFilesBasePath = "public/recipes";
 
+/**
+ * Retrieves the recipe index via HTTP. This function cannot be used during static generation, only in serverless mode!
+ * @param lang The locale for which to load the recipe index
+ * @returns The list of recipes in the index
+ */
 export async function fetchRecipeIndex(
   lang: SupportedLanguage
 ): Promise<RecipeInIndex[]> {
@@ -21,7 +26,11 @@ export async function fetchRecipeIndex(
   return allRecipes;
 }
 
-// TODO: Properly type fieldsToInclude
+/**
+ * Reads and parses all recipes found on disk for the given language. This function cannot be used in serverless mode, only during static generation!
+ * @param locale The locale for which to load the recipes
+ * @returns The fully parsed recipes
+ */
 export async function loadRecipesFromDisk(
   locale: SupportedLanguage
 ): Promise<Recipe[]> {
@@ -39,6 +48,28 @@ export async function loadRecipesFromDisk(
       return parseRecipeData(id, recipeData);
     })
   );
+}
+
+/**
+ * Loads the recipes either from disk (default) or from the recipe index (fallback). This can be used both during static generation and in serverless functions.
+ * @param locale The language for which to load the recipes
+ */
+export async function getRecipesFromDiskOrIndex(locale: SupportedLanguage) {
+  let allRecipes: Array<Recipe | RecipeInIndex> = [];
+  try {
+    allRecipes = await loadRecipesFromDisk(locale);
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      // We're running in ISR mode and regenerating the page in a lambda.
+      // Load the recipe index via HTTP in this case.
+      // This is not the nicest workaround, but since we cannot use HTTP to fetch the index at SSG time and cannot read the files from disk at ISR time,
+      // we either have to do it this way or switch to an actual CMS
+      allRecipes = await fetchRecipeIndex(locale);
+    } else {
+      throw err;
+    }
+  }
+  return allRecipes;
 }
 
 export async function readSingleRecipeFromDisk(
