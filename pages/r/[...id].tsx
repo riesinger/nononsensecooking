@@ -98,7 +98,6 @@ const IconStat = styled.span`
 
 const SingleRecipe = ({
   name,
-  longName,
   steps,
   image,
   diet,
@@ -114,7 +113,7 @@ const SingleRecipe = ({
     <StyledArticle>
       <SEO isRecipe title={name} img={image} />
       <RecipeStats>
-        <StyledHeading>{longName || name}</StyledHeading>
+        <StyledHeading>{name}</StyledHeading>
         <IconStat>
           <Icon path={mdiClockOutline} size={1} title="Preparation Time" />
           <span>{cookTime}min</span>
