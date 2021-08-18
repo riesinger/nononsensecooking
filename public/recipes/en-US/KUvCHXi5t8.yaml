@@ -1,23 +1,30 @@
 name: Spinach Wraps filled with Dill Cream
 image: "spinatwraps-min.jpg"
-publishedAt: "2021-08-11T20:36:58.221Z"
-cookTime: 20
+publishedAt: "2021-08-18T20:08:13.465Z"
+cookTime: 35
 diet: vegetarian
 ingredients:
-  - name: Spinach
+  - id: freshspinach
+    amount: 400
+    unit: g
+    scales: true
+  - id: egg
+    amount: 4
+    scales: true
+  - name: cremefraiche
     amount: 300
     unit: g
     scales: true
-  - name: Crème fraîche
-    amount: 200
-    unit: g
-    scales: true
+  - id: dill
   - id: pepper
-    amount: 1
-    scales: false
   - id: salt
-    amount: 1
-    scales: false
 steps:
-  - Do something first
-  - then another thing
+  - Pre-heat your oven to 200°C (390°F)
+  - Wash the spinach, put it into a strainer and pour boiling water overtop of it
+  - Press out as much water as you can out of the spinach as you can
+  - Next, puree it, add the eggs, some salt and pepper and puree it again
+  - Spread the paste on a baking tray covered with a baking paper and bake the wrap for about 10-15 minutes, until it gets firm
+  - In the meantime, mix Crème fraîche, salt, pepper and dill in a bowl
+  - Once the the wrap is getting firm, remove it from the oven and transfer it onto a mesh or a cutting bord. For removing it from the baking paper, you can use a spatula. If you placed the wrap onto a cutting board, you should flip it from time to time
+  - Let the wrap cool fully. After about 5 minutes, dab the wrap with a paper towel from both sides, to get rid of the moisture building up on it
+  - Once the wrap has cooled sufficiently, spread the cream on it, roll it and enjoy it
