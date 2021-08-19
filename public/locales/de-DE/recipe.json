@@ -56,6 +56,11 @@
     "avocado_plural": "Avocados",
     "tofu": "Tofu",
     "cremefraiche": "Crème fraîche",
-    "dill": "Dill"
+    "dill": "Dill",
+    "rice": "Reis",
+    "tomato": "Tomate",
+    "tomato_plural": "Tomaten",
+    "tomatopaste": "Tomatenmark",
+    "parmesan": "Parmesan"
   }
 }
