@@ -1,5 +1,5 @@
-import { Recipe } from "../models/Recipe";
 import styled from "styled-components";
+import { Recipe } from "../models/Recipe";
 import Ingredient from "./Ingredient";
 
 interface Props {
@@ -16,7 +16,7 @@ const List = styled.ul`
 const IngredientsList = ({ ingredients, servingsMultiplier }: Props) => (
   <div>
     <List>
-      {ingredients.map((ingredient) => (
+      {ingredients?.map((ingredient) => (
         <li key={ingredient.name || ingredient.id}>
           <Ingredient {...ingredient} servingsMultiplier={servingsMultiplier} />
         </li>
