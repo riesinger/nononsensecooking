@@ -13,6 +13,8 @@ const recipeFilesBasePath = "public/recipes";
  * Retrieves the recipe index via HTTP. This function cannot be used during static generation, only in serverless mode!
  * @param lang The locale for which to load the recipe index
  * @returns The list of recipes in the index
+ *
+ * TODO: Error Handling
  */
 export async function fetchRecipeIndex(
   lang: SupportedLanguage
@@ -24,6 +26,21 @@ export async function fetchRecipeIndex(
   const allRecipes = await (await fetch(baseUrl + recipeIndexPath)).json();
 
   return allRecipes;
+}
+
+/**
+ * Retrieves the full recipe index via HTTP. This function cannot be used during static generation, only in serverless mode!
+ * @returns The full recipe i
+ *
+ * TODO: Error Handling
+ */
+export async function fetchFullRecipeIndex() {
+  const baseUrl = VERCEL_URL
+    ? `https://${VERCEL_URL}`
+    : "http://localhost:3000";
+  const recipeIndexPath = "/recipes/index.json";
+  const index = await (await fetch(baseUrl + recipeIndexPath)).json();
+  return index;
 }
 
 /**
@@ -80,6 +97,8 @@ export async function readSingleRecipeFromDisk(
     path.join(recipeFilesBasePath, lang, `${id}.yaml`),
     "utf-8"
   );
+  console.log("Read recipe from file", lang, `${id}.yaml`);
+  console.log(file);
   const recipeData = YAML.parse(file);
   return parseRecipeData(id, recipeData);
 }
