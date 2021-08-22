@@ -37,5 +37,14 @@
       "allrecipes": "Alle Rezepte",
       "github": "Fehler auf GitHub melden"
     }
+  },
+  "locales": {
+    "en-US": "Englisch (USA)",
+    "de-DE": "Deutsch (Deutschland)"
+  },
+  "notinyourlocale": {
+    "displaytitle": "🙊 Rezept nicht auf {{locale}} verfügbar",
+    "explanation": "Leider ist dieses Rezept nicht auf {{locale}} verfügbar, aber du kannst es dir in einer dieser Sprachen anschauen:",
+    "helptranslateit": "Falls du uns helfen willst, das Rezept auf {{locale}} zu übersetzen, schaue bei <5>GitHub</5> vorbei."
   }
 }

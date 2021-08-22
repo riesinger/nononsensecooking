@@ -24,7 +24,6 @@ const Step = styled.li`
     flex-direction: row;
   }
 
-
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -47,7 +46,6 @@ const StepCounter = styled.span`
     margin-right: 2rem;
     margin-bottom: 0;
   }
-
 `;
 
 const StepDescription = styled.span`
@@ -60,7 +58,7 @@ const StepDescription = styled.span`
 
 const StepList = ({ steps }: Props) => (
   <List>
-    {steps.map((step, i) => (
+    {steps?.map((step, i) => (
       <Step key={i}>
         <StepCounter className="list-counter">{i + 1}</StepCounter>
         <StepDescription>{step}</StepDescription>
