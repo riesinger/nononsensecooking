@@ -5,6 +5,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
+import DraftIndicator from "../../components/DraftIndicator";
 import IconForDiet from "../../components/IconForDiet";
 import IngredientsList from "../../components/IngredientsList";
 import SEO from "../../components/SEO";
@@ -103,6 +104,7 @@ const SingleRecipe = ({
   diet,
   cookTime,
   ingredients,
+  isDraft,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const DEFAULT_SERVINGS = 2;
   const [servings, setServings] = useState(DEFAULT_SERVINGS);
@@ -112,6 +114,7 @@ const SingleRecipe = ({
   return (
     <StyledArticle>
       <SEO isRecipe title={name} img={image} />
+      {isDraft ? <DraftIndicator /> : null}
       <RecipeStats>
         <StyledHeading>{name}</StyledHeading>
         <IconStat>

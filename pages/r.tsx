@@ -35,14 +35,16 @@ export default function Home({
       <SEO title={t("home.allrecipes")} />
       <PaddedSection title={t("home.allrecipes")} smallHeadings>
         <DishList>
-          {recipes.map((recipe: Recipe) => (
-            <DishListItem
-              key={recipe.id}
-              id={recipe.id}
-              slug={recipe.slug}
-              {...recipe}
-            />
-          ))}
+          {recipes
+            .filter((r: Recipe) => !r.isDraft)
+            .map((recipe: Recipe) => (
+              <DishListItem
+                key={recipe.id}
+                id={recipe.id}
+                slug={recipe.slug}
+                {...recipe}
+              />
+            ))}
         </DishList>
       </PaddedSection>
     </>

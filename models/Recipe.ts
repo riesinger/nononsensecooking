@@ -10,6 +10,7 @@ export interface Recipe {
   steps: string[];
   ingredients: Ingredient[];
   publishedAt: string;
+  isDraft: boolean;
 }
 
 export interface RecipeFile {
@@ -20,9 +21,17 @@ export interface RecipeFile {
   steps: string[];
   ingredients: Ingredient[];
   publishedAt: string;
+  isDraft?: boolean;
 }
 
 export type RecipeInIndex = Pick<
   Recipe,
-  "id" | "name" | "slug" | "image" | "cookTime" | "diet" | "publishedAt"
+  | "id"
+  | "name"
+  | "slug"
+  | "image"
+  | "cookTime"
+  | "diet"
+  | "publishedAt"
+  | "isDraft"
 >;

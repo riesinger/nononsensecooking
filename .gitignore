@@ -42,3 +42,4 @@ public/recipes/index*.json
 # un-minified images
 *.bak.jpg
 public/rss
+.vscode

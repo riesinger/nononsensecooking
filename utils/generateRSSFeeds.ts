@@ -2,6 +2,7 @@ import { Feed } from "feed";
 import fs from "fs/promises";
 import path from "path";
 import { SupportedLanguage } from "../models/Localized";
+import { Recipe, RecipeInIndex } from "../models/Recipe";
 import { i18n } from "../next-i18next.config";
 import { getRecipesFromDiskOrIndex } from "./recipes";
 
@@ -55,20 +56,22 @@ export async function generateFeedForLocale(
     author,
   });
 
-  recipes.forEach((recipe) => {
-    const url = `${siteURL}/${locale}/r/${recipe.slug}`;
+  recipes
+    .filter((r: RecipeInIndex | Recipe) => !r.isDraft)
+    .forEach((recipe) => {
+      const url = `${siteURL}/${locale}/r/${recipe.slug}`;
 
-    feed.addItem({
-      title: recipe.name,
-      id: url,
-      link: url,
-      description: recipe.name,
-      // TODO: The content should be the steps, not the name
-      author: [author],
-      contributor: [author],
-      date: new Date(recipe.publishedAt),
+      feed.addItem({
+        title: recipe.name,
+        id: url,
+        link: url,
+        description: recipe.name,
+        // TODO: The content should be the steps, not the name
+        author: [author],
+        contributor: [author],
+        date: new Date(recipe.publishedAt),
+      });
     });
-  });
 
   await fs.mkdir(path.resolve("./public", "rss"), {
     recursive: true,

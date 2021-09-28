@@ -54,7 +54,7 @@ export async function loadRecipesFromDisk(
   const recipeFiles = await fs.readdir(
     path.join(process.cwd(), recipeFilesBasePath, locale)
   );
-  return await Promise.all(
+  const allRecipes = await Promise.all(
     recipeFiles.map(async (filename) => {
       const file = await fs.readFile(
         path.join(recipeFilesBasePath, locale, filename),
@@ -65,6 +65,8 @@ export async function loadRecipesFromDisk(
       return parseRecipeData(id, recipeData);
     })
   );
+
+  return allRecipes;
 }
 
 /**
@@ -98,7 +100,6 @@ export async function readSingleRecipeFromDisk(
     "utf-8"
   );
   console.log("Read recipe from file", lang, `${id}.yaml`);
-  console.log(file);
   const recipeData = YAML.parse(file);
   return parseRecipeData(id, recipeData);
 }
@@ -106,6 +107,7 @@ export async function readSingleRecipeFromDisk(
 const parseRecipeData = (id: string, recipeData: RecipeFile): Recipe => ({
   ...recipeData,
   id,
+  isDraft: recipeData.isDraft || false,
   slug: `${id}/${slug(recipeData.name)}`,
   ingredients: parseIngredients(recipeData.ingredients),
   publishedAt: recipeData.publishedAt,

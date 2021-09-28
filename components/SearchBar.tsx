@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import styled from "styled-components";
+import { RecipeInIndex } from "../models/Recipe";
 import SearchResult from "./SearchResult";
 
 const StyledForm = styled.form`
@@ -141,12 +142,12 @@ const SearchBar = ({ placeholder }: Props) => {
       {searchResults.length > 0 ? (
         <SearchResultsSheet>
           <SearchResultsList>
-            {searchResults.map((r) => (
+            {searchResults.map(({ item }: { item: RecipeInIndex }) => (
               <SearchResult
-                key={r.item.id}
-                slug={r.item.fullSlug}
-                name={r.item.name}
-                diet={r.item.diet}
+                key={item.id}
+                slug={item.slug}
+                name={item.name}
+                diet={item.diet}
               />
             ))}
           </SearchResultsList>

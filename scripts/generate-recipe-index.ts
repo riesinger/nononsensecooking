@@ -14,6 +14,7 @@ const fieldsToIncludeInIndex = [
   "diet",
   "slug",
   "publishedAt",
+  "isDraft",
 ];
 
 async function generateIndex() {

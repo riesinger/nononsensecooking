@@ -30,10 +30,14 @@ function shuffle(a: any[]) {
 export const getStaticProps: GetStaticProps = async (context) => {
   const locale = languageFrom(context);
   const allRecipes = await getRecipesFromDiskOrIndex(locale);
-  const recipesOfTheDay = shuffle(allRecipes).slice(0, 3);
+  const recipesOfTheDay = shuffle(allRecipes)
+    .filter((r: Recipe) => !r.isDraft)
+    .slice(0, 3);
   const mostPopularRecipes = (
     await orderRecipesByMostPopular(locale, allRecipes)
-  ).slice(0, 3);
+  )
+    .filter((r: Recipe) => !r.isDraft)
+    .slice(0, 3);
 
   return {
     props: {
