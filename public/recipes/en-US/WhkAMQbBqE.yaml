@@ -1,0 +1,44 @@
+name: Simple Quesadillas
+image: "quesadillas.jpg"
+publishedAt: "2021-09-29T20:50:22.079Z"
+cookTime: 20
+diet: vegetarian
+ingredients:
+  - id: wheattortilla
+    amount: 4
+    scales: true
+  - id: lemon
+    amount: 0.5
+    scales: true
+  - id: gouda
+    amount: 120
+    unit: g
+    scales: true
+  - id: cremefraiche
+    amount: 75
+    unit: g
+    scales: true
+  - id: corn
+    amount: 150
+    unit: g
+    scales: true
+  - id: salsa
+    amount: 100
+    unit: g
+    scales: true
+  - id: avocado
+    amount: 1
+    scales: true
+  - id: salt
+  - id: pepper
+  - id: chiliflakes
+  - id: garlicpowder
+steps:
+  - Halve the wheat tortillas
+  - Grate the Gouda cheese using a coarse cheese grater
+  - Drain the water from the corn kernels
+  - Add Crème fraîche, salsa, corn and the Gouda cheese onto one quarter of all the tortillas. Seson with some salt and pepper, then fold each tortilla onto itself
+  - Fry the tortillas in a buttered or oiled pan on medium heat until both sides are golden brown
+  - In the meantime, cut the avocado into halves, dice its pulp and remove it from the shell with a spoon
+  - Squeeze the juice from the lemon onto the avocado, season it with salt, pepper, some chili flakes and garlic powder and then mash it with a fork
+  - Once the Quesadillas are golden brown from both sides, you can enjoy them together with the guacamole

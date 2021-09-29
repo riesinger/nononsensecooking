@@ -68,6 +68,11 @@
     "lemon_plural": "Zitronen",
     "flour": "Mehl",
     "honey": "Honig",
-    "sesameseeds": "Sesam"
+    "sesameseeds": "Sesam",
+    "wheattortilla": "Weizentortilla",
+    "wheattortilla_plural": "Weizentortillas",
+    "gouda": "Gouda",
+    "corn": "Mais",
+    "salsa": "Salsa"
   }
 }

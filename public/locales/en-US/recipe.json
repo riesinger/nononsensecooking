@@ -68,6 +68,11 @@
     "lemon_plural": "Lemons",
     "flour": "Flour",
     "honey": "Honey",
-    "sesameseeds": "Sesame Seeds"
+    "sesameseeds": "Sesame Seeds",
+    "wheattortilla": "Wheat Tortilla",
+    "wheattortilla_plural": "Wheat Tortillas",
+    "gouda": "Gouda Cheese",
+    "corn": "Corn",
+    "salsa": "Salsa"
   }
 }
