@@ -69,7 +69,7 @@ const Footer = () => {
           href="https://github.com/riesinger/nononsensecooking"
           rel="noopener"
         >
-          Github
+          GitHub
         </StyledLink>
         <Link href="/legal" passHref prefetch={false}>
           <StyledLink>{t("link.legal.text")}</StyledLink>
