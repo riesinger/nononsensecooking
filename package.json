@@ -12,33 +12,33 @@
     "check-translations": "ts-node ./scripts/check-translations.ts"
   },
   "dependencies": {
-    "@mdi/js": "^5.9.55",
+    "@mdi/js": "^6.4.95",
     "@mdi/react": "^1.5.0",
-    "babel-plugin-styled-components": "^1.13.2",
-    "csv-parse": "^4.16.0",
+    "babel-plugin-styled-components": "^1.13.3",
+    "csv-parse": "^4.16.3",
     "feed": "^4.2.2",
     "fuse.js": "^6.4.6",
     "lodash": "^4.17.21",
-    "next": "11.1.1",
-    "next-i18next": "^8.5.5",
+    "next": "^12.0.2",
+    "next-i18next": "^8.10.0",
     "node-gzip": "^1.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "slug": "^5.1.0",
-    "styled-components": "^5.3.0",
-    "typescript": "^4.3.5",
+    "styled-components": "^5.3.3",
+    "typescript": "^4.4.4",
     "yaml": "^1.10.2"
   },
   "devDependencies": {
-    "@types/inquirer": "^7.3.3",
+    "@types/inquirer": "^8.1.3",
     "@types/node-gzip": "^1.1.0",
-    "@types/react": "^17.0.15",
+    "@types/react": "^17.0.34",
     "@types/slug": "^5.0.2",
-    "@types/styled-components": "^5.1.11",
+    "@types/styled-components": "^5.1.15",
     "eslint": "^7.31.0",
-    "eslint-config-next": "^11.0.1",
-    "inquirer": "^8.1.2",
-    "nanoid": "^3.1.23",
-    "ts-node": "^10.1.0"
+    "eslint-config-next": "^12.0.2",
+    "inquirer": "^8.2.0",
+    "nanoid": "^3.1.30",
+    "ts-node": "^10.4.0"
   }
 }
