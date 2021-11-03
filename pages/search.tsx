@@ -1,4 +1,4 @@
-import { GetServerSideProps, InferGetStaticPropsType } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import DishList from "../components/DishList";
@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Search({
   searchTerm,
   results,
-}: InferGetStaticPropsType<typeof getServerSideProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t } = useTranslation("common");
   return (
     <>
