@@ -47,6 +47,12 @@ function MyApp({ Component, pageProps }) {
         ) : (
           false
         )}
+        <script
+          async
+          defer
+          data-domain="nononsense.cooking"
+          src="https://plausible.riesinger.dev/count.js"
+        ></script>
       </Head>
       <Header />
       <Main>
