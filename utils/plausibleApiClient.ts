@@ -1,9 +1,11 @@
 import { SupportedLanguage } from "../models/Localized";
 import * as config from "../next.config";
+import { HttpStatusError } from "./goatCounterApiClient";
 
 export class PlausibleClient {
   // Which timeframe to respect when looking for the most popular recipes
   readonly POPULAR_RECIPES_PERIOD = "6mo";
+  readonly POPULAR_RECIPES_LIMIT = 5;
 
   constructor(
     private apiKey: string,
@@ -20,13 +22,16 @@ export class PlausibleClient {
     locale: SupportedLanguage
   ): Promise<{ [recipeId: string]: number }> {
     const response = await fetch(
-      `${this.baseUrl}/api/v1/stats/breakdown?site_id=${this.siteId}&period=${this.POPULAR_RECIPES_PERIOD}&property=event:page&limit=10`,
+      `${this.baseUrl}/api/v1/stats/breakdown?site_id=${this.siteId}&period=${this.POPULAR_RECIPES_PERIOD}&property=event:page&limit=${this.POPULAR_RECIPES_LIMIT}`,
       {
         headers: {
           Authorization: `Bearer ${this.apiKey}`,
         },
       }
     );
+    if (response.status < 200 || response.status > 400) {
+      throw new HttpStatusError(200, response.status);
+    }
     const data = await response.json();
     const { results } = data;
     const scores = results
