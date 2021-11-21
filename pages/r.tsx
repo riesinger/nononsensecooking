@@ -5,9 +5,9 @@ import DishList from "../components/DishList";
 import DishListItem from "../components/DishListItem";
 import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
+import languageFrom from "../lib/languageFrom";
+import { loadRecipesFromDisk } from "../lib/recipes";
 import { Recipe } from "../models/Recipe";
-import languageFrom from "../utils/languageFrom";
-import { loadRecipesFromDisk } from "../utils/recipes";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const locale = languageFrom(context);

@@ -8,12 +8,11 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { PaddedSection } from "../../components/PaddedSection";
 import Spinner from "../../components/Spinner";
-import { useQueryParam } from "../../hooks/useQueryParam";
-import { fetchFullRecipeIndex } from "../../utils/recipes";
+import { queryParam } from "../../lib/queryParameter";
+import { fetchFullRecipeIndex } from "../../lib/recipes";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const id = useQueryParam(context, "id", "");
+  const id = queryParam("id").from(context) || "";
   const fullIndex = await fetchFullRecipeIndex();
   const { availableIn, slugs, image } = await fullIndex[id];
   return {

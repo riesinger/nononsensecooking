@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
+import { loadRecipesFromDisk } from "../lib/recipes";
 import { SupportedLanguage } from "../models/Localized";
 import config from "../next-i18next.config.js";
-import { loadRecipesFromDisk } from "../utils/recipes";
 
 const basePath = "./public/recipes";
 const supportedLocales = config.i18n.locales;
