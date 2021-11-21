@@ -1,8 +1,15 @@
 import { SupportedLanguage } from "../models/Localized";
 import { Recipe, RecipeInIndex } from "../models/Recipe";
-import { GoatcounterClient, TimeoutError } from "./goatCounterApiClient";
+import { TimeoutError } from "./goatCounterApiClient";
+import { PlausibleClient } from "./plausibleApiClient";
 
 const maxTries = process.env.NODE_ENV === "production" ? 5 : 3;
+
+interface APIClient {
+  fetchMostPopularRecipesForLocale: (
+    locale: SupportedLanguage
+  ) => Promise<{ [recipeId: string]: number }>;
+}
 
 /**
  * Fetches the most popular recipes by exporting metrics from GoatCounter and summing up pagehits on recipe pages
@@ -16,16 +23,19 @@ export async function orderRecipesByMostPopular(
   recipes: Array<Recipe | RecipeInIndex>
 ) {
   const goatcounterApiKey = process.env.GOATCOUNTER_API_KEY;
+  const plausibleApiKey = process.env.PLAUSIBLE_API_KEY;
   // TODO: Read the URL from the config
   const goatcounterBaseUrl = "https://analytics.nononsense.cooking";
-  const goatcounterClient = new GoatcounterClient(
-    goatcounterApiKey,
-    goatcounterBaseUrl
+  const plausibleBaseUrl = "https://plausible.riesinger.dev";
+  const apiClient: APIClient = new PlausibleClient(
+    plausibleApiKey,
+    plausibleBaseUrl,
+    "nononsense.cooking"
   );
 
   return await withRetries(maxTries, async () => {
     const accumulatedPagehits =
-      await goatcounterClient.fetchMostPopularRecipesForLocale(locale);
+      await apiClient.fetchMostPopularRecipesForLocale(locale);
     return recipes.sort(byNumberOfPageHits(accumulatedPagehits));
   });
 }
@@ -59,6 +69,6 @@ async function withRetries(maxTries: number, fn: Function) {
   }
 
   throw new Error(
-    "Maximum retries reached while getting most popular hits from GoatCounter"
+    "Maximum retries reached while getting most popular hits from analytics"
   );
 }
