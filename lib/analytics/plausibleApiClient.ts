@@ -1,6 +1,6 @@
-import { SupportedLanguage } from "../models/Localized";
-import * as config from "../next.config";
-import { HttpStatusError } from "./goatCounterApiClient";
+import { SupportedLanguage } from "../../models/Localized";
+import * as config from "../../next.config";
+import { HttpStatusError } from "./HttpStatusError";
 
 export class PlausibleClient {
   // Which timeframe to respect when looking for the most popular recipes

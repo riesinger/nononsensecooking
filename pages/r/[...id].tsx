@@ -11,13 +11,13 @@ import IngredientsList from "../../components/IngredientsList";
 import SEO from "../../components/SEO";
 import ServingsChooser from "../../components/ServingsChooser";
 import StepList from "../../components/StepList";
-import { SupportedLanguage } from "../../models/Localized";
-import { Recipe } from "../../models/Recipe";
-import languageFrom from "../../utils/languageFrom";
+import languageFrom from "../../lib/languageFrom";
 import {
   loadRecipesFromDisk,
   readSingleRecipeFromDisk,
-} from "../../utils/recipes";
+} from "../../lib/recipes";
+import { SupportedLanguage } from "../../models/Localized";
+import { Recipe } from "../../models/Recipe";
 
 export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
   const { id } = context.params;

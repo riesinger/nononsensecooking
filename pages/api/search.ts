@@ -1,7 +1,7 @@
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
+import { fetchRecipeIndex } from "../../lib/recipes";
 import { SupportedLanguage } from "../../models/Localized";
-import { fetchRecipeIndex } from "../../utils/recipes";
 import { localeFrom } from "./utils/localeFrom";
 import { methodIs } from "./utils/methodIs";
 

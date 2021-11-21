@@ -1,7 +1,6 @@
 import { SupportedLanguage } from "../models/Localized";
 import { Recipe, RecipeInIndex } from "../models/Recipe";
-import { TimeoutError } from "./goatCounterApiClient";
-import { PlausibleClient } from "./plausibleApiClient";
+import { PlausibleClient } from "./analytics/plausibleApiClient";
 
 const maxTries = process.env.NODE_ENV === "production" ? 5 : 3;
 
@@ -22,22 +21,18 @@ export async function orderRecipesByMostPopular(
   locale: SupportedLanguage,
   recipes: Array<Recipe | RecipeInIndex>
 ) {
-  const goatcounterApiKey = process.env.GOATCOUNTER_API_KEY;
   const plausibleApiKey = process.env.PLAUSIBLE_API_KEY;
   // TODO: Read the URL from the config
-  const goatcounterBaseUrl = "https://analytics.nononsense.cooking";
   const plausibleBaseUrl = "https://plausible.riesinger.dev";
   const apiClient: APIClient = new PlausibleClient(
     plausibleApiKey,
     plausibleBaseUrl,
     "nononsense.cooking"
   );
-
-  return await withRetries(maxTries, async () => {
-    const accumulatedPagehits =
-      await apiClient.fetchMostPopularRecipesForLocale(locale);
-    return recipes.sort(byNumberOfPageHits(accumulatedPagehits));
-  });
+  const accumulatedPagehits = await apiClient.fetchMostPopularRecipesForLocale(
+    locale
+  );
+  return recipes.sort(byNumberOfPageHits(accumulatedPagehits));
 }
 
 type SortableRecipe = Pick<Recipe, "id" | "name">;
@@ -50,25 +45,3 @@ const byNumberOfPageHits =
   (hits: { [recipeId: string]: number }) =>
   (a: SortableRecipe, b: SortableRecipe) =>
     (hits[b.id] || 0) - (hits[a.id] || 0) || a.name.localeCompare(b.name);
-
-async function withRetries(maxTries: number, fn: Function) {
-  for (let tries = 0; tries < maxTries; tries++) {
-    try {
-      return await fn();
-    } catch (err) {
-      // We don't need a stacktrace for timeouts
-      if (err instanceof TimeoutError) {
-        console.error(err.message);
-      } else {
-        console.error(err);
-      }
-      if (tries < maxTries - 1) {
-        console.log("Retrying...");
-      }
-    }
-  }
-
-  throw new Error(
-    "Maximum retries reached while getting most popular hits from analytics"
-  );
-}

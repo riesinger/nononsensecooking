@@ -5,10 +5,10 @@ import DishCard from "../components/DishCard";
 import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
 import Track from "../components/Track";
+import languageFrom from "../lib/languageFrom";
+import { orderRecipesByMostPopular } from "../lib/popularRecipes";
+import { getRecipesFromDiskOrIndex } from "../lib/recipes";
 import { Recipe } from "../models/Recipe";
-import languageFrom from "../utils/languageFrom";
-import { orderRecipesByMostPopular } from "../utils/popularRecipes";
-import { getRecipesFromDiskOrIndex } from "../utils/recipes";
 
 const revalidationTimesInSeconds = {
   development: 60,
