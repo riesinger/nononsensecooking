@@ -35,7 +35,7 @@
     "@types/slug": "^5.0.3",
     "@types/styled-components": "^5.1.17",
     "eslint": "^7.32.0",
-    "eslint-config-next": "^12.0.4",
+    "eslint-config-next": "^12.0.7",
     "inquirer": "^8.2.0",
     "nanoid": "^3.1.30",
     "ts-node": "^10.4.0"
