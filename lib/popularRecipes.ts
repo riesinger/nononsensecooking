@@ -11,7 +11,7 @@ interface APIClient {
 }
 
 /**
- * Fetches the most popular recipes by exporting metrics from GoatCounter and summing up pagehits on recipe pages
+ * Fetches the most popular recipes by exporting metrics from the analytics and summing up pagehits on recipe pages
  *
  * @param locale The locale to use
  * @param recipes The recipes to be sorted

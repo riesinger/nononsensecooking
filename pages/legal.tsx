@@ -85,12 +85,12 @@ export default function Legal({}: InferGetStaticPropsType<
           <Trans t={t} i18nKey="section.privacy.plausible.content">
             Wir nutzen auf dieser Seite eine selbstverwaltete Installation von
             Plausible Analytics. Dabei handelt es sich um ein Werkzeug zum
-            Erfassen von Analysedaten von Websites. nders als bei vielen
-            sogenannten Analytics-Tools nutzen wir Goatcounter nicht dazu, um
-            Dich über das Internet hinweg zu tracken. Wir sammeln ausschließlich
-            auf dieser Website Nutzungsdaten und können Dich als Person mit
-            diesen Daten auch nicht identifizieren. Die Nutzungsdaten werden auf
-            einem Server in Deutschland gespeichert, womit sie den sehr hohen
+            Erfassen von Analysedaten von Websites. Anders als bei vielen
+            sogenannten Analytics-Tools nutzen wir Plausible nicht dazu, um Dich
+            über das Internet hinweg zu tracken. Wir sammeln ausschließlich auf
+            dieser Website Nutzungsdaten und können Dich als Person mit diesen
+            Daten auch nicht identifizieren. Die Nutzungsdaten werden auf einem
+            Server in Deutschland gespeichert, womit sie den sehr hohen
             europäischen Ansprüchen an Datenschutz unterliegen. Sobald du diese
             Seite besuchst, sammeln wir folgende Daten: die Seiten-URL, den
             Referrer-Header, deinen Browser, dein Betriebssystem, deinen
