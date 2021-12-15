@@ -1,0 +1,41 @@
+name: Karotten-Rotkohl-Salat
+image: "carrot-red-cabbage-salad.jpg"
+publishedAt: "2021-12-15T19:46:41.357Z"
+cookTime: 15
+diet: vegetarian
+ingredients:
+  - id: carrot
+    amount: 1
+    unit: pc
+    scales: true
+  - id: redcabbage
+    amount: 75
+    unit: g
+    scales: true
+  - id: leek
+    amount: 15
+    unit: g
+    scales: true
+  - id: soysauce
+    amount: 2
+    unit: tbsp
+    scales: true
+  - id: sweetmustard
+    amount: 1
+    unit: tbsp
+    scales: true
+  - id: balsamicvinegar
+    amount: 1
+    unit: tbsp
+    scales: true
+  - id: oliveoil
+    amount: 1
+    unit: tbsp
+    scales: true
+steps:
+  - Die angegebenen Mengen sind als Beilagensalat gedacht
+  - Schneide die Karotten diagonal in Scheiben, dann in dünne Stifte
+  - Schneide vom ganzen Rotkohl dünne Scheiben ab. Je nachdem, wie groß die Stücke sind, wenn du sie außeinander gezupft hast, kannst du sie noch etwas kleiner schneiden
+  - Schneide den Lauch diagonal in Ringe
+  - Gebe die restlichen Zutaten zu den Karotten, dem Rotkohl und dem Lauch und verrühre alles gut
+  - Am besten schmeckt der Salat, wenn er einen Tag im Kühlschrank abgedeckt ziehen konnte, aber auch direkt nach der Zubereitung ist er lecker :)

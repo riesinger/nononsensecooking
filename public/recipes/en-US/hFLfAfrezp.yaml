@@ -1,0 +1,41 @@
+name: Carrot and Cabbage Salad
+image: "carrot-red-cabbage-salad.jpg"
+publishedAt: "2021-12-15T19:46:41.350Z"
+cookTime: 15
+diet: vegetarian
+ingredients:
+  - id: carrot
+    amount: 1
+    unit: pc
+    scales: true
+  - id: redcabbage
+    amount: 75
+    unit: g
+    scales: true
+  - id: leek
+    amount: 15
+    unit: g
+    scales: true
+  - id: soysauce
+    amount: 2
+    unit: tbsp
+    scales: true
+  - id: sweetmustard
+    amount: 1
+    unit: tbsp
+    scales: true
+  - id: balsamicvinegar
+    amount: 1
+    unit: tbsp
+    scales: true
+  - id: oliveoil
+    amount: 1
+    unit: tbsp
+    scales: true
+steps:
+  - The given amounts are assuming that you eat the salad as a side dish
+  - Slice the carrots diagonally, then cut the slices into thin sticks
+  - Cut thin slices off of the red cabbage. If the pieces are too large for your liking, feel free to chop them up further
+  - Chop the leek into rings diagonally
+  - Add the rest of the ingredients to the carrots, cabbage and leek and mix them thoroughly
+  - The salad tastes best after being left in the refrigerator for a day, but you definitively also enjoy it immediately after preparing it :)
