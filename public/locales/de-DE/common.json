@@ -26,7 +26,8 @@
   },
   "search": {
     "pagetitle": "Suchergebnisse",
-    "sectiontitle": "Suchergebnisse für {{searchTerm}}"
+    "sectiontitle": "Suchergebnisse für {{searchTerm}}",
+    "findrecipes": "Finde deine Lieblingsrezepte"
   },
   "notfound": {
     "pagetitle": "Seite nicht gefunden",

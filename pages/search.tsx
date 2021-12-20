@@ -71,7 +71,7 @@ export default function Search({
       <>
         <SEO title={t("search.pagetitle")} />
         <CenteredSection>
-          <Notice>Finde deine Lieblingsrezepte</Notice>
+          <Notice>{t("search.findrecipes")}</Notice>
           <SearchBar placeholder={th("searchbar.placeholder")} />
         </CenteredSection>
       </>
