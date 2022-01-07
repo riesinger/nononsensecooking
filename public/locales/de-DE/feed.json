@@ -1,0 +1,13 @@
+{
+  "pagetitle": "Feeds",
+  "displayPageTitle": "Abonniere unsere Feeds",
+  "introduction": "Du möchtest immer auf dem neuesten Stand bleiben und mitbekommen, wenn wir ein neues Rezept veröffentlichen? Dann bist du hier an der richtigen Adresse! Hier findest du die Links zu unseren RSS-, Atom- und JSON-Feeds, welche du mit einer Feedreader-Anwendung deiner Wahl nutzen kannst. Weiter unten auf der Seite findest du auch ein paar Feedreader, falls du noch keinen hast.",
+  "feedtypes": "Die meisten Reader unterstützen RSS Feeds, deshalb soltest du diesen zuerst probieren, wenn du die Unterschiede zwischen RSS-, Atom- und JSON-Feeds nicht kennst.",
+  "feedreader": {
+    "sectionTitle": "Feedreader",
+    "introduction": "Du hast noch keinen Feedreader? Hier findest du ein paar unserer Empfehlungen. Keine der Empfehlungen sind gesponsort, es handelt sich nur um Apps, die wir gerne nutzen oder die besonders häufig gelobt werden.",
+    "android": "Android",
+    "iOS": "iOS",
+    "other": "Sonstige"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "pagetitle": "Feeds",
+  "displayPageTitle": "Subscribe to our feeds",
+  "introduction": "You want to stay up-to-date and get notified when we release a new recipe? Than this is the right place to be! Here, you'll find links to our RSS, Atom and JSON feeds, which you can use with your preferred feed reader. Down below, you'll also find some recommendations for feed readers, if you don't already have one.",
+  "feedtypes": "Most feed readers support RSS, so this is the one to try first, if you don't know the difference between RSS, Atom and JSON feeds.",
+  "feedreader": {
+    "sectionTitle": "Feed readers",
+    "introduction": "You don't use a feed reader yet? Here are some recommended ones. Note that none of them are sponsored, these are just apps we like or which get praised often enough.",
+    "android": "Android",
+    "iOS": "iOS",
+    "other": "Others"
+  }
+}
