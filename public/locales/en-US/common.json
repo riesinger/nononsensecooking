@@ -4,6 +4,7 @@
     "recentlyaddedrecipes": "Recently Added",
     "mostpopularrecipes": "Most Popular",
     "allrecipes": "All Recipes",
+    "latestrecipes": "Latest Recipes",
     "pageindicator": "Page {{currentPage}} of {{totalPages}}",
     "previouspage": "Previous page",
     "nextpage": "Next page"
