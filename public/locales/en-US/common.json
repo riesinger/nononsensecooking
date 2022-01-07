@@ -7,7 +7,13 @@
     "latestrecipes": "Latest Recipes",
     "pageindicator": "Page {{currentPage}} of {{totalPages}}",
     "previouspage": "Previous page",
-    "nextpage": "Next page"
+    "nextpage": "Next page",
+    "about": {
+      "sectiontitle": "What is NoNonsenseCooking?",
+      "introduction": "NoNonsenseCooking has been built because many websites hosting recipes are overloaded with ads and useless features and have dozens of recipes per dish. How would you find the \"right one\"?",
+      "mission": "We made it our mission to curate our favorite recipes to be easy to follow and without the extra fluff and then publish them here",
+      "cta": "You want to stay up-to-date? Subscribe to our <rsslink>RSS feeds</rsslink> with your favorite reader. You like what we do? Find out how you can support our work <donatelink>here</donatelink>."
+    }
   },
   "diet": {
     "meat": "Contains Meat",

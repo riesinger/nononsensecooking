@@ -1,8 +1,11 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Link from "next/link";
+import { ReactElement } from "react";
 import DishCard from "../components/DishCard";
 import { PaddedSection } from "../components/PaddedSection";
+import Paragraph from "../components/Paragraph";
 import SEO from "../components/SEO";
 import Track from "../components/Track";
 import languageFrom from "../lib/languageFrom";
@@ -48,6 +51,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
+const LinkText = ({ href, children }: { href: string; children: ReactElement | undefined }) => (
+  <Link href={href}>
+    <a>{children}</a>
+  </Link>
+);
+
 export default function Home({
   recipesOfTheDay,
   mostPopularRecipes,
@@ -77,6 +86,19 @@ export default function Home({
             <DishCard {...recipe} key={recipe.id} />
           ))}
         </Track>
+      </PaddedSection>
+      <PaddedSection width="narrow" title={t("home.about.sectiontitle")} smallHeadings>
+        <Paragraph>{t("home.about.introduction")}</Paragraph>
+        <Paragraph>{t("home.about.mission")}</Paragraph>
+        <Paragraph>
+          <Trans
+            i18nKey="home.about.cta"
+            components={{
+              rsslink: <LinkText href="/rss/" />,
+              donatelink: <LinkText href="/donate/" />,
+            }}
+          ></Trans>
+        </Paragraph>
       </PaddedSection>
     </>
   );
