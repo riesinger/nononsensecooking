@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-const LinkText = ({ href, children }: { href: string; children: ReactElement | undefined }) => (
+const LinkText = ({ href, children }: { href: string; children?: ReactElement }) => (
   <Link href={href}>
     <a>{children}</a>
   </Link>
