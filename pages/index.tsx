@@ -83,6 +83,5 @@ export default function Home({
 }
 
 function byPublishedAt(a: Pick<Recipe, "publishedAt">, b: Pick<Recipe, "publishedAt">) {
-  console.log(a.publishedAt, b.publishedAt);
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 }
