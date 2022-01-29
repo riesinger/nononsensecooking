@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/riesinger/nononsensecooking/telegram/api"
 	v1 "github.com/riesinger/nononsensecooking/telegram/api/v1"
+	"github.com/riesinger/nononsensecooking/telegram/models"
 	"github.com/rs/zerolog/log"
 	"os"
 	"os/signal"
@@ -44,6 +45,27 @@ func main() {
 				return err
 			}
 			bot.BroadcastTo(subscribedUsers, message)
+			return nil
+		},
+		SendRecipesMessage: func(ctx context.Context, recipeUpdate models.RecipeUpdate) error {
+			subscribedUsers, err := db.GetSubscribedUsers(ctx)
+			if err != nil {
+				return err
+			}
+			// TODO: Make locale handling more flexible here
+			for idx, user := range subscribedUsers {
+				update, hasLocale := recipeUpdate[user.RecipeLocale]
+				if !hasLocale {
+					logger.Warn().Str("chatLocale", user.RecipeLocale).Msg("The recipe update doesnt contain the user's language")
+					continue
+				}
+				success := true
+				if err := bot.SendMessageTo(user, update.Message); err != nil {
+					success = false
+				}
+				logger.Debug().Int("totalUsers", len(subscribedUsers)).Int("currentUser", idx).Bool("success", success).Msg("Processed update for user")
+
+			}
 			return nil
 		},
 	}
