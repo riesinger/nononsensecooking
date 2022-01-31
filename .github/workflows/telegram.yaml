@@ -1,0 +1,42 @@
+name: Telegram Bot
+on:
+  pull_request:
+  push:
+    # Only rebuild when the bot or the workflow definitions have changed
+    paths:
+      - "telegram/**"
+      - ".github/workflows/**"
+
+jobs:
+  test:
+    name: Test for Go version ${{ matrix.golang }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Go ${{ matrix.golang }}
+        uses: actions/setup-go@v1
+        with:
+          go-version: ${{ matrix.golang }}
+      - name: Get dependencies
+        run: go get -v -t -d ./...
+        working-directory: ./telegram
+      - name: Test
+        run: go test ./...
+        working-directory: ./telegram
+    strategy:
+      matrix:
+        golang: ["1.17"]
+
+  build:
+    name: Build on the latest Go version
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: ./telegram
+        run: go build ./cmd/nnc-bot
+
+# TODO: Add a deployment step
