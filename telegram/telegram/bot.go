@@ -55,9 +55,9 @@ func subscribeHandler(users UserStore) WorkflowFunc {
 	return func(ctx context.Context, logger zerolog.Logger, chatID int64, chatLocale string) string {
 		if err := users.Subscribe(ctx, chatID); err != nil {
 			logger.Error().Err(err).Msg("Failed to subscribe user")
-			return successMessage(ctx, "subscribe")
+			return errorMessage(ctx, "subscribe")
 		}
-		return errorMessage(ctx, "subscribe")
+		return successMessage(ctx, "subscribe")
 	}
 }
 
@@ -65,9 +65,9 @@ func unsubscribeHandler(users UserStore) WorkflowFunc {
 	return func(ctx context.Context, logger zerolog.Logger, chatID int64, chatLocale string) string {
 		if err := users.Unsubscribe(ctx, chatID); err != nil {
 			logger.Error().Err(err).Msg("Failed to unsubscribe user")
-			return successMessage(ctx, "unsubscribe")
+			return errorMessage(ctx, "unsubscribe")
 		}
-		return errorMessage(ctx, "unsubscribe")
+		return successMessage(ctx, "unsubscribe")
 	}
 }
 
@@ -103,6 +103,15 @@ func (bot *Bot) BroadcastTo(users []models.User, message string) {
 			logger.Error().Err(err).Int64("chatID", user.ChatID).Msg("Failed to send broadcast to user")
 		}
 	}
+}
+
+func (bot *Bot) SendMessageTo(user models.User, message string) error {
+	msg := tgbotapi.NewMessage(user.ChatID, message)
+	if _, err := bot.api.Send(msg); err != nil {
+		logger.Error().Err(err).Int64("chatID", user.ChatID).Msg("Failed to send message to user")
+		return err
+	}
+	return nil
 }
 
 // handleUpdate handles incoming "Updates" (i.e. messages) from the Telegram API
