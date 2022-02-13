@@ -3,9 +3,17 @@ version: "3"
 services:
   dev-db:
     image: postgres:14
-    ports:
-      - 5432:5432
     environment:
       - POSTGRES_PASSWORD=nnctelegram
       - POSTGRES_USER=nnc
       - POSTGRES_DB=nnc
+  app:
+    build: .
+    ports:
+      - 50403:50403
+    env_file: .env.docker-compose
+    environment:
+      - NNC_TG_POSTGRES_HOST=dev-db
+      - NNC_TG_POSTGRES_USER=nnc
+      - NNC_TG_POSTGRES_PASS=nnctelegram
+      - NNC_TG_API_TOKEN=TEST

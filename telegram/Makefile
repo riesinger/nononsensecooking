@@ -1,8 +1,11 @@
 sources := $(wildcard **/*.go)
+binary := nnc-bot
 
-nnc-bot: $(sources)
-	go build ./cmd/nnc-bot
+$(binary): $(sources)
+	go build -o $(binary) ./cmd/nnc-bot
 
-run: nnc-bot
-  source .env
-	./nnc-bot
+run: $(binary)
+	./$(binary)
+
+clean:
+	rm -rf $(binary)

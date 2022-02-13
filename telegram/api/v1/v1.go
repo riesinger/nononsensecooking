@@ -16,11 +16,16 @@ type HandlerFunctions struct {
 
 var logger = log.With().Str("component", "api").Int("version", 1).Logger()
 
-func BindRoutes(r *mux.Router, handlers HandlerFunctions) {
+func BindRoutes(r *mux.Router, handlers HandlerFunctions, apiToken string) {
 	s := r.PathPrefix("/v1").Subrouter()
 	s.Use(loggingMiddleware)
-	s.Path("/broadcasts").Methods("POST").HandlerFunc(postBroadcastsHandler(handlers.CreateBroadcast))
-	s.Path("/recipes").Methods("POST").HandlerFunc(postRecipesHandler(handlers.SendRecipesMessage))
+
+  s.Path("/status").Methods("GET").HandlerFunc(getStatusHandler())
+
+  authorizedRoutes := s.NewRoute().Subrouter()
+  authorizedRoutes.Use(authenticationMiddleware(apiToken))
+	authorizedRoutes.Path("/broadcasts").Methods("POST").HandlerFunc(postBroadcastsHandler(handlers.CreateBroadcast))
+	authorizedRoutes.Path("/recipes").Methods("POST").HandlerFunc(postRecipesHandler(handlers.SendRecipesMessage))
 }
 
 func postBroadcastsHandler(handler func(ctx context.Context, message string) error) http.HandlerFunc {
@@ -62,4 +67,10 @@ func postRecipesHandler(handler func(ctx context.Context, recipeUpdate models.Re
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
+}
+
+func getStatusHandler() http.HandlerFunc {
+  return func(w http.ResponseWriter, r *http.Request) {
+    w.WriteHeader(http.StatusOK)
+  }
 }

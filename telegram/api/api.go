@@ -15,9 +15,9 @@ type HTTPServer struct {
 
 var logger = log.With().Str("component", "api").Logger()
 
-func NewHTTPServer(v1handlers v1.HandlerFunctions) *HTTPServer {
+func NewHTTPServer(v1handlers v1.HandlerFunctions, apiToken string) *HTTPServer {
 	r := mux.NewRouter()
-	v1.BindRoutes(r, v1handlers)
+	v1.BindRoutes(r, v1handlers, apiToken)
 
 	return &HTTPServer{r: r}
 }
