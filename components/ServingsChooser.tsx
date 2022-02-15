@@ -7,6 +7,7 @@ const IconButton = styled.button`
   appearance: none;
   border: none;
   background: var(--color-background-alt);
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
