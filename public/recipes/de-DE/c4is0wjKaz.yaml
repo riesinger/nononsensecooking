@@ -1,0 +1,37 @@
+name: Teriyaki-Chili-Nudeln
+image: "teriyaki-chili-noodles.jpg"
+publishedAt: "2022-02-15T20:48:25.207Z"
+cookTime: 20
+diet: vegan
+ingredients:
+  - name: Chili-Nudeln
+    amount: 200
+    unit: g
+    scales: true
+  - name: Portobello-Pilze oder Champignons
+    amount: 200
+    unit: g
+    scales: true
+  - id: onion
+    amount: 2
+    unit: pc
+    scales: true
+  - id: tofu
+    amount: 100
+    unit: g
+    scales: true
+  - id: teriyakisauce
+    amount: 6
+    unit: tbsp
+    scales: true
+  - id: salt
+  - id: pepper
+  - id: sunfloweroil
+steps:
+  - Schneide die Pilze in Scheiben, die Zwiebeln in feine Streifen und das Tofu in dünne, mundgerechte Scheiben
+  - Erhitze etwas Sonnenblumenöl (oder Rapsöl) in einer Pfanne unnd brate das Tofu auf beiden Seiten für ca. 2 Minuten schaf an, bis es sich leicht golbraun verfärbt
+  - Reduziere die Hitze und gebe die Zwiebeln und Pilze mit in die Pfanne und brate alles weitere 3 Minuten an
+  - Gib die Teriyaki-Soße hinzu und köchle Pilze, Zwiebeln und Tofu für weitere 5 Minuten, wobei du gelegentlich umrühren solltest
+  - Koche in der Zwischenzeit die Chilinudeln nach den Hinweisen auf der Packung
+  - Mische die Nudeln in die Pfanne und lasse sie 1-2 Minuten mit köcheln
+  - Serviere die Nudeln in einer Schüssel und garniere sie nach Wunsch mit etwas Sesam
