@@ -82,7 +82,7 @@ func main() {
 	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
 
 	go bot.Start(ctx)
-	go srv.Listen(ctx, "127.0.0.1", 50403)
+	go srv.Listen(ctx, "0.0.0.0", 50403)
 
 	logger.Info().Msg("Service started")
 	<-signals
