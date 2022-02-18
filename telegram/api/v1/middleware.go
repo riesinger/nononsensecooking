@@ -25,32 +25,32 @@ func loggingMiddleware(next http.Handler) http.Handler {
 }
 
 func authenticationMiddleware(apiToken string) mux.MiddlewareFunc {
-  return func(next http.Handler) http.Handler {
-    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-      ctx := r.Context()
-      subLogger := loggerFromContext(ctx)
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			ctx := r.Context()
+			subLogger := loggerFromContext(ctx)
 
-      authHeader := r.Header.Get("Authorization")
-      if authHeader == "" {
-        subLogger.Warn().Msg("Missing Authorization header")
-        w.WriteHeader(http.StatusUnauthorized)
-        return
-      }
+			authHeader := r.Header.Get("Authorization")
+			if authHeader == "" {
+				subLogger.Warn().Msg("Missing Authorization header")
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
 
-      token := strings.TrimPrefix(authHeader, "Bearer ")
-      if token == "" {
-        subLogger.Warn().Msg("Empty auth token")
-        w.WriteHeader(http.StatusUnauthorized)
-        return
-      }
+			token := strings.TrimPrefix(authHeader, "Bearer ")
+			if token == "" {
+				subLogger.Warn().Msg("Empty auth token")
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
 
-      if token != "TEST" {
-        subLogger.Warn().Msg("Token is forbidden")
-        w.WriteHeader(http.StatusForbidden)
-        return
-      }
+			if token != apiToken {
+				subLogger.Warn().Msg("Token is forbidden")
+				w.WriteHeader(http.StatusForbidden)
+				return
+			}
 
-      next.ServeHTTP(w, r)
-    })
-  }
+			next.ServeHTTP(w, r)
+		})
+	}
 }
