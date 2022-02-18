@@ -1,6 +1,10 @@
 name: Telegram Bot
 on:
   pull_request:
+    # Only rebuild when the bot or the workflow definitions have changed
+    paths:
+      - "telegram/**"
+      - ".github/workflows/**"
   push:
     # Only rebuild when the bot or the workflow definitions have changed
     paths:
@@ -39,8 +43,12 @@ jobs:
         working-directory: ./telegram
         run: DOCKER_BUILDKIT=1 docker build . --file Dockerfile --tag nnc-telegram
       - name: Log into registry
+        # Nobody else is allowed to use the GITHUB_TOKEN, therefore don't login
+        if: github.actor === 'riesinger'
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Push image
+        # Nobody else is allowed to use the GITHUB_TOKEN, therefore skip pushing
+        if: github.actor == 'riesinger'
         run: |
           IMAGE_ID=ghcr.io/riesinger/nnc-telegram
           # Change all uppercase to lowercase
