@@ -8,6 +8,8 @@ services:
       - POSTGRES_USER=nnc
       - POSTGRES_DB=nnc
   app:
+    depends_on:
+      - dev-db
     build: .
     ports:
       - 50403:50403
