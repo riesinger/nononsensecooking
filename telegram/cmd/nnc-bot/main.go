@@ -2,35 +2,27 @@ package main
 
 import (
 	"context"
-	"github.com/riesinger/nononsensecooking/telegram/api"
-	v1 "github.com/riesinger/nononsensecooking/telegram/api/v1"
-	"github.com/riesinger/nononsensecooking/telegram/models"
-	"github.com/rs/zerolog/log"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/riesinger/nononsensecooking/telegram/api"
+	v1 "github.com/riesinger/nononsensecooking/telegram/api/v1"
+	"github.com/riesinger/nononsensecooking/telegram/models"
+	"github.com/riesinger/nononsensecooking/telegram/pkg/config"
+	"github.com/rs/zerolog/log"
+
 	"github.com/riesinger/nononsensecooking/telegram/database"
 	"github.com/riesinger/nononsensecooking/telegram/telegram"
-
-  "github.com/joho/godotenv"
 )
 
 var logger = log.With().Str("component", "main").Logger()
 
 func main() {
 	logger.Info().Msg("Service starting up")
-  // Since we'll only load .env files for development, we don't care if that fails
-  _ = godotenv.Load()
+	cfg := config.Load()
 
-	// TODO: Better configuration management
-	telegramToken := os.Getenv("NNC_TG_TELEGRAM_TOKEN")
-	postgresHost := os.Getenv("NNC_TG_POSTGRES_HOST")
-	postgresUser := os.Getenv("NNC_TG_POSTGRES_USER")
-	postgresPass := os.Getenv("NNC_TG_POSTGRES_PASS")
-  apiToken := os.Getenv("NNC_TG_API_TOKEN")
-
-	db := database.Connect(postgresUser, postgresPass, postgresHost)
+	db := database.Connect(cfg.PostgresUser, cfg.PostgresPass, cfg.PostgresHost)
 	ctx, cancel := context.WithCancel(context.Background())
 	err := db.Initialize(ctx)
 	if err != nil {
@@ -38,7 +30,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	bot, err := telegram.NewBot(telegramToken, db)
+	bot, err := telegram.NewBot(cfg.TelegramAPIToken, db)
 	if err != nil {
 		logger.Fatal().Err(err).Msg("Could not connect to Telegram, exiting")
 		os.Exit(1)
@@ -76,7 +68,7 @@ func main() {
 		},
 	}
 
-	srv := api.NewHTTPServer(handlers, apiToken)
+	srv := api.NewHTTPServer(handlers, cfg.APIToken)
 
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
