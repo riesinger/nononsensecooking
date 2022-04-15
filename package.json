@@ -36,7 +36,7 @@
     "eslint": "^8.13.0",
     "eslint-config-next": "^12.1.4",
     "inquirer": "^8.2.2",
-    "nanoid": "^3.3.1",
+    "nanoid": "^3.3.2",
     "ts-node": "^10.7.0"
   }
 }
