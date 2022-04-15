@@ -78,6 +78,12 @@
     "leek": "Leek",
     "sweetmustard": "Sweet (Bavarian Style) Mustard",
     "balsamicvinegar": "Balsamic Vinegar",
-    "teriyakisauce": "Teriyaki Sauce"
+    "teriyakisauce": "Teriyaki Sauce",
+    "toast": "Toast",
+    "olive": "Olive",
+    "olive_plural": "Olives",
+    "basil-dried": "Basil (dried)",
+    "rosemary-dried": "Rosemary (dried)",
+    "thyme-dried": "Thyme (dried)"
   }
 }

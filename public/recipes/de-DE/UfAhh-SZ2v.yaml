@@ -1,0 +1,40 @@
+name: Überbackene Tomaten-Toasts
+image: "baked-tomato-toast.jpg"
+publishedAt: "2022-04-15T20:41:20.405Z"
+cookTime: 15
+diet: vegetarian
+ingredients:
+  - id: toast
+    amount: 6
+    unit: pc
+    scales: true
+  - id: cremefraiche
+    amount: 100
+    unit: g
+    scales: true
+  - id: tomato
+    amount: 150
+    unit: g
+    scales: true
+  - id: olive
+    amount: 50
+    unit: g
+    scales: true
+  - id: gouda
+    amount: 60
+    unit: g
+    scales: true
+  - id: salt
+  - id: pepper
+  - id: garlicpowder
+  - id: basil-dried
+  - id: rosemary-dried
+  - id: thyme-dried
+steps:
+  - Heize den Ofen auf 180°C vor. Falls dein Ofen eine Grillfunktion hat, schalte diese zu. Ansonsten kannst du auch Ober- und Unterhitze einstellen und das Blech später möglichst weit oben einschieben
+  - Bestreiche das Toastbrot mit Crème fraîche und würze diese
+  - Schneide die Tomaten in möglichst dünne scheiben und bedecke den Toast damit
+  - Schneide nun die Oliven in Scheibchen und verteile diese auf der Tomate
+  - Reibe etwas Gouda (andere Käse gehen natürlich auch!) und streue diesen auf die belegten Toasts
+  - Lege die Scheiben nun auf ein Backblech und backe sie ca. 5 Minuten im Ofen, bis die Ecken des Toasts goldbraun werden
+  - Guten Appetit!

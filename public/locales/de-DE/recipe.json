@@ -78,6 +78,12 @@
     "leek": "Lauch",
     "sweetmustard": "Süßer Senf",
     "balsamicvinegar": "Balsamico Essig",
-    "teriyakisauce": "Teriyakisoße"
+    "teriyakisauce": "Teriyakisoße",
+    "toast": "Toastbrot",
+    "olive": "Olive",
+    "olive_plural": "Oliven",
+    "basil-dried": "Basilikum (getrocknet)",
+    "rosemary-dried": "Rosmarin (getrocknet)",
+    "thyme-dried": "Thymian (getrocknet)"
   }
 }
