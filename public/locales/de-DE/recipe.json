@@ -43,6 +43,7 @@
     "zucchini": "Zucchini",
     "zucchini_plural": "Zucchinis",
     "dicedtomatos": "Gehackte Tomaten",
+    "strainedtomatos": "Passierte Tomaten",
     "garammasala": "Garam Masala",
     "quinoa": "Quinoa",
     "feta": "Feta",
@@ -84,6 +85,11 @@
     "olive_plural": "Oliven",
     "basil-dried": "Basilikum (getrocknet)",
     "rosemary-dried": "Rosmarin (getrocknet)",
-    "thyme-dried": "Thymian (getrocknet)"
+    "thyme-dried": "Thymian (getrocknet)",
+    "oregano": "Oregano",
+    "garlicclove": "Knoblauchzehe",
+    "garlicclove_plural": "Knoblauchzehen",
+    "rawham": "Roher Schinken",
+    "spaghetti": "Spaghetti"
   }
 }
