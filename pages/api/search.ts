@@ -28,6 +28,9 @@ export async function searchRecipes(
   language: SupportedLanguage,
   searchTerm: string
 ) {
+  if (!searchTerm) {
+    return [];
+  }
   const recipes = await fetchRecipeIndex(language);
   const fuse = new Fuse(recipes, searchOptions);
 

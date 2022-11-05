@@ -83,7 +83,7 @@ const SearchBar = ({ placeholder }: Props) => {
     debounce(fetchSearchResults, 250, {
       maxWait: 1500,
     }),
-    [searchTerm]
+    []
   );
 
   useEffect(() => {
@@ -108,6 +108,11 @@ const SearchBar = ({ placeholder }: Props) => {
   }
 
   async function fetchSearchResults(searchTerm: string) {
+    if (searchTerm === "") {
+      setSearchResults([]);
+      return;
+    }
+    console.log("Fetching search results for", searchTerm);
     const results = await (
       await fetch(`/api/search?query=${searchTerm}`, {
         headers: {
