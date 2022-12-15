@@ -58,36 +58,34 @@ export default function NotFound({}: InferGetStaticPropsType<
   typeof getStaticProps
 >) {
   const { t } = useTranslation("common");
-  return (
-    <>
-      <SEO title={t("notfound.pagetitle")} />
-      <NotFoundPage>
-        <PageTitle>{t("notfound.displaytitle")}</PageTitle>
-        <IntroParagraph>{t("notfound.explanation")}</IntroParagraph>
-        <LinkContainer>
-          <Link href="/" passHref>
-            <StyledLink>
-              <Icon path={mdiArrowLeft} size={1} />
-              {t("notfound.links.home")}
-            </StyledLink>
-          </Link>
-          <Link href="/r" passHref>
-            <StyledLink>
-              <Icon path={mdiPotSteamOutline} size={1} />
-              {t("notfound.links.allrecipes")}
-            </StyledLink>
-          </Link>
-          <Link
-            href="https://github.com/riesinger/nononsensecooking/issues"
-            passHref
-          >
-            <StyledLink>
-              <Icon path={mdiGithub} size={1} />
-              {t("notfound.links.github")}
-            </StyledLink>
-          </Link>
-        </LinkContainer>
-      </NotFoundPage>
-    </>
-  );
+  return <>
+    <SEO title={t("notfound.pagetitle")} />
+    <NotFoundPage>
+      <PageTitle>{t("notfound.displaytitle")}</PageTitle>
+      <IntroParagraph>{t("notfound.explanation")}</IntroParagraph>
+      <LinkContainer>
+        <Link href="/" passHref legacyBehavior>
+          <StyledLink>
+            <Icon path={mdiArrowLeft} size={1} />
+            {t("notfound.links.home")}
+          </StyledLink>
+        </Link>
+        <Link href="/r" passHref legacyBehavior>
+          <StyledLink>
+            <Icon path={mdiPotSteamOutline} size={1} />
+            {t("notfound.links.allrecipes")}
+          </StyledLink>
+        </Link>
+        <Link
+          href="https://github.com/riesinger/nononsensecooking/issues"
+          passHref
+          legacyBehavior>
+          <StyledLink>
+            <Icon path={mdiGithub} size={1} />
+            {t("notfound.links.github")}
+          </StyledLink>
+        </Link>
+      </LinkContainer>
+    </NotFoundPage>
+  </>;
 }

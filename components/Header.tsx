@@ -35,7 +35,7 @@ const StyledHeading = styled.h1`
   }
 `;
 
-const HomeLink = styled.a`
+const HomeLink = styled(Link)`
   display: flex;
   align-items: center;
   max-width: 100%;
@@ -62,7 +62,7 @@ const StyledNav = styled.nav`
   max-width: 100%;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   color: var(--color-text-secondary);
   transition: color 0.1s linear;
   display: flex;
@@ -144,25 +144,21 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <Link href="/" passHref>
-        <HomeLink>
-          <IconContainer>
-            <Icon path={mdiChefHat} size={1.5} rotate={10} />
-          </IconContainer>
-          <StyledHeading>NoNonsenseCooking</StyledHeading>
-        </HomeLink>
-      </Link>
+      <HomeLink href="/" passHref>
+        <IconContainer>
+          <Icon path={mdiChefHat} size={1.5} rotate={10} />
+        </IconContainer>
+        <StyledHeading>NoNonsenseCooking</StyledHeading>
+      </HomeLink>
       <MenuButton onClick={toggleMenu}>
         <Icon path={mdiMenu} size={1} />
       </MenuButton>
       <Menu open={menuOpen}>
         <StyledNav>
-          <Link href="/r" passHref prefetch={false}>
-            <StyledLink>
-              <Icon path={mdiPotSteamOutline} size={1} />
-              <span>{t("link.allrecipes")}</span>
-            </StyledLink>
-          </Link>
+          <StyledLink href="/r" passHref prefetch={false}>
+            <Icon path={mdiPotSteamOutline} size={1} />
+            <span>{t("link.allrecipes")}</span>
+          </StyledLink>
           <SearchBar placeholder={t("searchbar.placeholder")} />
         </StyledNav>
       </Menu>

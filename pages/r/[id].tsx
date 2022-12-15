@@ -78,11 +78,7 @@ export default function Redirect({
       })}
     >
       <ImageContainer>
-        <Image
-          src={`/img/recipes/${image}`}
-          layout="fill"
-          alt="An image of the dish"
-        />
+        <Image src={`/img/recipes/${image}`} fill alt="An image of the dish" />
       </ImageContainer>
       <p>
         {t("notinyourlocale.explanation", { locale: prettyLocale(locale) })}
@@ -95,7 +91,7 @@ export default function Redirect({
               passHref
               locale={loc}
             >
-              <a>{prettyLocale(loc)}</a>
+              {prettyLocale(loc)}
             </Link>
           </li>
         ))}

@@ -22,7 +22,7 @@ const StyledFooter = styled.footer`
   }
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   color: var(--color-primary);
   white-space: pre;
 `;
@@ -71,12 +71,12 @@ const Footer = () => {
         >
           GitHub
         </StyledLink>
-        <Link href="/legal" passHref prefetch={false}>
-          <StyledLink>{t("link.legal.text")}</StyledLink>
-        </Link>
-        <Link href="/donate" passHref prefetch={false}>
-          <StyledLink>{t("link.donate.text")}</StyledLink>
-        </Link>
+        <StyledLink href="/legal" passHref prefetch={false}>
+          {t("link.legal.text")}
+        </StyledLink>
+        <StyledLink href="/donate" passHref prefetch={false}>
+          {t("link.donate.text")}
+        </StyledLink>
         <StyledLink
           href={`/rss/feed.${router.locale || router.defaultLocale}.xml`}
         >

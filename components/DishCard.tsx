@@ -15,7 +15,7 @@ type Props = {
   diet: Recipe["diet"];
 };
 
-const StyledCard = styled.a`
+const StyledCard = styled(Link)`
   background: var(--color-background-alt);
   border-radius: var(--rounded-lg);
   cursor: pointer;
@@ -90,36 +90,31 @@ const IconStat = styled.span`
 const DishCard = ({ slug, name, image, cookTime, diet }: Props) => {
   const { t } = useTranslation("common");
   return (
-    <Link href={`/r/${slug}`} passHref>
-      <StyledCard>
-        <ImageContainer>
-          <Image
-            src={`/img/recipes/${image}`}
-            layout="fill"
-            objectFit="cover"
-            quality={80}
-            sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, (max-width: 1800px) 500, (max-width: 2400px) 600px, (min-width: 2401px) 700px"
-            alt=""
-          />
-        </ImageContainer>
-        <DishStats>
-          <DishName>{name}</DishName>
-          <DishStatLine>
-            <IconStat>
-              <Icon
-                path={mdiClockOutline}
-                size={1}
-                title={t("preparationTime.label")}
-              />
-              <span>
-                {t("preparationTime.inMinutes", { minutes: cookTime })}
-              </span>
-            </IconStat>
-            <IconForDiet diet={diet} />
-          </DishStatLine>
-        </DishStats>
-      </StyledCard>
-    </Link>
+    <StyledCard href={`/r/${slug}`} passHref>
+      <ImageContainer>
+        <Image
+          src={`/img/recipes/${image}`}
+          fill
+          quality={80}
+          sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, (max-width: 1800px) 500, (max-width: 2400px) 600px, (min-width: 2401px) 700px"
+          alt=""
+        />
+      </ImageContainer>
+      <DishStats>
+        <DishName>{name}</DishName>
+        <DishStatLine>
+          <IconStat>
+            <Icon
+              path={mdiClockOutline}
+              size={1}
+              title={t("preparationTime.label")}
+            />
+            <span>{t("preparationTime.inMinutes", { minutes: cookTime })}</span>
+          </IconStat>
+          <IconForDiet diet={diet} />
+        </DishStatLine>
+      </DishStats>
+    </StyledCard>
   );
 };
 
