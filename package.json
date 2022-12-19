@@ -12,7 +12,7 @@
     "check-translations": "ts-node ./scripts/check-translations.ts"
   },
   "dependencies": {
-    "@mdi/js": "^7.0.96",
+    "@mdi/js": "^7.1.96",
     "@mdi/react": "^1.6.1",
     "@swc/core": "^1.3.19",
     "feed": "^4.2.2",
