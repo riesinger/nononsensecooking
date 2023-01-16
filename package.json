@@ -31,7 +31,7 @@
   "devDependencies": {
     "@types/inquirer": "^8.2.1",
     "@types/node-gzip": "^1.1.0",
-    "@types/react": "^18.0.25",
+    "@types/react": "^18.0.26",
     "@types/slug": "^5.0.3",
     "@types/styled-components": "^5.1.26",
     "eslint": "^8.31.0",
