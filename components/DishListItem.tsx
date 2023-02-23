@@ -20,9 +20,9 @@ const HEIGHT = 8; //rem
 
 const Dish = styled.a`
   position: relative;
+  flex-direction: column;
   display: flex;
   align-items: center;
-  height: ${HEIGHT}rem;
   overflow: hidden;
   color: var(--color-text-primary);
 
@@ -33,22 +33,39 @@ const Dish = styled.a`
   :hover img {
     transform: scale(1.1);
   }
+
+  @media screen and (min-width: 500px) {
+    height: ${HEIGHT}rem;
+    flex-direction: row;
+  }
 `;
 
 const ImageContainer = styled.div`
-  width: ${HEIGHT * 1.539}rem;
-  height: ${HEIGHT}rem;
+  width: 100%;
+  padding-top: 64.577792124%;
+  height: 0;
   position: relative;
   overflow: hidden;
   border-radius: var(--rounded);
   background: var(--color-background-alt);
+  flex: 0 0 auto;
+
+  @media screen and (min-width: 500px) {
+    width: ${HEIGHT * 1.539}rem;
+    height: ${HEIGHT}rem;
+    padding-top: 0;
+  }
 `;
 
 const DishStats = styled.div`
   width: 100%;
   bottom: 0;
   z-index: 2;
-  padding: 1rem 2rem;
+  padding: 1rem 0rem;
+
+  @media screen and (min-width: 500px) {
+    padding: 1rem 2rem;
+  }
 `;
 
 const DishName = styled.h4`
