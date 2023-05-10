@@ -1,4 +1,4 @@
-export type SupportedLanguage = "en-US" | "de-DE";
+export type SupportedLanguage = "en" | "de";
 export function isSupportedLanguage(lang: string): lang is SupportedLanguage {
-  return ["en-US", "de-DE"].includes(lang);
+  return ["en", "de"].includes(lang);
 }

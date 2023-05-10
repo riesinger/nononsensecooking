@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { loadRecipesFromDisk } from "../lib/recipes";
+import { loadRecipesFromDisk } from "../lib/recipes_deprecated";
 import { SupportedLanguage } from "../models/Localized";
 import config from "../next-i18next.config.js";
 

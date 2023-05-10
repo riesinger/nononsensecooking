@@ -1,146 +1,121 @@
 import { mdiClockOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
+import { getPlaiceholder } from "plaiceholder";
 import { useState } from "react";
-import styled from "styled-components";
 import DraftIndicator from "../../components/DraftIndicator";
 import IconForDiet from "../../components/IconForDiet";
 import IngredientsList from "../../components/IngredientsList";
 import SEO from "../../components/SEO";
 import ServingsChooser from "../../components/ServingsChooser";
 import StepList from "../../components/StepList";
-import languageFrom from "../../lib/languageFrom";
 import {
-  loadRecipesFromDisk,
-  readSingleRecipeFromDisk,
+  getAllRecipes,
+  getRecipeByIDWithStepsAndIngredients,
 } from "../../lib/recipes";
-import { SupportedLanguage } from "../../models/Localized";
-import { Recipe } from "../../models/Recipe";
+import { FullRecipe } from "../../models/Recipe";
 
-export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
+export const getStaticProps: GetStaticProps<
+  FullRecipe & {
+    imagePlaceholder: string;
+  }
+> = async (context) => {
   const { id } = context.params;
-  const recipe = await readSingleRecipeFromDisk(languageFrom(context), id[0]);
+  const recipe = await getRecipeByIDWithStepsAndIngredients(id[0]);
+  const { base64: imagePlaceholder } = await getPlaiceholder(recipe.imageUrl);
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
-        "header",
-        "common",
-        "recipe",
-        "footer",
-      ])),
+      ...(await serverSideTranslations(context.locale, ["common", "recipe"])),
       ...recipe,
+      imagePlaceholder,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
   let paths = [];
+  const recipes = await getAllRecipes({ publishedOnly: true });
+
   for (const locale of context.locales) {
-    const recipes = await loadRecipesFromDisk(locale as SupportedLanguage);
-    for (const recipe of recipes) {
+    console.log("building index for locale", locale);
+    const recipesInLocale = recipes.filter((r) => r.locale === locale);
+    for (const recipe of recipesInLocale) {
       paths.push({
         params: {
-          id: recipe.slug.split("/"),
+          id: [recipe.id, recipe.slug],
         },
         locale,
       });
     }
   }
+
   return {
     paths,
     fallback: false, // NOTE: Once we have many recipes, it might be worth looking into only pre-rendering some of them
   };
 };
 
-const StyledArticle = styled.article`
-  max-width: 1000px;
-  width: 100%;
-  margin: 2rem auto;
-  padding: 0 2rem;
-  box-sizing: border-box;
-`;
-
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 0px;
-  padding-top: 60%;
-  position: relative;
-  border-radius: var(--rounded-lg);
-  overflow: hidden;
-  background: var(--color-background-alt);
-`;
-
-const RecipeStats = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-`;
-
-const StyledHeading = styled.h2`
-  font-size: 1.6rem;
-  font-weight: 400;
-  margin: 0 1rem 0 0;
-
-  @media screen and (min-width: 800px) {
-    font-size: 2rem;
-  }
-`;
-
-const IconStat = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-`;
-
 const SingleRecipe = ({
   name,
   steps,
-  image,
+  imageUrl,
   diet,
-  cookTime,
+  preparationTimeMinutes,
   ingredients,
-  isDraft,
+  status,
+  type,
+  imagePlaceholder,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const DEFAULT_SERVINGS = 2;
   const [servings, setServings] = useState(DEFAULT_SERVINGS);
   function onServingsChanged(newServings: number) {
     setServings(newServings);
   }
+  const { t } = useTranslation("recipe");
   return (
-    <StyledArticle>
-      <SEO isRecipe title={name} img={image} />
-      {isDraft ? <DraftIndicator /> : null}
-      <RecipeStats>
-        <StyledHeading>{name}</StyledHeading>
-        <IconStat>
+    <article className="max-w-screen-lg w-full my-8 mx-auto px-8 box-border">
+      <SEO isRecipe title={name} img={imageUrl} />
+      {status === "draft" ? <DraftIndicator /> : null}
+      <header className="flex items-center justify-start flex-wrap gap-4 mb-8">
+        <h2 className="text-2xl md:text-3xl text-zinc-900 dark:text-zinc-100 font-medium mr-4">
+          {name}
+        </h2>
+        <div className="flex items-center gap-1">
           <Icon path={mdiClockOutline} size={1} title="Preparation Time" />
-          <span>{cookTime}min</span>
-        </IconStat>
+          <span>{preparationTimeMinutes}min</span>
+        </div>
         <IconForDiet diet={diet} />
-      </RecipeStats>
-      <ImageContainer>
+      </header>
+      <div className="w-full h-0 pt-[65%] relative rounded-lg overflow-hidden bg-zinc-200 dark:bg-zinc-800 mb-8">
         <Image
-          src={`/img/recipes/${image || "placeholder-min.jpg"}`}
+          src={imageUrl}
           fill
           sizes="(max-width: 400px) 400px, (max-width: 600px) 600px, (max-width: 800px) 800px, (min-width: 801px) 900px"
           alt=""
+          placeholder="blur"
+          blurDataURL={imagePlaceholder}
+          priority
         />
-      </ImageContainer>
+      </div>
       <ServingsChooser
         servings={servings}
         onServingsChanged={onServingsChanged}
       />
+      <h3 className="mt-4 mb-1 text-xl font-medium">
+        {t("ingredient-title_plural")}
+      </h3>
       <IngredientsList
         ingredients={ingredients}
         servingsMultiplier={servings / DEFAULT_SERVINGS}
       />
+      <h3 className="mt-4 mb-1 text-xl font-medium">
+        {t("preparation-title")}
+      </h3>
       <StepList steps={steps} />
-    </StyledArticle>
+    </article>
   );
 };
 

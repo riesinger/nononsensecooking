@@ -1,73 +1,51 @@
+import { mdiGithub } from "@mdi/js";
+import Icon from "@mdi/react";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import styled from "styled-components";
-import { PaddedSection } from "../components/PaddedSection";
+import Link from "../components/Link";
+import Paragraph from "../components/Paragraph";
 import SEO from "../components/SEO";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "header",
-        "footer",
-        "donation",
-      ])),
+      ...(await serverSideTranslations(locale, ["common", "donation"])),
     },
   };
 };
 
-const IntroParagraph = styled.p`
-  max-width: 70ch;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-  margin-bottom: 2rem;
-`;
+const DonationOptionsList = (props) => <ul className="mb-4" {...props} />;
+const DonationOption = (props) => <li className="leading-8" {...props} />;
 
-const PageTitle = styled.h2`
-  font-size: 2rem;
-`;
+const Section = ({ title, children }) => (
+  <section className="max-w-2xl mx-auto px-8">
+    <h3 className="font-medium text-3xl dark:text-zinc-100 text-zinc-900 mb-3 mt-10">
+      {title}
+    </h3>
+    {children}
+  </section>
+);
 
-const DonationSection = styled.section`
-  margin-top: 2rem;
-`;
+const SubHeading = ({ children }) => (
+  <h4 className="font-medium text-xl mt-6 mb-3">{children}</h4>
+);
 
-const DonationOptionHeading = styled.h3`
-  font-weight: 500;
-  font-size: 1.5rem;
-  margin: 2rem 0 1rem 0;
-`;
-
-const DonationOptionsList = styled.ul`
-  margin: 0 0 1rem 0;
-`;
-
-const DonationOption = styled.li`
-  line-height: 2rem;
-`;
-
-const DonationLink = styled.a<{ preferred?: boolean }>`
-  color: var(--color-primary);
-  font-weight: ${({ preferred }) => (preferred ? "600" : "500")};
-`;
 const monthlyOptions = [
   {
     href: "https://github.com/sponsors/riesinger",
     name: "GitHub Sponsors",
-    preferred: true,
+    icon: mdiGithub,
   },
-  { name: "Brave Rewards" },
 ];
 
 const onetimeOptions = [
   {
     href: "https://github.com/sponsors/riesinger",
     name: "GitHub Sponsors",
-    preferred: true,
+    icon: mdiGithub,
   },
-  { href: "https://paypal.me/PRiesinger", name: "PayPal", preferred: false },
-  { name: "Brave Rewards" },
+  { href: "https://paypal.me/PRiesinger", name: "PayPal" },
 ];
 
 export default function Legal({}: InferGetStaticPropsType<
@@ -77,40 +55,40 @@ export default function Legal({}: InferGetStaticPropsType<
   return (
     <>
       <SEO title={t("pagetitle")} />
-      <PaddedSection width="narrow" title={t("displayPageTitle")}>
-        <IntroParagraph>{t("introduction")}</IntroParagraph>
+      <Section title={t("displayPageTitle")}>
+        <Paragraph>{t("introduction")}</Paragraph>
 
-        <DonationSection>
-          <DonationOptionHeading>
-            {t("section.monthly.title")}
-          </DonationOptionHeading>
-          <DonationOptionsList>
-            {monthlyOptions.map((option) => (
-              <DonationOption key={option.name}>
-                {option.href ? (
-                  <DonationLink {...option}>{option.name}</DonationLink>
-                ) : (
-                  <span>{option.name}</span>
-                )}
-              </DonationOption>
-            ))}
-          </DonationOptionsList>
-          <DonationOptionHeading>
-            {t("section.onetime.title")}
-          </DonationOptionHeading>
-          <DonationOptionsList>
-            {onetimeOptions.map((option) => (
-              <DonationOption key={option.name}>
-                {option.href ? (
-                  <DonationLink {...option}>{option.name}</DonationLink>
-                ) : (
-                  <span>{option.name}</span>
-                )}
-              </DonationOption>
-            ))}
-          </DonationOptionsList>
-        </DonationSection>
-      </PaddedSection>
+        <SubHeading>{t("section.monthly.title")}</SubHeading>
+        <DonationOptionsList>
+          {monthlyOptions.map((option) => (
+            <DonationOption key={option.name}>
+              <Link
+                {...option}
+                leftIcon={
+                  option.icon ? <Icon size={0.75} path={option.icon} /> : null
+                }
+              >
+                {option.name}
+              </Link>
+            </DonationOption>
+          ))}
+        </DonationOptionsList>
+        <SubHeading>{t("section.onetime.title")}</SubHeading>
+        <DonationOptionsList>
+          {onetimeOptions.map((option) => (
+            <DonationOption key={option.name}>
+              <Link
+                {...option}
+                leftIcon={
+                  option.icon ? <Icon size={0.75} path={option.icon} /> : null
+                }
+              >
+                {option.name}
+              </Link>
+            </DonationOption>
+          ))}
+        </DonationOptionsList>
+      </Section>
     </>
   );
 }

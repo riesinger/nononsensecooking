@@ -1,13 +1,12 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import styled from "styled-components";
+import DishCard from "../components/DishCard";
 import DishList from "../components/DishList";
-import DishListItem from "../components/DishListItem";
 import { PaddedSection } from "../components/PaddedSection";
 import SearchBar from "../components/SearchBar";
 import SEO from "../components/SEO";
-import languageFrom from "../lib/languageFrom";
+import languageFrom from "../lib/localeFrom";
 import { queryParam } from "../lib/queryParameter";
 import { sanitize, searchRecipes } from "./api/search";
 
@@ -18,11 +17,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {
         searchTerm: "",
         results: [],
-        ...(await serverSideTranslations(context.locale, [
-          "common",
-          "header",
-          "footer",
-        ])),
+        ...(await serverSideTranslations(context.locale, ["common"])),
       },
     };
   }
@@ -32,48 +27,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       searchTerm,
       results,
-      ...(await serverSideTranslations(context.locale, [
-        "common",
-        "header",
-        "footer",
-      ])),
+      ...(await serverSideTranslations(context.locale, ["common"])),
     },
   };
 };
-
-const Notice = styled.p`
-  text-align: center;
-  font-size: 1.5rem;
-`;
-
-const CenteredSection = styled.section`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  max-width: 700px;
-  margin: 25vh auto 0 auto;
-  padding: 0 2rem;
-  box-sizing: border-box;
-`;
 
 export default function Search({
   searchTerm,
   results,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t } = useTranslation("common");
-  const { t: th } = useTranslation("header");
   if (!searchTerm) {
     return (
       <>
         <SEO title={t("search.pagetitle")} />
-        <CenteredSection>
-          <Notice>{t("search.findrecipes")}</Notice>
-          <SearchBar placeholder={th("searchbar.placeholder")} />
-        </CenteredSection>
+        <section className="relative flex items-center justify-center flex-col gap-8 w-full max-w-screen-md mt-16 mx-auto px-8 box-border">
+          <p className="text-center text-xl">{t("search.findrecipes")}</p>
+          <SearchBar placeholder={t("header.searchbar.placeholder")} />
+        </section>
       </>
     );
   }
@@ -83,7 +54,7 @@ export default function Search({
       <PaddedSection title={t("search.sectiontitle", { searchTerm })}>
         <DishList>
           {results?.map(({ item: recipe }) => (
-            <DishListItem
+            <DishCard
               key={recipe.id}
               id={recipe.id}
               slug={recipe.fullSlug}

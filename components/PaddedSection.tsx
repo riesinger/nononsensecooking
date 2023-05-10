@@ -1,19 +1,5 @@
+import clsx from "clsx";
 import { ReactNode } from "react";
-import styled from "styled-components";
-
-const StyledSection = styled.section<{ width?: "default" | "narrow" }>`
-  width: 100%;
-  max-width: ${({ width }) => (width === "narrow" ? "700px" : "2000px")};
-  margin: 0 auto 4rem auto;
-  padding: 0 2rem;
-  box-sizing: border-box;
-`;
-
-const Title = styled.h3<{ smallHeadings?: boolean }>`
-  font-weight: ${({ smallHeadings }) => (smallHeadings ? "500" : "700")};
-  font-size: ${({ smallHeadings }) => (smallHeadings ? "1.75rem" : "2rem")};
-  color: var(--color-text-primary);
-`;
 
 type Props = {
   title?: string;
@@ -22,14 +8,25 @@ type Props = {
   smallHeadings?: boolean;
 };
 
-export const PaddedSection = ({
+export function PaddedSection({
   title,
   children,
   width,
   smallHeadings,
-}: Props) => (
-  <StyledSection width={width}>
-    {title ? <Title smallHeadings={smallHeadings}>{title}</Title> : null}
-    {children}
-  </StyledSection>
-);
+}: Props) {
+  const classes = clsx(
+    "w-full mx-auto mb-16 px-8 box-border",
+    width === "narrow" && "max-w-screen-md",
+    width === "default" && "max-w-screen-2xl"
+  );
+  const titleClasses = clsx(
+    "text-zinc-900 dark:text-zinc-100 font-medium mb-2",
+    smallHeadings ? "text-2xl" : "text-3xl"
+  );
+  return (
+    <section className={classes}>
+      {title ? <h3 className={titleClasses}>{title}</h3> : null}
+      {children}
+    </section>
+  );
+}

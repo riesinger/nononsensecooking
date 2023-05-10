@@ -1,42 +1,7 @@
 import { mdiMinus, mdiPlus } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useTranslation } from "next-i18next";
-import styled from "styled-components";
-
-const IconButton = styled.button`
-  appearance: none;
-  border: none;
-  background: var(--color-background-alt);
-  color: var(--color-text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: var(--rounded-full);
-  width: 2.5rem;
-  height: 2.5rem;
-`;
-
-const ChooserInputLine = styled.div`
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-`;
-
-const Servings = styled.span`
-  font-size: 1.275rem;
-`;
-
-const Heading = styled.h5`
-  font-weight: 500;
-  font-size: 1.275rem;
-`;
-
-const StyledServingsChooser = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-`;
+import IconButton from "./IconButton";
 
 interface Props {
   servings: number;
@@ -46,27 +11,26 @@ interface Props {
 const ServingsChooser = ({ servings, onServingsChanged }: Props) => {
   const { t } = useTranslation("recipe");
   return (
-    <StyledServingsChooser>
-      <Heading>{t("servings")}</Heading>
-      <ChooserInputLine>
+    <div className="flex items-center gap-8">
+      <h5 className="font-medium text-xl">{t("servings")}</h5>
+      <div className="flex gap-4 items-center">
         <IconButton
           onClick={function () {
             onServingsChanged(Math.max(1, servings - 1));
           }}
-        >
-          <Icon path={mdiMinus} size={1} title="Less servings" />
-        </IconButton>
-
-        <Servings>{servings}</Servings>
+          icon={<Icon path={mdiMinus} size={1} title="Less servings" />}
+          ariaLabel="Less servings"
+        />
+        <span className="text-xl">{servings}</span>
         <IconButton
           onClick={function () {
             onServingsChanged(servings + 1);
           }}
-        >
-          <Icon path={mdiPlus} size={1} title="More servings" />
-        </IconButton>
-      </ChooserInputLine>
-    </StyledServingsChooser>
+          icon={<Icon path={mdiPlus} size={1} title="More servings" />}
+          ariaLabel="More servings"
+        />
+      </div>
+    </div>
   );
 };
 

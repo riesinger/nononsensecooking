@@ -43,3 +43,4 @@ public/recipes/index*.json
 *.bak.jpg
 public/rss
 .vscode
+pb_data

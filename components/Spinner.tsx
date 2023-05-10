@@ -1,26 +1,11 @@
-import styled, { keyframes } from "styled-components";
+import clsx from "clsx";
 
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-const SpinnerCircle = styled.div`
-  border-radius: 50%;
-  border-width: 4px;
-  border-color: var(--color-background-alt);
-  border-top-color: var(--color-primary);
-  border-style: solid;
-  width: 3rem;
-  height: 3rem;
-  animation: ${rotate} 1s linear infinite;
-`;
-
-export default function Spinner() {
-  return <SpinnerCircle />;
+function Spinner({ small }: { small?: boolean }) {
+  const classes = clsx(
+    "inline-block rounded-full border-4 border-zinc-200 border-t-blue-700 dark:border-zinc-800 dark:border-t-blue-500 animate-spin w-12 h-12",
+    small && "w-6 h-6 border-2"
+  );
+  return <div className={classes} />;
 }
+
+export default Spinner;

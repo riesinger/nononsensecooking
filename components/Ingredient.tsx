@@ -1,36 +1,32 @@
 import { useTranslation } from "react-i18next";
-import { Ingredient as IngredientModel } from "../models/Ingredient";
-import { Unit } from "../models/Unit";
+import { Ingredient as IngredientModel, Unit } from "../models/Recipe";
 
 function unitUsesPlural(unit: Unit) {
   return {
-    [Unit.NONE]: true,
-    [Unit.GRAM]: false,
-    [Unit.KILOGRAM]: false,
-    [Unit.LITERS]: false,
-    [Unit.MILILITERS]: false,
-    [Unit.PIECE]: true,
-    [Unit.TABLESPOONS]: false,
+    none: true,
+    g: false,
+    kg: false,
+    l: false,
+    ml: false,
+    pc: true,
+    tbsp: false,
   }[unit];
 }
 
 const Ingredient = ({
   id,
-  name,
-  scales,
+  scalesWithPortions,
   unit,
   amount,
   servingsMultiplier,
 }: IngredientModel & { servingsMultiplier: number }) => {
   const { t } = useTranslation("recipe");
-  const adjustedAmount = scales
+  const adjustedAmount = scalesWithPortions
     ? Math.round(amount * servingsMultiplier * 100) / 100
     : amount;
-  const ingredientName = id
-    ? t(`ingredient.${id}`, {
-        count: unitUsesPlural(unit) ? adjustedAmount : 1,
-      })
-    : name;
+  const ingredientName = t(`ingredient.${id}`, {
+    count: unitUsesPlural(unit as Unit) ? adjustedAmount : 1,
+  });
 
   return (
     <span>

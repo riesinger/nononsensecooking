@@ -19,7 +19,14 @@
     "meat": "Contains Meat",
     "fish": "Contains Fish",
     "vegetarian": "Vegetarian",
-    "vegan": "Vegan"
+    "vegan": "Vegan",
+    "label": "Diet"
+  },
+  "recipeType": {
+    "starter": "Starter",
+    "main": "Main",
+    "dessert": "Dessert",
+    "label": "Recipe Type"
   },
   "preparationTime": {
     "label": "Preparation Time",
@@ -47,12 +54,60 @@
     }
   },
   "locales": {
-    "en-US": "English (US)",
-    "de-DE": "German (Germany)"
+    "en-US": "English",
+    "de-DE": "German"
+  },
+  "new": {
+    "pagetitle": "Create a new Recipe for NoNonsenseCooking",
+    "subtitle": "Keep in mind thaat a recipe must be reviewed by a moderator before it is visible to everyone",
+    "redirect-to-signin": "You must be signed in to create a recipe, we're redirecting you...",
+    "localeinput": {
+      "label": "Recipe language"
+    },
+    "nameinput": {
+      "label": "Name of the recipe",
+      "placeholder": "My favorite pasta"
+    },
+    "pictureinput": {
+      "label": "Image of the dish"
+    },
+    "ingredientssection": {
+      "title": "Ingredients for one serving",
+      "addbutton": "Add ingredient",
+      "deletebutton": "Remove ingredient"
+    },
+    "addingredientdialog": {
+      "title": "Add ingredient",
+      "cancelbutton": "Cancel",
+      "addbutton": "Add ingredient"
+    },
+    "stepssection": {
+      "title": "Preparation steps",
+      "addbutton": "Add step",
+      "deletebutton": "Remove step"
+    },
+    "submitbutton": "Create recipe",
+    "create-result-success": "The recipe was successfully created",
+    "create-result-error": "A problem occurred. Please try again later"
   },
   "notinyourlocale": {
     "displaytitle": "🙊 Recipe not available in {{locale}}",
     "explanation": "Unfortunately, this recipe isn't available in {{locale}}. However, you can check it out in:",
     "helptranslateit": "In case you want to help us translating this recipe to {{locale}}, take a look at <5>GitHub</5>."
+  },
+  "header": {
+    "searchbar": {
+      "placeholder": "Search for recipes"
+    },
+    "link": {
+      "allrecipes": "All recipes",
+      "newrecipe": "Create a recipe"
+    }
+  },
+  "footer": {
+    "link.legal.text": "Legal information",
+    "link.donate.text": "Donate",
+    "link.rss.title": "Subscribe via RSS",
+    "licensenotice": "The content on this page is licensed under a <2>CC BY 4.0</2> license"
   }
 }

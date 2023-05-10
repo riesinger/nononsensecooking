@@ -1,122 +1,137 @@
-import fs from "fs/promises";
-import path from "path";
-import slug from "slug";
-import YAML from "yaml";
-import { SupportedLanguage } from "../models/Localized";
-import { Recipe, RecipeFile, RecipeInIndex } from "../models/Recipe";
-import { Unit } from "../models/Unit";
+import PocketBase, { RecordListQueryParams } from "pocketbase";
+import { FullRecipe, Ingredient, SlimRecipe, Step } from "../models/Recipe";
+import { IngredientUsageDTO, RecipeDTO, StepDTO } from "./dtos";
 
-const VERCEL_URL = process.env.VERCEL_URL;
-const recipeFilesBasePath = "public/recipes";
+const stepsBatchSize = 25;
+const ingredientsBatchSize = 50;
 
-/**
- * Retrieves the recipe index via HTTP. This function cannot be used during static generation, only in serverless mode!
- * @param lang The locale for which to load the recipe index
- * @returns The list of recipes in the index
- *
- * TODO: Error Handling
- */
-export async function fetchRecipeIndex(
-  lang: SupportedLanguage
-): Promise<RecipeInIndex[]> {
-  const baseUrl = VERCEL_URL
-    ? `https://${VERCEL_URL}`
-    : "http://localhost:3000";
-  const recipeIndexPath = `/recipes/index_${lang}.json`;
-  const allRecipes = await (await fetch(baseUrl + recipeIndexPath)).json();
-
-  return allRecipes;
+function getPocketBase() {
+  return new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_HOST);
 }
 
-/**
- * Retrieves the full recipe index via HTTP. This function cannot be used during static generation, only in serverless mode!
- * @returns The full recipe i
- *
- * TODO: Error Handling
- */
-export async function fetchFullRecipeIndex() {
-  const baseUrl = VERCEL_URL
-    ? `https://${VERCEL_URL}`
-    : "http://localhost:3000";
-  const recipeIndexPath = "/recipes/index.json";
-  const index = await (await fetch(baseUrl + recipeIndexPath)).json();
-  return index;
-}
+async function getAllPaginatedItems<T>(
+  collectionName: string,
+  batchSize: number,
+  options?: Partial<Pick<RecordListQueryParams, "filter" | "sort">>
+): Promise<T[]> {
+  const pb = getPocketBase();
+  let page = 1;
+  const items: T[] = [];
 
-/**
- * Reads and parses all recipes found on disk for the given language. This function cannot be used in serverless mode, only during static generation!
- * @param locale The locale for which to load the recipes
- * @returns The fully parsed recipes
- */
-export async function loadRecipesFromDisk(
-  locale: SupportedLanguage
-): Promise<Recipe[]> {
-  const recipeFiles = await fs.readdir(
-    path.join(process.cwd(), recipeFilesBasePath, locale)
-  );
-  const allRecipes = await Promise.all(
-    recipeFiles.map(async (filename) => {
-      const file = await fs.readFile(
-        path.join(recipeFilesBasePath, locale, filename),
-        "utf-8"
-      );
-      const id = filename.split(".")[0];
-      const recipeData = YAML.parse(file);
-      return parseRecipeData(id, recipeData);
-    })
+  const setOptions = Object.fromEntries(
+    Object.entries(options || {}).filter(([, value]) => !!value)
   );
 
-  return allRecipes;
-}
-
-/**
- * Loads the recipes either from disk (default) or from the recipe index (fallback). This can be used both during static generation and in serverless functions.
- * @param locale The language for which to load the recipes
- */
-export async function getRecipesFromDiskOrIndex(locale: SupportedLanguage) {
-  let allRecipes: Array<Recipe | RecipeInIndex> = [];
-  try {
-    allRecipes = await loadRecipesFromDisk(locale);
-  } catch (err) {
-    if (err.code === "ENOENT") {
-      // We're running in ISR mode and regenerating the page in a lambda.
-      // Load the recipe index via HTTP in this case.
-      // This is not the nicest workaround, but since we cannot use HTTP to fetch the index at SSG time and cannot read the files from disk at ISR time,
-      // we either have to do it this way or switch to an actual CMS
-      allRecipes = await fetchRecipeIndex(locale);
-    } else {
-      throw err;
+  while (page) {
+    console.log("Fetching page", page);
+    const response = await pb
+      .collection(collectionName)
+      .getList<T>(page, batchSize, setOptions);
+    items.push(...response.items);
+    console.log("Fetched page", page, "of", response.totalPages);
+    if (response.totalPages <= page) {
+      break;
     }
+    page++;
   }
-  return allRecipes;
+  return items;
 }
 
-export async function readSingleRecipeFromDisk(
-  lang: SupportedLanguage,
-  id: string
-) {
-  const file = await fs.readFile(
-    path.join(recipeFilesBasePath, lang, `${id}.yaml`),
-    "utf-8"
+function recipeDTOToRecipe(recipe: RecipeDTO): SlimRecipe {
+  return {
+    id: recipe.id,
+    slug: recipe.slug,
+    name: recipe.name,
+    status: recipe.status,
+    diet: recipe.diet,
+    preparationTimeMinutes: recipe.preparationTime,
+    type: recipe.type,
+    imageUrl: recipe.image
+      ? getPocketBase().getFileUrl(recipe, recipe.image)
+      : null,
+    writtenBy: recipe.writtenBy,
+    locale: recipe.locale,
+    createdAt: recipe.created,
+    updatedAt: recipe.updated,
+  };
+}
+
+function ingredientDTOToIngredient(ingredient: IngredientUsageDTO): Ingredient {
+  return {
+    id: ingredient.ingredientId,
+    amount: ingredient.amount === 0 ? null : ingredient.amount,
+    unit: ingredient.unit,
+    scalesWithPortions: ingredient.scalesWithPortions,
+  };
+}
+
+function stepDTOToStep(step: StepDTO): Step {
+  return {
+    stepIndex: step.stepIndex,
+    text: step.text,
+  };
+}
+
+/**
+ * Retrieves all recipes (regardless of status) from the database.
+ * This does not expand the ingredients and steps, only the basic recipe
+ * information.
+ */
+export async function getAllRecipes({
+  publishedOnly = false,
+  locale,
+}: {
+  publishedOnly?: boolean;
+  locale?: "en" | "de";
+}): Promise<SlimRecipe[]> {
+  const recipes = await getAllPaginatedItems<RecipeDTO>(
+    publishedOnly ? "publishedRecipes" : "recipes",
+    50,
+    {
+      filter: locale ? `locale = "${locale}"` : undefined,
+    }
   );
-  console.log("Read recipe from file", lang, `${id}.yaml`);
-  const recipeData = YAML.parse(file);
-  return parseRecipeData(id, recipeData);
+  return recipes.map(recipeDTOToRecipe);
 }
 
-const parseRecipeData = (id: string, recipeData: RecipeFile): Recipe => ({
-  ...recipeData,
-  id,
-  isDraft: recipeData.isDraft || false,
-  slug: `${id}/${slug(recipeData.name)}`,
-  ingredients: parseIngredients(recipeData.ingredients),
-  publishedAt: recipeData.publishedAt,
-});
+/**
+ * Retrieves a singular recipe from the database.
+ * This does not expand the ingredients and steps, only the basic recipe
+ * information. If you need them, use @link getRecipeByIDWithStepsAndIngredients
+ * instead.
+ *
+ * FIXME: Sanitize `id` before using it as filter parameter
+ */
+export async function getRecipeByID(id: string): Promise<SlimRecipe> {
+  const pb = getPocketBase();
+  const recipe = await pb.collection("recipes").getOne<RecipeDTO>(id);
+  return recipeDTOToRecipe(recipe);
+}
 
-const parseIngredients = (
-  ingredients: Recipe["ingredients"]
-): Recipe["ingredients"] =>
-  ingredients.map((ingredient) => ({
-    ...ingredient,
-    unit: ingredient.unit || Unit.NONE,
-  }));
+/**
+ * Retrieves a singular recipe from the database.
+ * This does expand the ingredients and steps. If you don't need them, use @link
+ * getRecipeByID instead.
+ */
+export async function getRecipeByIDWithStepsAndIngredients(
+  id: string
+): Promise<FullRecipe> {
+  const recipe = await getRecipeByID(id);
+  const steps = await getAllPaginatedItems<StepDTO>("steps", stepsBatchSize, {
+    filter: `recipe = "${id}"`,
+    sort: "+stepIndex",
+  });
+  const ingredients = await getAllPaginatedItems<IngredientUsageDTO>(
+    "ingredientUsages",
+    ingredientsBatchSize,
+    {
+      filter: `recipe = "${id}"`,
+    }
+  );
+
+  return {
+    ...recipe,
+    steps: steps.map(stepDTOToStep),
+    ingredients: ingredients.map(ingredientDTOToIngredient),
+  };
+}

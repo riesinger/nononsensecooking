@@ -1,13 +1,6 @@
-import Link from "next/link";
-import styled from "styled-components";
 import { Recipe } from "../models/Recipe";
 import IconForDiet from "./IconForDiet";
-
-const StyledLink = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
+import Link from "./Link";
 
 interface Props {
   name: string;
@@ -19,19 +12,13 @@ function getHref(slug: string) {
   return `/r/${slug}`;
 }
 
-const StyledLi = styled.li`
-  margin: 1rem 0;
-`;
-
 const SearchResult = ({ slug, name, diet }: Props) => (
-  <StyledLi>
-    <Link href={getHref(slug)} passHref>
-      <StyledLink>
-        <IconForDiet diet={diet} />
-        <span>{name}</span>
-      </StyledLink>
+  <li>
+    <Link className="flex items-center gap-2" ghost href={getHref(slug)}>
+      <IconForDiet diet={diet} />
+      <span>{name}</span>
     </Link>
-  </StyledLi>
+  </li>
 );
 
 export default SearchResult;

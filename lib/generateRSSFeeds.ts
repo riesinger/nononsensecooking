@@ -4,7 +4,7 @@ import path from "path";
 import { SupportedLanguage } from "../models/Localized";
 import { Recipe, RecipeInIndex } from "../models/Recipe";
 import { i18n } from "../next-i18next.config";
-import { getRecipesFromDiskOrIndex } from "./recipes";
+import { getRecipesFromDiskOrIndex } from "./recipes_deprecated";
 
 const localizedMetadata = {
   "en-US": {

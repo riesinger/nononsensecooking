@@ -1,14 +1,10 @@
 import { appWithTranslation } from "next-i18next";
 import Head from "next/head";
-import styled from "styled-components";
+import { Toaster } from "react-hot-toast";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PageLoadingIndicator from "../components/PageLoadingIndicator";
 import "../styles/globals.css";
-
-const Main = styled.main`
-  flex: 1 0 auto;
-`;
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -33,9 +29,13 @@ function MyApp({ Component, pageProps }) {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5686f5" />
-        <meta name="msapplication-TileColor" content="#5686f5" />
-        <meta name="theme-color" content="#5686f5" />
+        <link
+          rel="mask-icon"
+          href="/safari-pinned-tab.svg"
+          color="rgb(99, 102, 241)"
+        />
+        <meta name="msapplication-TileColor" content="rgb(99, 102, 241)" />
+        <meta name="theme-color" content="rgb(99, 102, 241)" />
         <script
           async
           defer
@@ -44,9 +44,10 @@ function MyApp({ Component, pageProps }) {
         ></script>
       </Head>
       <Header />
-      <Main>
+      <main className="flex-grow flex-shrink-0">
+        <Toaster position="bottom-center" />
         <Component {...pageProps} />
-      </Main>
+      </main>
       <Footer />
     </>
   );

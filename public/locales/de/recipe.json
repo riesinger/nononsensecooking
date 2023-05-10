@@ -1,5 +1,17 @@
 {
   "servings": "Portionen",
+  "scales-with-servings": "Skaliert mit Portionen",
+  "amount-title": "Menge",
+  "unit-title": "Einheit",
+  "unit-raw": {
+    "none": "-",
+    "g": "g",
+    "kg": "kg",
+    "pc": "Stück",
+    "ml": "ml",
+    "l": "l",
+    "tbsp": "Esslöffel"
+  },
   "unit": {
     "none": "{{amount}}",
     "g": "{{amount}}g",
@@ -9,6 +21,9 @@
     "l": "{{amount}}l",
     "tbsp": "{{amount}} Esslöffel"
   },
+  "ingredient-title": "Zutat",
+  "ingredient-title_plural": "Zutaten",
+  "preparation-title": "Zubereitung",
   "ingredient": {
     "salt": "Salz",
     "pepper": "Pfeffer",

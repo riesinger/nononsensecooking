@@ -1,5 +1,17 @@
 {
   "servings": "Servings",
+  "scales-with-servings": "Scales with servings",
+  "amount-title": "Amount",
+  "unit-title": "Unit",
+  "unit-raw": {
+    "none": "-",
+    "g": "g",
+    "kg": "kg",
+    "pc": "pc",
+    "ml": "ml",
+    "l": "l",
+    "tbsp": "tbsp"
+  },
   "unit": {
     "none": "{{amount}}",
     "g": "{{amount}}g",
@@ -9,6 +21,8 @@
     "l": "{{amount}}l",
     "tbsp": "{{amount}}tbsp"
   },
+  "ingredient-title": "Ingredient",
+  "ingredient-title_plural": "Ingredients",
   "ingredient": {
     "salt": "Salt",
     "pepper": "Pepper",

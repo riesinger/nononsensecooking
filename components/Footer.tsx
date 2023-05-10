@@ -1,89 +1,44 @@
-import { mdiRss } from "@mdi/js";
+import { mdiCash, mdiGithub, mdiRss } from "@mdi/js";
 import Icon from "@mdi/react";
 import { Trans, useTranslation } from "next-i18next";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import styled from "styled-components";
-
-const StyledFooter = styled.footer`
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-
-  @media screen and (max-width: 800px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  color: var(--color-primary);
-  white-space: pre;
-`;
-
-const LicenseNotice = styled.span`
-  font-size: 1rem;
-  display: inline-block;
-  line-height: 1.5;
-
-  @media screen and (max-width: 800px) {
-    /* text-align: center; */
-  }
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-
-  @media screen and (max-width: 800px) {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-`;
+import Link from "./Link";
 
 const Footer = () => {
-  const { t } = useTranslation("footer");
+  const { t } = useTranslation("common");
   const router = useRouter();
   return (
-    <StyledFooter>
-      <LicenseNotice>
+    <footer className="mt-8 py-4 px-8 w-full flex flex-col lg:flex-row justify-center items-start lg:items-center lg:justify-between gap-4 lg:gap-2">
+      <span className="leading-6">
         <Trans t={t} i18nKey="licensenotice">
           The content on this page is licensed under a{" "}
-          <a href="https://creativecommons.org/licenses/by/4.0/legalcode">
+          <Link href="https://creativecommons.org/licenses/by/4.0/legalcode">
             CC BY 4.0
-          </a>{" "}
+          </Link>{" "}
           license
         </Trans>
-      </LicenseNotice>
-      <Nav>
-        <StyledLink
+      </span>
+      <nav className="flex flex-col gap-2 items-start lg:flex-row lg:justify-center lg:items-center lg:gap-6">
+        <Link href="/legal" prefetch={false}>
+          {t("footer.link.legal.text")}
+        </Link>
+        <Link
           href="https://github.com/riesinger/nononsensecooking"
           rel="noopener"
+          leftIcon={<Icon size={0.75} path={mdiGithub} />}
         >
           GitHub
-        </StyledLink>
-        <StyledLink href="/legal" passHref prefetch={false}>
-          {t("link.legal.text")}
-        </StyledLink>
-        <StyledLink href="/donate" passHref prefetch={false}>
-          {t("link.donate.text")}
-        </StyledLink>
-        <StyledLink
-          href={`/rss/feed.${router.locale || router.defaultLocale}.xml`}
-        >
-          <Icon path={mdiRss} size={1} title={t("link.rss.title")} />
-        </StyledLink>
-      </Nav>
-    </StyledFooter>
+        </Link>
+        <Link href="/donate" passHref prefetch={false}>
+          <Icon size={0.75} path={mdiCash} />
+          {t("footer.link.donate.text")}
+        </Link>
+        <Link href={`/rss/feed.${router.locale || router.defaultLocale}.xml`}>
+          <Icon path={mdiRss} size={0.75} title={t("footer.link.rss.title")} />
+          RSS Feed
+        </Link>
+      </nav>
+    </footer>
   );
 };
 

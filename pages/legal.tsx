@@ -1,45 +1,40 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { Trans, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import styled from "styled-components";
-import { PaddedSection } from "../components/PaddedSection";
+import Paragraph from "../components/Paragraph";
 import SEO from "../components/SEO";
-import { generateRSSFeeds } from "../lib/generateRSSFeeds";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  // FIXME: Re-enable feed generation
   // This is an ugly way to generate the RSS feeds during static generation
-  await generateRSSFeeds();
+  // await generateRSSFeeds();
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "header",
-        "footer",
-        "legal",
-      ])),
+      ...(await serverSideTranslations(locale, ["common", "legal"])),
     },
   };
 };
 
-const Key = styled.span`
-  display: inline-block;
-  margin-right: 1ch;
-  font-weight: 600;
-`;
+const Key = ({ children }) => (
+  <span className="inline-block mr-[1ch] font-medium">{children}</span>
+);
 
-const LegalSection = styled.div`
-  line-height: 2;
-`;
+const LegalSection = ({ children }) => (
+  <div className="leading-8">{children}</div>
+);
 
-const Paragraph = styled.p`
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-`;
+const SubHeading = ({ children }) => (
+  <h4 className="font-medium text-xl mt-6 mb-3">{children}</h4>
+);
 
-const SubHeading = styled.h4`
-  font-weight: 600;
-  font-size: 1.4rem;
-`;
+const Section = ({ title, children }) => (
+  <section className="max-w-2xl mx-auto">
+    <h3 className="font-medium text-3xl dark:text-zinc-100 text-zinc-900 mb-3 mt-10">
+      {title}
+    </h3>
+    {children}
+  </section>
+);
 
 export default function Legal({}: InferGetStaticPropsType<
   typeof getStaticProps
@@ -48,7 +43,7 @@ export default function Legal({}: InferGetStaticPropsType<
   return (
     <>
       <SEO title={t("pagetitle")} />
-      <PaddedSection title={t("section.legal.title")} width="narrow">
+      <Section title={t("section.legal.title")}>
         <LegalSection>
           <div>
             <Key>{t("section.legal.owner")}</Key>
@@ -60,8 +55,8 @@ export default function Legal({}: InferGetStaticPropsType<
           </div>
           <div>{t("section.legal.contactformoreinformation")}</div>
         </LegalSection>
-      </PaddedSection>
-      <PaddedSection title={t("section.privacy.title")} width="narrow">
+      </Section>
+      <Section title={t("section.privacy.title")}>
         <Paragraph>
           <Trans t={t} i18nKey="section.privacy.introduction" />
         </Paragraph>
@@ -103,7 +98,7 @@ export default function Legal({}: InferGetStaticPropsType<
             von Plausible anschauen.
           </Trans>
         </Paragraph>
-      </PaddedSection>
+      </Section>
     </>
   );
 }

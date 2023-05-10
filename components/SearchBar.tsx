@@ -9,64 +9,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import styled from "styled-components";
-import { RecipeInIndex } from "../models/Recipe";
+import Input from "./Input";
 import SearchResult from "./SearchResult";
-
-const StyledForm = styled.form`
-  position: relative;
-  width: 40ch;
-  max-width: 100%;
-  height: 3rem;
-`;
-
-const SearchInput = styled.input`
-  font-family: var(--font-stack);
-  font-size: var(--font-size-base);
-  background: var(--color-background-alt);
-  border-radius: var(--rounded);
-  border: none;
-  padding: 0.75rem 1rem;
-  appearance: none;
-  color: var(--color-text-primary);
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3rem;
-`;
-
-const SearchButton = styled.button`
-  background: var(--color-primary);
-  position: absolute;
-  right: 0;
-  height: 3rem;
-  width: 3rem;
-  appearance: none;
-  cursor: pointer;
-  border-radius: var(--rounded);
-  outline: none;
-  border: none;
-  color: hsla(var(--palette-gray-00), 100%);
-`;
-
-const SearchResultsSheet = styled.div`
-  background: var(--color-background-alt-solid);
-  padding: 0.5rem 1rem;
-  position: absolute;
-  z-index: 10;
-  top: 3rem;
-  right: 0%;
-  min-width: 100%;
-  border-radius: var(--rounded);
-`;
-
-const SearchResultsList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-`;
 
 interface Props {
   placeholder: string;
@@ -112,7 +56,7 @@ const SearchBar = ({ placeholder }: Props) => {
       setSearchResults([]);
       return;
     }
-    console.log("Fetching search results for", searchTerm);
+    console.log("Searching for", searchTerm);
     const results = await (
       await fetch(`/api/search?query=${searchTerm}`, {
         headers: {
@@ -120,6 +64,7 @@ const SearchBar = ({ placeholder }: Props) => {
         },
       })
     ).json();
+    console.log("Search results", results);
     setSearchResults(results);
   }
 
@@ -130,24 +75,30 @@ const SearchBar = ({ placeholder }: Props) => {
   }
 
   return (
-    <StyledForm
+    <form
       action={`${router.locale}/search`}
       method="GET"
       onSubmit={onSearch}
+      className="relative"
     >
-      <SearchInput
+      <Input
+        leftDecoration={
+          <Icon
+            className="text-zinc-600 dark:text-zinc-300"
+            size={1}
+            path={mdiMagnify}
+          />
+        }
+        type="text"
         placeholder={placeholder}
         name="query"
         onChange={onChange}
         autoComplete="off"
       />
-      <SearchButton type="submit" value="Suchen">
-        <Icon path={mdiMagnify} size={1} />
-      </SearchButton>
       {searchResults.length > 0 ? (
-        <SearchResultsSheet>
-          <SearchResultsList>
-            {searchResults.map(({ item }: { item: RecipeInIndex }) => (
+        <div className="bg-zinc-300 dark:bg-zinc-800 py-4 px-4 absolute z-10 top-12 right-0 min-w-full rounded-md">
+          <ul className="list-none p-0 m-0 space-y-4">
+            {searchResults.map((item) => (
               <SearchResult
                 key={item.id}
                 slug={item.slug}
@@ -155,10 +106,10 @@ const SearchBar = ({ placeholder }: Props) => {
                 diet={item.diet}
               />
             ))}
-          </SearchResultsList>
-        </SearchResultsSheet>
+          </ul>
+        </div>
       ) : null}
-    </StyledForm>
+    </form>
   );
 };
 

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { orderRecipesByMostPopular } from "../../lib/popularRecipes";
-import { fetchRecipeIndex } from "../../lib/recipes";
+import { fetchRecipeIndex } from "../../lib/recipes_deprecated";
 import { localeFrom } from "./utils/localeFrom";
 
 export default async function popularRecipes(

@@ -1,26 +1,22 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import DishCard from "../components/DishCard";
 import DishList from "../components/DishList";
-import DishListItem from "../components/DishListItem";
 import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
-import languageFrom from "../lib/languageFrom";
-import { loadRecipesFromDisk } from "../lib/recipes";
+import localeFrom from "../lib/localeFrom";
+import { getAllRecipes } from "../lib/recipes";
 import { Recipe } from "../models/Recipe";
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const locale = languageFrom(context);
-  const recipeIndex = await loadRecipesFromDisk(locale);
+  const locale = localeFrom(context);
+  const recipes = await getAllRecipes({ publishedOnly: true, locale });
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
-        "common",
-        "footer",
-        "header",
-      ])),
-      recipes: recipeIndex,
+      ...(await serverSideTranslations(context.locale, ["common"])),
+      recipes: recipes,
     },
   };
 };
@@ -38,12 +34,7 @@ export default function Home({
           {recipes
             .filter((r: Recipe) => !r.isDraft)
             .map((recipe: Recipe) => (
-              <DishListItem
-                key={recipe.id}
-                id={recipe.id}
-                slug={recipe.slug}
-                {...recipe}
-              />
+              <DishCard key={recipe.id} {...recipe} />
             ))}
         </DishList>
       </PaddedSection>

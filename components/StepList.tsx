@@ -1,70 +1,45 @@
-import styled from "styled-components";
-import { Recipe } from "../models/Recipe";
+import { HTMLProps } from "react";
+import { Step } from "../models/Recipe";
 
 interface Props {
-  steps: Recipe["steps"];
+  steps: Step[];
 }
 
-const List = styled.ol`
-  line-height: 1.5;
-  margin: 2rem 0 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-`;
+interface StepProps extends HTMLProps<HTMLLIElement> {
+  index: number;
+}
 
-const Step = styled.li`
-  display: flex;
-  margin-bottom: 2rem;
-  align-items: center;
-  flex-direction: column;
+function Step({ index, children }: StepProps) {
+  return (
+    <li className="flex items-center flex-col md:flex-row gap-x-6 gap-y-4">
+      <StepCounter>{index + 1}</StepCounter>
+      <StepDescription>{children}</StepDescription>
+    </li>
+  );
+}
 
-  @media screen and (min-width: 800px) {
-    flex-direction: row;
-  }
+const StepDescription = (props) => (
+  <span className="text-center md:text-left" {...props} />
+);
 
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-`;
-
-const StepCounter = styled.span`
-  flex: 0 0 auto;
-  display: inline-block;
-  width: 3rem;
-  height: 3rem;
-  line-height: 3rem;
-  background: var(--color-background-alt);
-  text-align: center;
-  font-size: 1.25rem;
-  font-weight: 400;
-  border-radius: var(--rounded-full);
-  margin-bottom: 1.5rem;
-
-  @media screen and (min-width: 800px) {
-    margin-right: 2rem;
-    margin-bottom: 0;
-  }
-`;
-
-const StepDescription = styled.span`
-  text-align: center;
-
-  @media screen and (min-width: 800px) {
-    text-align: left;
-  }
-`;
+const StepCounter = (props) => (
+  <span
+    className="flex-none inline-block w-12 h-12 leading-[3rem] text-center bg-zinc-200 dark:bg-zinc-800 font-medium rounded-full"
+    {...props}
+  />
+);
 
 const StepList = ({ steps }: Props) => (
-  <List>
+  <ol className="leading-6 mt-8 p-0 flex flex-col list-none space-y-12">
     {steps?.map((step, i) => (
-      <Step key={i}>
-        <StepCounter className="list-counter">{i + 1}</StepCounter>
-        <StepDescription>{step}</StepDescription>
+      <Step key={step.stepIndex} index={step.stepIndex}>
+        {step.text}
       </Step>
     ))}
-  </List>
+  </ol>
 );
+
+StepList.Step = Step;
+StepList.StepCounter = StepCounter;
 
 export default StepList;

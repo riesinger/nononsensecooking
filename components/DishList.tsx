@@ -1,13 +1,13 @@
-import styled from "styled-components";
+interface Props {
+  children: React.ReactNode;
+}
 
-const DishList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-
-  @media screen and (min-width: 1000px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
+function DishList({ children }: Props) {
+  return (
+    <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+      {children}
+    </div>
+  );
+}
 
 export default DishList;

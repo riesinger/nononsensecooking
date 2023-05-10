@@ -19,7 +19,14 @@
     "meat": "Enthält Fleisch",
     "fish": "Enthält Fisch",
     "vegetarian": "Vegetarisch",
-    "vegan": "Vegan"
+    "vegan": "Vegan",
+    "label": "Ernährung"
+  },
+  "recipetype": {
+    "starter": "Vorspeise",
+    "main": "Hauptgang",
+    "dessert": "Dessert",
+    "label": "Rezepttyp"
   },
   "preparationTime": {
     "label": "Zubereitungszeit",
@@ -47,12 +54,60 @@
     }
   },
   "locales": {
-    "en-US": "Englisch (USA)",
-    "de-DE": "Deutsch (Deutschland)"
+    "en": "Englisch",
+    "de": "Deutsch"
+  },
+  "new": {
+    "pagetitle": "Erstelle ein neues Rezept für NoNonsenseCooking",
+    "subtitle": "Beachte, dass neue Rezepte von Moderatoren überprüft werden müssen, bevor sie für alle sichtbar sind",
+    "redirect-to-signin": "Du musst angemeldet sein, um ein neues Rezept zu erstellen, wir leiten dich weiter...",
+    "localeinput": {
+      "label": "Rezeptsprache"
+    },
+    "nameinput": {
+      "label": "Name des Rezepts",
+      "placeholder": "Mein Lieblingsrezept"
+    },
+    "pictureinput": {
+      "label": "Bild des Rezepts"
+    },
+    "ingredientssection": {
+      "title": "Zutaten für eine Portion",
+      "addbutton": "Zutat hinzufügen",
+      "deletebutton": "Zutat löschen"
+    },
+    "addingredientdialog": {
+      "title": "Zutat hinzufügen",
+      "cancelbutton": "Abbrechen",
+      "addbutton": "Zutat hinzufügen"
+    },
+    "stepssection": {
+      "title": "Zubereitung",
+      "addbutton": "Schritt hinzufügen",
+      "deletebutton": "Schritt löschen"
+    },
+    "submitbutton": "Rezept erstellen",
+    "create-result-success": "Das Rezept wurde erfolgreich erstellt",
+    "create-result-error": "Ein Fehler ist aufgetreten, versuche es später nochmal"
   },
   "notinyourlocale": {
     "displaytitle": "🙊 Rezept nicht auf {{locale}} verfügbar",
     "explanation": "Leider ist dieses Rezept nicht auf {{locale}} verfügbar, aber du kannst es dir in einer dieser Sprachen anschauen:",
     "helptranslateit": "Falls du uns helfen willst, das Rezept auf {{locale}} zu übersetzen, schaue bei <5>GitHub</5> vorbei."
+  },
+  "header": {
+    "searchbar": {
+      "placeholder": "Suche nach Rezepten..."
+    },
+    "link": {
+      "allrecipes": "Alle Rezepte",
+      "newrecipe": "Rezept erstellen"
+    }
+  },
+  "footer": {
+    "link.legal.text": "Datenschutz & Impressum",
+    "link.donate.text": "Spenden",
+    "link.rss.title": "Per RSS abonieren",
+    "licensenotice": "Die Inhalte auf dieser Seite unterliegen der <2>CC BY 4.0</2> Lizenz"
   }
 }

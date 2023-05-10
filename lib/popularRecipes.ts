@@ -1,8 +1,6 @@
-import { SupportedLanguage } from "../models/Localized";
-import { Recipe, RecipeInIndex } from "../models/Recipe";
+import type { SupportedLanguage } from "../models/Localized";
+import type { FullRecipe, SlimRecipe } from "../models/Recipe";
 import { PlausibleClient } from "./analytics/plausibleApiClient";
-
-const maxTries = process.env.NODE_ENV === "production" ? 5 : 3;
 
 interface APIClient {
   fetchMostPopularRecipesForLocale: (
@@ -19,7 +17,7 @@ interface APIClient {
  */
 export async function orderRecipesByMostPopular(
   locale: SupportedLanguage,
-  recipes: Array<Recipe | RecipeInIndex>
+  recipes: Array<SlimRecipe | FullRecipe>
 ) {
   const plausibleApiKey = process.env.PLAUSIBLE_API_KEY;
   // TODO: Read the URL from the config
@@ -35,7 +33,7 @@ export async function orderRecipesByMostPopular(
   return recipes.sort(byNumberOfPageHits(accumulatedPagehits));
 }
 
-type SortableRecipe = Pick<Recipe, "id" | "name">;
+type SortableRecipe = Pick<SlimRecipe | FullRecipe, "id" | "name">;
 /**
  * Sort function for a recipe index.
  * @param hits The accumulated page hits by id
