@@ -7,14 +7,13 @@ import {
 } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useTranslation } from "next-i18next";
-import React from "react";
-import { Recipe } from "../models/Recipe";
+import { SlimRecipe } from "../models/Recipe";
 
 const IconForDiet = ({
   diet,
   size = 1,
 }: {
-  diet: Recipe["diet"];
+  diet: SlimRecipe["diet"];
   size?: number;
 }) => {
   const { t } = useTranslation();

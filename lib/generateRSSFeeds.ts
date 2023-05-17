@@ -1,10 +1,7 @@
 import { Feed } from "feed";
 import fs from "fs/promises";
 import path from "path";
-import { SupportedLanguage } from "../models/Localized";
-import { Recipe, RecipeInIndex } from "../models/Recipe";
-import { i18n } from "../next-i18next.config";
-import { getRecipesFromDiskOrIndex } from "./recipes_deprecated";
+import { getAllRecipes } from "./recipes";
 
 const localizedMetadata = {
   "en-US": {
@@ -27,16 +24,17 @@ const author = {
 
 export async function generateRSSFeeds() {
   await Promise.all([
-    ...i18n.locales.map(async (locale) => await generateFeedForLocale(locale)),
-    generateFeedForLocale(i18n.defaultLocale, true),
+    ["de", "en"].map(
+      async (locale: "de" | "en") => await generateFeedForLocale(locale)
+    ),
   ]);
 }
 
 export async function generateFeedForLocale(
-  locale: string,
+  locale: "de" | "en",
   stripLocaleFromName = false
 ) {
-  const recipes = await getRecipesFromDiskOrIndex(locale as SupportedLanguage);
+  const recipes = await getAllRecipes({ publishedOnly: true, locale });
 
   const feed = new Feed({
     title: "NoNonsenseCooking",
@@ -56,22 +54,20 @@ export async function generateFeedForLocale(
     author,
   });
 
-  recipes
-    .filter((r: RecipeInIndex | Recipe) => !r.isDraft)
-    .forEach((recipe) => {
-      const url = `${siteURL}/${locale}/r/${recipe.slug}`;
+  recipes.forEach((recipe) => {
+    const url = `${siteURL}/${locale}/r/${recipe.slug}`;
 
-      feed.addItem({
-        title: recipe.name,
-        id: url,
-        link: url,
-        description: recipe.name,
-        // TODO: The content should be the steps, not the name
-        author: [author],
-        contributor: [author],
-        date: new Date(recipe.publishedAt),
-      });
+    feed.addItem({
+      title: recipe.name,
+      id: url,
+      link: url,
+      description: recipe.name,
+      // TODO: The content should be the steps, not the name
+      author: [author],
+      contributor: [author],
+      date: new Date(recipe.createdAt),
     });
+  });
 
   await fs.mkdir(path.resolve("./public", "rss"), {
     recursive: true,

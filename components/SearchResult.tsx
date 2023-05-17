@@ -1,11 +1,11 @@
-import { Recipe } from "../models/Recipe";
+import { SlimRecipe } from "../models/Recipe";
 import IconForDiet from "./IconForDiet";
 import Link from "./Link";
 
 interface Props {
   name: string;
   slug: string;
-  diet: Recipe["diet"];
+  diet: SlimRecipe["diet"];
 }
 
 function getHref(slug: string) {

@@ -1,8 +1,7 @@
 import { mdiTrashCanOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useTranslation } from "next-i18next";
-import { Ingredient as IIngredient } from "../models/Recipe";
-import { Unit } from "../models/Unit";
+import { Ingredient as IIngredient, Unit } from "../models/Recipe";
 import IconButton from "./IconButton";
 import Ingredient from "./Ingredient";
 

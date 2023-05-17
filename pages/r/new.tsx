@@ -19,7 +19,7 @@ import { PaddedSection } from "../../components/PaddedSection";
 import Select from "../../components/Select";
 import Spinner from "../../components/Spinner";
 import StepList from "../../components/StepList";
-import { Unit } from "../../models/Unit";
+import { Unit } from "../../models/Recipe";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const ingredientsResponse = await readFile(
@@ -160,13 +160,11 @@ export default function NewRecipePage({
     unit: Unit,
     scales: boolean
   ) {
-    console.log("Adding ingredient", ingredient, amount, unit, scales);
     setIngredientsInUse([
       ...ingredientsInUse,
       { id: ingredient, amount, unit, scales },
     ]);
     setAddIngredientDialogOpen(false);
-    console.log(ingredientsInUse);
   }
 
   function onIngredientDelete(id: string) {
@@ -267,7 +265,7 @@ export default function NewRecipePage({
                     id: ingredient.id,
                     amount: ingredient.amount,
                     unit: ingredient.unit,
-                    scales: ingredient.scales,
+                    scalesWithPortions: ingredient.scales,
                   }))}
                   servingsMultiplier={1}
                   onDelete={onIngredientDelete}

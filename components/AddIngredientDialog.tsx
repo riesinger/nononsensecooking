@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "next-i18next";
 import { Fragment, useState } from "react";
-import { Unit } from "../models/Unit";
+import { Unit } from "../models/Recipe";
 import Button from "./Button";
 import Combobox from "./Combobox";
 import FormGroup from "./FormGroup";
@@ -29,13 +29,13 @@ export default function AddIngredientDialog({
   const { t: recipeTranslations } = useTranslation("recipe");
   const { t: commonTranslations } = useTranslation("common");
   const unitTranslations: Record<Unit, string> = {
-    [Unit.NONE]: recipeTranslations("unit-raw.none"),
-    [Unit.GRAM]: recipeTranslations("unit-raw.g"),
-    [Unit.KILOGRAM]: recipeTranslations("unit-raw.kg"),
-    [Unit.MILILITERS]: recipeTranslations("unit-raw.ml"),
-    [Unit.LITERS]: recipeTranslations("unit-raw.l"),
-    [Unit.TABLESPOONS]: recipeTranslations("unit-raw.tbsp"),
-    [Unit.PIECE]: recipeTranslations("unit-raw.pc"),
+    none: recipeTranslations("unit-raw.none"),
+    g: recipeTranslations("unit-raw.g"),
+    kg: recipeTranslations("unit-raw.kg"),
+    ml: recipeTranslations("unit-raw.ml"),
+    l: recipeTranslations("unit-raw.l"),
+    tbsp: recipeTranslations("unit-raw.tbsp"),
+    pc: recipeTranslations("unit-raw.pc"),
   };
 
   const unitOptions = Object.keys(unitTranslations);

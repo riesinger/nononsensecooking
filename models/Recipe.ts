@@ -37,4 +37,4 @@ export type Ingredient = {
   scalesWithPortions: boolean;
 };
 
-export type Unit = keyof Ingredient["unit"];
+export type Unit = Ingredient["unit"];

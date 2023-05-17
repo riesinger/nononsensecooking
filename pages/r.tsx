@@ -7,7 +7,7 @@ import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
 import localeFrom from "../lib/localeFrom";
 import { getAllRecipes } from "../lib/recipes";
-import { Recipe } from "../models/Recipe";
+import { SlimRecipe } from "../models/Recipe";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const locale = localeFrom(context);
@@ -31,11 +31,9 @@ export default function Home({
       <SEO title={t("home.allrecipes")} />
       <PaddedSection title={t("home.allrecipes")} smallHeadings>
         <DishList>
-          {recipes
-            .filter((r: Recipe) => !r.isDraft)
-            .map((recipe: Recipe) => (
-              <DishCard key={recipe.id} {...recipe} />
-            ))}
+          {recipes.map((recipe: SlimRecipe) => (
+            <DishCard key={recipe.id} {...recipe} />
+          ))}
         </DishList>
       </PaddedSection>
     </>

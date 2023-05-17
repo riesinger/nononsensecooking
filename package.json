@@ -4,11 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run generate-recipe-index",
     "build": "next build",
     "start": "next start",
     "new-recipe": "ts-node ./scripts/new-recipe.ts",
-    "generate-recipe-index": "ts-node ./scripts/generate-recipe-index.ts",
     "check-translations": "ts-node ./scripts/check-translations.ts"
   },
   "dependencies": {
