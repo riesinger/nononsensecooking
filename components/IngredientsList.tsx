@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { Recipe } from "../models/Recipe";
 import Ingredient from "./Ingredient";
 
@@ -7,21 +6,15 @@ interface Props {
   servingsMultiplier: number;
 }
 
-const List = styled.ul`
-  margin: 1rem 0;
-  padding: 0 0 0 2ch;
-  line-height: 2rem;
-`;
-
 const IngredientsList = ({ ingredients, servingsMultiplier }: Props) => (
   <div>
-    <List>
+    <ul className="my-4 pr-[2ch] leading-8">
       {ingredients?.map((ingredient) => (
         <li key={ingredient.name || ingredient.id}>
           <Ingredient {...ingredient} servingsMultiplier={servingsMultiplier} />
         </li>
       ))}
-    </List>
+    </ul>
   </div>
 );
 
