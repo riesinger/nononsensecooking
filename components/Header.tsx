@@ -74,7 +74,7 @@ const Header = () => {
       </div>
       <div
         className={clsx(
-          "absolute top-full z-10 left-0 right-0 w-full shadow-lg bg-neutral-100 dark:bg-neutral-900 p-8 transition md:hidden",
+          "absolute top-full z-10 left-0 right-0 w-full shadow-lg bg-neutral-50 dark:bg-neutral-900 p-8 transition md:hidden",
           menuOpen && "visible pointer-events-auto opacity-100 scale-100",
           !menuOpen && "invisible pointer-events-none opacity-0 scale-95"
         )}
