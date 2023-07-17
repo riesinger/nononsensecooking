@@ -59,9 +59,9 @@ const Header = () => {
             rotate={10}
           />
         </div>
-        <h1 className="text-2xl m-0 font-medium tracking-tight hidden lg:block">
+        <span className="text-2xl m-0 font-medium tracking-tight hidden lg:block">
           NoNonsenseCooking
-        </h1>
+        </span>
       </Link>
       <button
         className="outline-none appearance-none cursor-pointer bg-transparent border-none text-neutral-900 dark:text-neutral-100 w-12 h-12 lg:hidden"
