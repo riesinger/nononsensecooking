@@ -4,7 +4,6 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import { useState } from "react";
-import DraftIndicator from "../../components/DraftIndicator";
 import IconForDiet from "../../components/IconForDiet";
 import IngredientsList from "../../components/IngredientsList";
 import SEO from "../../components/SEO";
@@ -70,7 +69,6 @@ const SingleRecipe = ({
   return (
     <article className="max-w-screen-lg w-full mt-12 mb-8 px-8 box-border space-y-8">
       <SEO isRecipe title={name} img={image} />
-      {isDraft ? <DraftIndicator /> : null}
       <header className="flex items-center justify-start flex-wrap gap-x-4 gap-y-2 mb-8">
         <h2 className="text-2xl md:text-3xl">{name}</h2>
         <div className="flex items-center gap-1">
