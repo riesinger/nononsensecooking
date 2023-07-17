@@ -1,8 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import styled from "styled-components";
-import { PaddedSection } from "../components/PaddedSection";
 import SEO from "../components/SEO";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
@@ -18,39 +16,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-const IntroParagraph = styled.p`
-  max-width: 70ch;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-  margin-bottom: 2rem;
-`;
-
-const PageTitle = styled.h2`
-  font-size: 2rem;
-`;
-
-const DonationSection = styled.section`
-  margin-top: 2rem;
-`;
-
-const DonationOptionHeading = styled.h3`
-  font-weight: 500;
-  font-size: 1.5rem;
-  margin: 2rem 0 1rem 0;
-`;
-
-const DonationOptionsList = styled.ul`
-  margin: 0 0 1rem 0;
-`;
-
-const DonationOption = styled.li`
-  line-height: 2rem;
-`;
-
-const DonationLink = styled.a<{ preferred?: boolean }>`
-  color: var(--color-primary);
-  font-weight: ${({ preferred }) => (preferred ? "600" : "500")};
-`;
 const monthlyOptions = [
   {
     href: "https://github.com/sponsors/riesinger",
@@ -77,40 +42,37 @@ export default function Legal({}: InferGetStaticPropsType<
   return (
     <>
       <SEO title={t("pagetitle")} />
-      <PaddedSection width="narrow" title={t("displayPageTitle")}>
-        <IntroParagraph>{t("introduction")}</IntroParagraph>
+      <div className="mx-auto prose dark:prose-invert prose-neutral px-8 box-content">
+        <h1>{t("displayPageTitle")} </h1>
+        <p>{t("introduction")}</p>
 
-        <DonationSection>
-          <DonationOptionHeading>
-            {t("section.monthly.title")}
-          </DonationOptionHeading>
-          <DonationOptionsList>
+        <section>
+          <h2>{t("section.monthly.title")}</h2>
+          <ul>
             {monthlyOptions.map((option) => (
-              <DonationOption key={option.name}>
+              <li key={option.name}>
                 {option.href ? (
-                  <DonationLink {...option}>{option.name}</DonationLink>
+                  <a {...option}>{option.name}</a>
                 ) : (
                   <span>{option.name}</span>
                 )}
-              </DonationOption>
+              </li>
             ))}
-          </DonationOptionsList>
-          <DonationOptionHeading>
-            {t("section.onetime.title")}
-          </DonationOptionHeading>
-          <DonationOptionsList>
+          </ul>
+          <h2>{t("section.onetime.title")}</h2>
+          <ul>
             {onetimeOptions.map((option) => (
-              <DonationOption key={option.name}>
+              <li key={option.name}>
                 {option.href ? (
-                  <DonationLink {...option}>{option.name}</DonationLink>
+                  <a {...option}>{option.name}</a>
                 ) : (
                   <span>{option.name}</span>
                 )}
-              </DonationOption>
+              </li>
             ))}
-          </DonationOptionsList>
-        </DonationSection>
-      </PaddedSection>
+          </ul>
+        </section>
+      </div>
     </>
   );
 }
