@@ -59,24 +59,24 @@ const Header = () => {
             rotate={10}
           />
         </div>
-        <h1 className="text-2xl m-0 font-medium tracking-tight hidden md:block">
+        <h1 className="text-2xl m-0 font-medium tracking-tight hidden lg:block">
           NoNonsenseCooking
         </h1>
       </Link>
       <button
-        className="outline-none appearance-none cursor-pointer bg-transparent border-none text-neutral-900 dark:text-neutral-100 w-12 h-12 md:hidden"
+        className="outline-none appearance-none cursor-pointer bg-transparent border-none text-neutral-900 dark:text-neutral-100 w-12 h-12 lg:hidden"
         onClick={toggleMenu}
       >
         <Icon path={mdiMenu} size={1} className="ml-3" />
       </button>
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <MenuContent t={t} />
       </div>
       <div
         className={clsx(
-          "absolute top-full z-10 left-0 right-0 w-full shadow-lg bg-neutral-50 dark:bg-neutral-900 p-8 transition md:hidden",
+          "absolute top-full z-10 left-0 right-0 w-full shadow-lg bg-neutral-50 dark:bg-neutral-900 p-8 transition lg:hidden",
           menuOpen && "visible pointer-events-auto opacity-100 scale-100",
-          !menuOpen && "invisible pointer-events-none opacity-0 scale-95"
+          !menuOpen && "invisible pointer-events-none opacity-0 scale-95",
         )}
       >
         <MenuContent t={t} />
