@@ -67,7 +67,7 @@ const SingleRecipe = ({
     setServings(newServings);
   }
   return (
-    <article className="max-w-screen-lg w-full mt-12 mb-8 px-8 box-border space-y-8">
+    <article className="ml-auto mr-auto max-w-screen-lg w-full mb-8 px-8 box-border space-y-8">
       <SEO isRecipe title={name} img={image} />
       <header className="flex items-center justify-start flex-wrap gap-x-4 gap-y-2 mb-8">
         <h2 className="text-2xl md:text-3xl">{name}</h2>
@@ -77,11 +77,11 @@ const SingleRecipe = ({
         </div>
         <IconForDiet diet={diet} />
       </header>
-      <div className="w-full aspect-w-10 aspect-h-6 rounded-lg overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+      <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden bg-neutral-200 dark:bg-neutral-800">
         <Image
           src={`/img/recipes/${image || "placeholder-min.jpg"}`}
           fill
-          sizes="(max-width: 400px) 400px, (max-width: 600px) 600px, (max-width: 800px) 800px, (min-width: 801px) 900px"
+          sizes="(max-width: 400px) 400px, (max-width: 600px) 600px, (max-width: 800px) 800px, (min-width: 801px) 960px"
           alt=""
         />
       </div>

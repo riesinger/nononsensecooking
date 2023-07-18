@@ -86,7 +86,7 @@ export default function Home({
           ))}
         </Track>
       </PaddedSection>
-      <section className="mx-auto prose dark:prose-invert prose-neutral px-8 box-content">
+      <section className="mt-12 lg:mt-24 mx-auto prose dark:prose-invert prose-neutral px-8 box-content">
         <h2>{t("home.about.sectiontitle")}</h2>
         <p>{t("home.about.introduction")}</p>
         <p>{t("home.about.mission")}</p>
