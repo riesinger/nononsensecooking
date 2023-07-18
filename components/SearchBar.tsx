@@ -99,7 +99,7 @@ const SearchBar = ({ placeholder }: Props) => {
         <div className="bg-neutral-50 dark:bg-neutral-800 absolute z-10 top-12 right-0 min-w-full rounded py-2 px-4 shadow-lg">
           <ul className="list-none p-0 m-0">
             {searchResults.map(({ item }: { item: RecipeInIndex }) => (
-              <li className="my-4">
+              <li className="my-4" key={item.slug}>
                 <Link
                   href={`/r/${item.slug}`}
                   key={item.id}
