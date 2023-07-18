@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { PaddedSection } from "../../components/PaddedSection";
 import Spinner from "../../components/Spinner";
 import { queryParam } from "../../lib/queryParameter";
@@ -29,22 +28,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   };
 }
-
-const Centered = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 0;
-  padding-top: 55%;
-  position: relative;
-  border-radius: var(--rounded);
-  background: var(--color-background-alt);
-  overflow: hidden;
-`;
-
 export default function Redirect({
   availableIn,
   slugs,
@@ -66,9 +49,9 @@ export default function Redirect({
 
   return existsInLocale === null ? (
     <PaddedSection>
-      <Centered>
+      <div className="flex justify-center">
         <Spinner />
-      </Centered>
+      </div>
     </PaddedSection>
   ) : (
     <PaddedSection
@@ -77,9 +60,9 @@ export default function Redirect({
         locale: prettyLocale(locale),
       })}
     >
-      <ImageContainer>
+      <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden bg-neutral-200 dark:bg-neutral-800">
         <Image src={`/img/recipes/${image}`} fill alt="An image of the dish" />
-      </ImageContainer>
+      </div>
       <p>
         {t("notinyourlocale.explanation", { locale: prettyLocale(locale) })}
       </p>

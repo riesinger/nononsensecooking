@@ -4,8 +4,6 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import { useState } from "react";
-import styled from "styled-components";
-import DraftIndicator from "../../components/DraftIndicator";
 import IconForDiet from "../../components/IconForDiet";
 import IngredientsList from "../../components/IngredientsList";
 import SEO from "../../components/SEO";
@@ -54,49 +52,6 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   };
 };
 
-const StyledArticle = styled.article`
-  max-width: 1000px;
-  width: 100%;
-  margin: 2rem auto;
-  padding: 0 2rem;
-  box-sizing: border-box;
-`;
-
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 0px;
-  padding-top: 60%;
-  position: relative;
-  border-radius: var(--rounded-lg);
-  overflow: hidden;
-  background: var(--color-background-alt);
-`;
-
-const RecipeStats = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-`;
-
-const StyledHeading = styled.h2`
-  font-size: 1.6rem;
-  font-weight: 400;
-  margin: 0 1rem 0 0;
-
-  @media screen and (min-width: 800px) {
-    font-size: 2rem;
-  }
-`;
-
-const IconStat = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-`;
-
 const SingleRecipe = ({
   name,
   steps,
@@ -112,25 +67,24 @@ const SingleRecipe = ({
     setServings(newServings);
   }
   return (
-    <StyledArticle>
+    <article className="ml-auto mr-auto max-w-screen-lg w-full mb-8 px-8 box-border space-y-8">
       <SEO isRecipe title={name} img={image} />
-      {isDraft ? <DraftIndicator /> : null}
-      <RecipeStats>
-        <StyledHeading>{name}</StyledHeading>
-        <IconStat>
+      <header className="flex items-center justify-start flex-wrap gap-x-4 gap-y-2 mb-8">
+        <h2 className="text-2xl md:text-3xl">{name}</h2>
+        <div className="flex items-center gap-1">
           <Icon path={mdiClockOutline} size={1} title="Preparation Time" />
           <span>{cookTime}min</span>
-        </IconStat>
+        </div>
         <IconForDiet diet={diet} />
-      </RecipeStats>
-      <ImageContainer>
+      </header>
+      <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden bg-neutral-200 dark:bg-neutral-800">
         <Image
           src={`/img/recipes/${image || "placeholder-min.jpg"}`}
           fill
-          sizes="(max-width: 400px) 400px, (max-width: 600px) 600px, (max-width: 800px) 800px, (min-width: 801px) 900px"
+          sizes="(max-width: 400px) 400px, (max-width: 600px) 600px, (max-width: 800px) 800px, (min-width: 801px) 960px"
           alt=""
         />
-      </ImageContainer>
+      </div>
       <ServingsChooser
         servings={servings}
         onServingsChanged={onServingsChanged}
@@ -140,7 +94,7 @@ const SingleRecipe = ({
         servingsMultiplier={servings / DEFAULT_SERVINGS}
       />
       <StepList steps={steps} />
-    </StyledArticle>
+    </article>
   );
 };
 

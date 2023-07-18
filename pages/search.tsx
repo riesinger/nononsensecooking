@@ -1,12 +1,10 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import styled from "styled-components";
 import DishList from "../components/DishList";
 import DishListItem from "../components/DishListItem";
-import { PaddedSection } from "../components/PaddedSection";
-import SearchBar from "../components/SearchBar";
 import SEO from "../components/SEO";
+import SearchBar from "../components/SearchBar";
 import languageFrom from "../lib/languageFrom";
 import { queryParam } from "../lib/queryParameter";
 import { sanitize, searchRecipes } from "./api/search";
@@ -41,25 +39,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const Notice = styled.p`
-  text-align: center;
-  font-size: 1.5rem;
-`;
-
-const CenteredSection = styled.section`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  max-width: 700px;
-  margin: 25vh auto 0 auto;
-  padding: 0 2rem;
-  box-sizing: border-box;
-`;
-
 export default function Search({
   searchTerm,
   results,
@@ -70,28 +49,33 @@ export default function Search({
     return (
       <>
         <SEO title={t("search.pagetitle")} />
-        <CenteredSection>
-          <Notice>{t("search.findrecipes")}</Notice>
+        <section className="flex justify-center align-center flex-col gap-8 w-full max-w-screen-md mt-[25vh] mx-auto px-8 box-border">
+          <p className="text-center text-2xl">{t("search.findrecipes")}</p>
           <SearchBar placeholder={th("searchbar.placeholder")} />
-        </CenteredSection>
+        </section>
       </>
     );
   }
   return (
     <>
       <SEO title={t("search.pagetitle")} />
-      <PaddedSection title={t("search.sectiontitle", { searchTerm })}>
-        <DishList>
-          {results?.map(({ item: recipe }) => (
-            <DishListItem
-              key={recipe.id}
-              id={recipe.id}
-              slug={recipe.fullSlug}
-              {...recipe}
-            />
-          ))}
-        </DishList>
-      </PaddedSection>
+      <div className="px-8 box-content">
+        <div className="prose dark:prose-invert prose-neutral">
+          <h1 className="mb-4">{t("search.sectiontitle", { searchTerm })}</h1>
+        </div>
+        <section>
+          <DishList>
+            {results?.map(({ item: recipe }) => (
+              <DishListItem
+                key={recipe.id}
+                id={recipe.id}
+                slug={recipe.fullSlug}
+                {...recipe}
+              />
+            ))}
+          </DishList>
+        </section>
+      </div>
     </>
   );
 }

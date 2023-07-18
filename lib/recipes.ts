@@ -17,20 +17,26 @@ const recipeFilesBasePath = "public/recipes";
  * TODO: Error Handling
  */
 export async function fetchRecipeIndex(
-  lang: SupportedLanguage
+  lang: SupportedLanguage,
 ): Promise<RecipeInIndex[]> {
   const baseUrl = VERCEL_URL
     ? `https://${VERCEL_URL}`
     : "http://localhost:3000";
   const recipeIndexPath = `/recipes/index_${lang}.json`;
-  const allRecipes = await (await fetch(baseUrl + recipeIndexPath)).json();
+  const response = await fetch(baseUrl + recipeIndexPath);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch recipe index for locale ${lang}: ${response.status} - ${response.statusText}`,
+    );
+  }
+  const allRecipes = await response.json();
 
   return allRecipes;
 }
 
 /**
  * Retrieves the full recipe index via HTTP. This function cannot be used during static generation, only in serverless mode!
- * @returns The full recipe i
+ * @returns The full recipe index
  *
  * TODO: Error Handling
  */
@@ -39,7 +45,13 @@ export async function fetchFullRecipeIndex() {
     ? `https://${VERCEL_URL}`
     : "http://localhost:3000";
   const recipeIndexPath = "/recipes/index.json";
-  const index = await (await fetch(baseUrl + recipeIndexPath)).json();
+  const response = await fetch(baseUrl + recipeIndexPath);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch full recipe index: ${response.status} - ${response.statusText}`,
+    );
+  }
+  const index = await response.json();
   return index;
 }
 
@@ -49,21 +61,21 @@ export async function fetchFullRecipeIndex() {
  * @returns The fully parsed recipes
  */
 export async function loadRecipesFromDisk(
-  locale: SupportedLanguage
+  locale: SupportedLanguage,
 ): Promise<Recipe[]> {
   const recipeFiles = await fs.readdir(
-    path.join(process.cwd(), recipeFilesBasePath, locale)
+    path.join(process.cwd(), recipeFilesBasePath, locale),
   );
   const allRecipes = await Promise.all(
     recipeFiles.map(async (filename) => {
       const file = await fs.readFile(
         path.join(recipeFilesBasePath, locale, filename),
-        "utf-8"
+        "utf-8",
       );
       const id = filename.split(".")[0];
       const recipeData = YAML.parse(file);
       return parseRecipeData(id, recipeData);
-    })
+    }),
   );
 
   return allRecipes;
@@ -93,11 +105,11 @@ export async function getRecipesFromDiskOrIndex(locale: SupportedLanguage) {
 
 export async function readSingleRecipeFromDisk(
   lang: SupportedLanguage,
-  id: string
+  id: string,
 ) {
   const file = await fs.readFile(
     path.join(recipeFilesBasePath, lang, `${id}.yaml`),
-    "utf-8"
+    "utf-8",
   );
   console.log("Read recipe from file", lang, `${id}.yaml`);
   const recipeData = YAML.parse(file);
@@ -114,7 +126,7 @@ const parseRecipeData = (id: string, recipeData: RecipeFile): Recipe => ({
 });
 
 const parseIngredients = (
-  ingredients: Recipe["ingredients"]
+  ingredients: Recipe["ingredients"],
 ): Recipe["ingredients"] =>
   ingredients.map((ingredient) => ({
     ...ingredient,

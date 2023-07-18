@@ -2,10 +2,8 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { Trans, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import { ReactElement } from "react";
 import DishCard from "../components/DishCard";
 import { PaddedSection } from "../components/PaddedSection";
-import Paragraph from "../components/Paragraph";
 import SEO from "../components/SEO";
 import Track from "../components/Track";
 import languageFrom from "../lib/languageFrom";
@@ -19,7 +17,8 @@ const revalidationTimesInSeconds = {
   default: 26 * 60 * 60,
 };
 
-const REVALIDATION_TIME = revalidationTimesInSeconds[process.env.VERCEL_ENV || "default"];
+const REVALIDATION_TIME =
+  revalidationTimesInSeconds[process.env.VERCEL_ENV || "default"];
 
 function shuffle(a: any[]) {
   for (let i = a.length - 1; i > 0; i--) {
@@ -35,14 +34,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const recipesOfTheDay = shuffle(allRecipes)
     .filter((r: Recipe) => !r.isDraft)
     .slice(0, 3);
-  const mostPopularRecipes = (await orderRecipesByMostPopular(locale, allRecipes))
+  const mostPopularRecipes = (
+    await orderRecipesByMostPopular(locale, allRecipes)
+  )
     .filter((r: Recipe) => !r.isDraft)
     .slice(0, 3);
   const latestRecipes = allRecipes.sort(byPublishedAt).slice(0, 3);
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "footer", "header"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "footer",
+        "header",
+      ])),
       recipesOfTheDay,
       mostPopularRecipes,
       latestRecipes,
@@ -50,12 +55,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     revalidate: REVALIDATION_TIME,
   };
 };
-
-const LinkText = ({ href, children }: { href: string; children?: ReactElement }) => (
-  <Link href={href}>
-    {children}
-  </Link>
-);
 
 export default function Home({
   recipesOfTheDay,
@@ -67,43 +66,47 @@ export default function Home({
     <>
       <SEO />
       <PaddedSection title={t("home.todaysrecipes")} smallHeadings>
-        <Track sm={1} md={2} lg={3}>
+        <Track>
           {recipesOfTheDay.map((recipe: Recipe) => (
             <DishCard {...recipe} key={recipe.id} />
           ))}
         </Track>
       </PaddedSection>
       <PaddedSection title={t("home.mostpopularrecipes")} smallHeadings>
-        <Track sm={1} md={2} lg={3}>
+        <Track>
           {mostPopularRecipes.map((recipe: Recipe) => (
             <DishCard {...recipe} key={recipe.id} />
           ))}
         </Track>
       </PaddedSection>
       <PaddedSection title={t("home.latestrecipes")} smallHeadings>
-        <Track sm={1} md={2} lg={3}>
+        <Track>
           {latestRecipes.map((recipe: Recipe) => (
             <DishCard {...recipe} key={recipe.id} />
           ))}
         </Track>
       </PaddedSection>
-      <PaddedSection width="narrow" title={t("home.about.sectiontitle")} smallHeadings>
-        <Paragraph>{t("home.about.introduction")}</Paragraph>
-        <Paragraph>{t("home.about.mission")}</Paragraph>
-        <Paragraph>
+      <section className="mt-12 lg:mt-24 mx-auto prose dark:prose-invert prose-neutral px-8 box-content">
+        <h2>{t("home.about.sectiontitle")}</h2>
+        <p>{t("home.about.introduction")}</p>
+        <p>{t("home.about.mission")}</p>
+        <p>
           <Trans
             i18nKey="home.about.cta"
             components={{
-              rsslink: <LinkText href="/rss/" />,
-              donatelink: <LinkText href="/donate/" />,
+              rsslink: <Link href="/rss/" />,
+              donatelink: <Link href="/donate/" />,
             }}
           ></Trans>
-        </Paragraph>
-      </PaddedSection>
+        </p>
+      </section>
     </>
   );
 }
 
-function byPublishedAt(a: Pick<Recipe, "publishedAt">, b: Pick<Recipe, "publishedAt">) {
+function byPublishedAt(
+  a: Pick<Recipe, "publishedAt">,
+  b: Pick<Recipe, "publishedAt">,
+) {
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 }
