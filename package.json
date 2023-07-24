@@ -14,7 +14,7 @@
   "dependencies": {
     "@mdi/js": "^7.1.96",
     "@mdi/react": "^1.6.1",
-    "@swc/core": "^1.3.27",
+    "@swc/core": "^1.3.70",
     "clsx": "^2.0.0",
     "feed": "^4.2.2",
     "fuse.js": "^6.6.2",
