@@ -35,7 +35,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "@types/inquirer": "^8.2.1",
     "@types/node-gzip": "^1.1.0",
-    "@types/react": "^18.0.28",
+    "@types/react": "^18.2.18",
     "@types/slug": "^5.0.3",
     "@types/styled-components": "^5.1.26",
     "autoprefixer": "^10.4.14",
