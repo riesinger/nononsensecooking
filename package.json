@@ -36,7 +36,7 @@
     "@types/inquirer": "^8.2.1",
     "@types/node-gzip": "^1.1.0",
     "@types/react": "^18.2.18",
-    "@types/slug": "^5.0.3",
+    "@types/slug": "^5.0.4",
     "@types/styled-components": "^5.1.26",
     "autoprefixer": "^10.4.15",
     "eslint": "^8.46.0",
