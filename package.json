@@ -38,7 +38,7 @@
     "@types/react": "^18.2.18",
     "@types/slug": "^5.0.4",
     "@types/styled-components": "^5.1.27",
-    "autoprefixer": "^10.4.15",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8.49.0",
     "eslint-config-next": "^13.5.2",
     "inquirer": "^8.2.4",
