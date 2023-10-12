@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run generate-recipe-index",
+    "prebuild": "bun generate-recipe-index",
     "build": "next build",
     "start": "next start",
-    "new-recipe": "ts-node ./scripts/new-recipe.ts",
-    "generate-recipe-index": "ts-node ./scripts/generate-recipe-index.ts",
-    "check-translations": "ts-node ./scripts/check-translations.ts"
+    "new-recipe": "bun ./scripts/new-recipe.ts",
+    "generate-recipe-index": "bun run ./scripts/generate-recipe-index.ts",
+    "check-translations": "bun run ./scripts/check-translations.ts"
   },
   "dependencies": {
     "@mdi/js": "^7.2.96",
@@ -18,12 +18,14 @@
     "clsx": "^2.0.0",
     "feed": "^4.2.2",
     "fuse.js": "^6.6.2",
+    "i18next": "^23.5.1",
     "lodash": "^4.17.21",
     "next": "^13.5.4",
     "next-i18next": "^14.0.0",
     "node-gzip": "^1.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^13.2.2",
     "slug": "^8.2.3",
     "typescript": "^5.1.6",
     "yaml": "^2.3.2"

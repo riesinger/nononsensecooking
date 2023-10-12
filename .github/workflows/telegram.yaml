@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Set up Go ${{ matrix.golang }}
         uses: actions/setup-go@v1
         with:
@@ -30,7 +30,7 @@ jobs:
         working-directory: ./telegram
     strategy:
       matrix:
-        golang: ["1.17"]
+        golang: ["1.21"]
 
   docker:
     name: Build the docker container
@@ -38,7 +38,7 @@ jobs:
     needs: test
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Build
         working-directory: ./telegram
         run: DOCKER_BUILDKIT=1 docker build . --file Dockerfile --tag nnc-telegram
