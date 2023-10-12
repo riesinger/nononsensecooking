@@ -1,14 +1,14 @@
 name: Check Translations
 on: [push]
+env:
+  BUN_VERSION: latest
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: 16.x
-          cache: "npm"
-      - run: npm ci
-      - run: npm run check-translations
+          bun-version: ${{ env.BUN_VERSION }}
+      - run: bun install --frozen-lockfile
+      - run: bun check-translations
