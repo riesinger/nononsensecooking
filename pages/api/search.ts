@@ -21,7 +21,7 @@ const searchOptions = {
 };
 
 export function sanitize(term: string) {
-  return term.trim().replace(/[<>]/g, "");
+  return term.trim().replace(/[<>'":]/g, "");
 }
 
 export async function searchRecipes(
