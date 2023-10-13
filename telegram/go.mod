@@ -9,7 +9,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/rs/zerolog v1.31.0
 	github.com/stretchr/testify v1.8.4
-	github.com/uptrace/bun v1.0.21
+	github.com/uptrace/bun v1.1.16
 	github.com/uptrace/bun/dialect/pgdialect v1.0.21
 	github.com/uptrace/bun/driver/pgdriver v1.0.21
 )
