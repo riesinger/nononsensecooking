@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up Go ${{ matrix.golang }}
-        uses: actions/setup-go@v1
+        uses: actions/setup-go@v4
         with:
           go-version: ${{ matrix.golang }}
       - name: Get dependencies
