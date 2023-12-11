@@ -6,7 +6,7 @@ const maxTries = process.env.NODE_ENV === "production" ? 5 : 3;
 
 interface APIClient {
   fetchMostPopularRecipesForLocale: (
-    locale: SupportedLanguage
+    locale: SupportedLanguage,
   ) => Promise<{ [recipeId: string]: number }>;
 }
 
@@ -19,19 +19,18 @@ interface APIClient {
  */
 export async function orderRecipesByMostPopular(
   locale: SupportedLanguage,
-  recipes: Array<Recipe | RecipeInIndex>
+  recipes: Array<Recipe | RecipeInIndex>,
 ) {
-  const plausibleApiKey = process.env.PLAUSIBLE_API_KEY;
+  const plausibleApiKey = process.env.PLAUSIBLE_API_KEY ?? "";
   // TODO: Read the URL from the config
   const plausibleBaseUrl = "https://plausible.riesinger.dev";
   const apiClient: APIClient = new PlausibleClient(
     plausibleApiKey,
     plausibleBaseUrl,
-    "nononsense.cooking"
+    "nononsense.cooking",
   );
-  const accumulatedPagehits = await apiClient.fetchMostPopularRecipesForLocale(
-    locale
-  );
+  const accumulatedPagehits =
+    await apiClient.fetchMostPopularRecipesForLocale(locale);
   return recipes.sort(byNumberOfPageHits(accumulatedPagehits));
 }
 

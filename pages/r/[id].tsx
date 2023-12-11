@@ -20,11 +20,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       availableIn,
       slugs,
       image,
-      ...(await serverSideTranslations(context.locale, [
-        "common",
-        "footer",
-        "header",
-      ])),
+      ...(await serverSideTranslations(
+        context.locale ?? context.defaultLocale!,
+        ["common", "footer", "header"],
+      )),
     },
   };
 }
@@ -35,7 +34,7 @@ export default function Redirect({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { t } = useTranslation();
   const router = useRouter();
-  const { locale } = router;
+  const { locale, defaultLocale } = router;
   const [existsInLocale, setExistsInLocale] = useState<boolean | null>(null);
   useEffect(() => {
     if (availableIn.includes(locale)) {
@@ -57,14 +56,16 @@ export default function Redirect({
     <PaddedSection
       width="narrow"
       title={t("notinyourlocale.displaytitle", {
-        locale: prettyLocale(locale),
+        locale: prettyLocale(locale ?? defaultLocale!),
       })}
     >
       <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden bg-neutral-200 dark:bg-neutral-800">
         <Image src={`/img/recipes/${image}`} fill alt="An image of the dish" />
       </div>
       <p>
-        {t("notinyourlocale.explanation", { locale: prettyLocale(locale) })}
+        {t("notinyourlocale.explanation", {
+          locale: prettyLocale(locale ?? defaultLocale!),
+        })}
       </p>
       <ul>
         {availableIn.map((loc) => (
@@ -82,7 +83,8 @@ export default function Redirect({
       <p>
         <Trans i18nKey="notinyourlocale.helptranslateit" t={t}>
           Falls du uns helfen willst, das Rezept auf{" "}
-          {{ locale: prettyLocale(locale) }} zu übersetzen, schaue bei{" "}
+          {{ locale: prettyLocale(locale ?? defaultLocale!) }} zu übersetzen,
+          schaue bei{" "}
           <a href="https://github.com/riesinger/nononsensecooking">Github</a>{" "}
           vorbei.
         </Trans>

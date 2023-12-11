@@ -6,10 +6,17 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import SEO from "../components/SEO";
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({
+  locale,
+  defaultLocale,
+}) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "header", "footer"])),
+      ...(await serverSideTranslations(locale ?? defaultLocale!, [
+        "common",
+        "header",
+        "footer",
+      ])),
     },
   };
 };

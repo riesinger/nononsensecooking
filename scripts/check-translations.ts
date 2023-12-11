@@ -20,7 +20,7 @@ async function main() {
       for (let translationInFirst of allTranslations[first]) {
         if (!allTranslations[second].includes(translationInFirst)) {
           console.error(
-            `🚨 ${first} has the translation key ${translationInFirst}, which ${second} is missing`
+            `🚨 ${first} has the translation key ${translationInFirst}, which ${second} is missing`,
           );
           hadError = true;
         }
@@ -28,7 +28,7 @@ async function main() {
       for (let translationInSecond of allTranslations[second]) {
         if (!allTranslations[first].includes(translationInSecond)) {
           console.error(
-            `🚨 ${second} has the translation key ${translationInSecond}, which ${first} is missing`
+            `🚨 ${second} has the translation key ${translationInSecond}, which ${first} is missing`,
           );
           hadError = true;
         }
@@ -42,23 +42,23 @@ async function main() {
 async function readTranslations(locale: string) {
   try {
     const files = await fs.readdir(
-      path.resolve(__dirname, "..", "public", "locales", locale)
+      path.resolve(__dirname, "..", "public", "locales", locale),
     );
     const allTranslations = await Promise.all(
       files.map(async (file) => {
         const content = await fs.readFile(
-          path.resolve(__dirname, "..", "public", "locales", locale, file)
+          path.resolve(__dirname, "..", "public", "locales", locale, file),
         );
         const translations = JSON.parse(content.toString());
         console.log(`⚙️ Parsing translations for ${locale}/${file}`);
         const parsedTranslations = parseTranslations(file, translations);
         return parsedTranslations;
-      })
+      }),
     );
     return allTranslations.reduce((acc, t) => [...acc, ...t], []);
   } catch (err) {
     throw new Error(
-      `We're supporting ${locale} as a locale, but the translation directory for it couldn't be read: ${err}`
+      `We're supporting ${locale} as a locale, but the translation directory for it couldn't be read: ${err}`,
     );
   }
 }
@@ -71,10 +71,10 @@ function parseTranslations(file: string, rawTranslations: object) {
 
 function recurse(translationsObject: object | string | number) {
   if (!isObject(translationsObject)) return [];
-  const currentKeys = [];
+  const currentKeys: string[] = [];
   const entries = Object.entries(translationsObject);
   const entriesWithoutChildren = entries.filter(
-    ([_, value]) => value && !isObject(value)
+    ([_, value]) => value && !isObject(value),
   );
   const entriesWithChildren = entries.filter(([_, value]) => isObject(value));
   currentKeys.push(...entriesWithoutChildren.map(([key, _]) => key));

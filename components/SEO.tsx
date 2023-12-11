@@ -35,7 +35,7 @@ const SEO = ({ title, isRecipe, img }: Props) => {
       <meta property="og:image:width" content="1600" />
       <meta property="og:image:height" content="1040" />
       <meta property="og:locale" content={locale} />
-      {locales.map((loc) => (
+      {locales?.map((loc) => (
         <meta property="og:locale:alternate" content={loc} key={loc} />
       ))}
       <meta property="og:description" content={description} />

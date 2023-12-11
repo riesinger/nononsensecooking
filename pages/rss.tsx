@@ -5,10 +5,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import SEO from "../components/SEO";
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({
+  locale,
+  defaultLocale,
+}) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
+      ...(await serverSideTranslations(locale ?? defaultLocale!, [
         "common",
         "header",
         "footer",

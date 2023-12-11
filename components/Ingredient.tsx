@@ -28,7 +28,7 @@ const Ingredient = ({
     : amount;
   const ingredientName = id
     ? t(`ingredient.${id}`, {
-        count: unitUsesPlural(unit) ? adjustedAmount : 1,
+        count: unitUsesPlural(unit ?? Unit.NONE) ? adjustedAmount : 1,
       })
     : name;
 

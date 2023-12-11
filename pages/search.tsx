@@ -16,11 +16,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {
         searchTerm: "",
         results: [],
-        ...(await serverSideTranslations(context.locale, [
-          "common",
-          "header",
-          "footer",
-        ])),
+        ...(await serverSideTranslations(
+          context.locale ?? context.defaultLocale!,
+          ["common", "header", "footer"],
+        )),
       },
     };
   }
@@ -30,11 +29,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       searchTerm,
       results,
-      ...(await serverSideTranslations(context.locale, [
-        "common",
-        "header",
-        "footer",
-      ])),
+      ...(await serverSideTranslations(
+        context.locale ?? context.defaultLocale!,
+        ["common", "header", "footer"],
+      )),
     },
   };
 };

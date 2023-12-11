@@ -18,24 +18,22 @@ import { SupportedLanguage } from "../../models/Localized";
 import { Recipe } from "../../models/Recipe";
 
 export const getStaticProps: GetStaticProps<Recipe> = async (context) => {
-  const { id } = context.params;
-  const recipe = await readSingleRecipeFromDisk(languageFrom(context), id[0]);
+  const { id } = context.params!;
+  const recipe = await readSingleRecipeFromDisk(languageFrom(context), id![0]);
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
-        "header",
-        "common",
-        "recipe",
-        "footer",
-      ])),
+      ...(await serverSideTranslations(
+        context.locale ?? context.defaultLocale!,
+        ["header", "common", "recipe", "footer"],
+      )),
       ...recipe,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-  let paths = [];
-  for (const locale of context.locales) {
+  let paths: any[] = [];
+  for (const locale of context.locales!) {
     const recipes = await loadRecipesFromDisk(locale as SupportedLanguage);
     for (const recipe of recipes) {
       paths.push({

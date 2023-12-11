@@ -4,12 +4,15 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import SEO from "../components/SEO";
 import { generateRSSFeeds } from "../lib/generateRSSFeeds";
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({
+  locale,
+  defaultLocale,
+}) => {
   // This is an ugly way to generate the RSS feeds during static generation
   await generateRSSFeeds();
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
+      ...(await serverSideTranslations(locale ?? defaultLocale!, [
         "common",
         "header",
         "footer",

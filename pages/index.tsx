@@ -43,11 +43,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
-        "common",
-        "footer",
-        "header",
-      ])),
+      ...(await serverSideTranslations(
+        context.locale ?? context.defaultLocale!,
+        ["common", "footer", "header"],
+      )),
       recipesOfTheDay,
       mostPopularRecipes,
       latestRecipes,
