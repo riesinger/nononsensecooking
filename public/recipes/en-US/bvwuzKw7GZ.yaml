@@ -1,0 +1,42 @@
+name: Swabian Inspired Burgers
+image: "swabian-burger.jpg"
+publishedAt: "2023-12-11T19:15:45.666Z"
+cookTime: 20
+diet: meat
+ingredients:
+  - name: Laugenbrötchen (Pretzel Buns / Lye Rolls)
+    amount: 2
+    scales: true
+  - name: Maultaschen (Swabian Dumplings)
+    amount: 4
+    scales: true
+  - id: onion
+    amount: 1
+    scales: true
+  - id: tomato
+    amount: 1
+    scales: true
+  - id: rocket
+    amount: 20
+    unit: g
+    scales: true
+  - id: mayonnaise
+    amount: 20
+    unit: g
+    scales: true
+  - id: dijon
+    amount: 10
+    unit: g
+    scales: true
+  - id: butter
+  - id: dill
+  - id: salt
+  - id: pepper
+steps:
+  - Peel the onions and cut them into rings. Put them into a pan with a bit of butter and salt them. Cook them on high heat for about 1 minute, then reduce the heat to a low setting and let them caramelise for about 15-20 minutes.
+  - Cut the tomatoes into slices and salt them so they loose water.
+  - Wash and dry the rocket.
+  - Mix a sauce out of the mustard and mayo and season it with dill, salt and pepper.
+  - Fry the "Maultaschen" in a pan with a bit of butter, until they are golden-brown on both sides.
+  - Cut open the bread rolls and toast them for a moment on the inside (in the same pan as the "Maultaschen"). Then spread the sauce onto both halves.
+  - Assemble the burger with the rocket, onions, Maultaschen and tomatoes and enjoy!
