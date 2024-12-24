@@ -26,7 +26,7 @@ const DishCard = ({ slug, name, image, cookTime, diet }: Props) => {
           src={`/img/recipes/${image}`}
           fill
           quality={80}
-          sizes="(max-width: 600px) 200px, (max-width: 1200px) 400px, (max-width: 1800px) 500, (max-width: 2400px) 600px, (min-width: 2401px) 700px"
+          sizes="(max-width: 600px) 550px, (max-width: 1200px) 375px, (min-width: 1201px) 500px"
           alt=""
           className="group-hover:scale-105 transition-transform duration-150 linear"
         />
