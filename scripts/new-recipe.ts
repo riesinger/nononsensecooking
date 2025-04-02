@@ -41,7 +41,7 @@ const questions = [
 
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-",
-  10
+  10,
 );
 const basePath = path.resolve("./public/recipes");
 
@@ -68,6 +68,7 @@ steps:
 `.trimStart();
 
 async function main() {
+  //@ts-ignore
   const answers = await inquirer.prompt(questions);
   const recipeId = nanoid();
   for (const locale of answers.localesToGenerate) {
