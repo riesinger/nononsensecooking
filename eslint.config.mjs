@@ -10,4 +10,6 @@ const compat = new FlatCompat({
     recommendedConfig: js.configs.recommended,
     allConfig: js.configs.all
 });
-export default [...compat.extends("next")];
+export default [...compat.extends("next/core-web-vitals", "next/typescript"), {
+    ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]
+}, ...compat.extends("next")];

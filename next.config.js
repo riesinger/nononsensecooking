@@ -5,5 +5,6 @@ module.exports = {
   compiler: {},
   images: {
     formats: ["image/avif", "image/webp"],
+    qualities: [80],
   },
 };

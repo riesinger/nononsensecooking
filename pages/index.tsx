@@ -93,8 +93,8 @@ export default function Home({
           <Trans
             i18nKey="home.about.cta"
             components={{
-              rsslink: <Link href="/rss/" />,
-              donatelink: <Link href="/donate/" />,
+              rsslink: <Link href="/rss/" key="rsslink" />,
+              donatelink: <Link href="/donate/" key="donatelink" />,
             }}
           ></Trans>
         </p>
