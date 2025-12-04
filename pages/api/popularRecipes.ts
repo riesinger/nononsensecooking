@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { orderRecipesByMostPopular } from "../../lib/popularRecipes";
 import { fetchRecipeIndex } from "../../lib/recipes";
-import { localeFrom } from "./utils/localeFrom";
+import { localeFrom } from "../../lib/utils/localeFrom";
 
 export default async function popularRecipes(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const locale = localeFrom(req);
   const recipes = await fetchRecipeIndex(locale);
