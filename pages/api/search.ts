@@ -1,9 +1,9 @@
 import Fuse from "fuse.js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getRecipesFromDiskOrIndex } from "../../lib/recipes";
+import { localeFrom } from "../../lib/utils/localeFrom";
+import { methodIs } from "../../lib/utils/methodIs";
 import { SupportedLanguage } from "../../models/Localized";
-import { localeFrom } from "./utils/localeFrom";
-import { methodIs } from "./utils/methodIs";
 
 const searchOptions = {
   isCaseSensitive: false,
