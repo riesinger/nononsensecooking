@@ -1,0 +1,19 @@
+{{- /* Accepts either a Page (default eager=false) or dict {page, eager}. */ -}}
+{{- $page := . -}}
+{{- $eager := false -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .page -}}
+  {{- $eager = .eager | default false -}}
+{{- end -}}
+<a class="dish-card" href="{{ $page.RelPermalink }}">
+  <div class="dish-card__image">
+    {{- partial "recipe-img.html" (dict "page" $page "variant" "card" "eager" $eager) -}}
+  </div>
+  <div class="dish-card__meta">
+    <h3 class="dish-card__title">{{ $page.Title }}</h3>
+    <div class="dish-card__row">
+      <span class="dish-card__time">{{ i18n "preparationTime.inMinutes" (dict "minutes" $page.Params.cookTime) }}</span>
+      {{- partial "icon-diet.html" (dict "diet" $page.Params.diet "size" 20) -}}
+    </div>
+  </div>
+</a>

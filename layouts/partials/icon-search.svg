@@ -1,0 +1,1 @@
+{{- partial "icon.html" (dict "id" "search" "size" 20) -}}

@@ -1,0 +1,34 @@
+---
+title: Burrito mit weißen Bohnen und Süßkartoffel
+translationKey: white-bean-burrito-with-sweet-potatos
+date: '2021-08-11T20:36:58.221Z'
+image: bean-burritos.jpg
+cookTime: 20
+diet: vegetarian
+draft: false
+ingredients:
+- name: Weiße Bohnen in Tomatensoße
+  amount: 400
+  unit: g
+  scales: true
+- name: Gouda/Cheddar
+  amount: 60
+  unit: g
+  scales: true
+- name: Wrap
+  amount: 2
+  scales: true
+- name: Zwiebel
+  amount: 1
+  scales: true
+- name: Pfeffer
+- name: Salz
+---
+
+1. Schneide die Süßkartoffel in kleine Würfel. Gebe die Würfel mit etwas Öl in einen Topf und brate sie bei mittlerer Hitze ca. 5 Minuten an
+2. In der Zwischenzeit die Zwiebel in feine Wüfel schneiden und zur Süßkartoffel in den Topf geben
+3. Die weißen Bohnen in Tomatensoße (Baked Beans) aus der Dose in den Topf geben und die Hitze reduzieren. Weitere 10 Minuten köcheln lassen, dabei regelmäßig umrühren
+4. Den Käse reiben. Für einen kräftigeren Geschmack Cheddar nutzen, aber auch Gouda oder Butterkäse schmecken im Wrap gut
+5. Sobald die Süßkartoffel weich wird, kannst du die Füllung mit Salz und Pfeffer und nach Belieben etwas Knoblauchpulver abschmecken
+6. Wraps nach der Anleitung auf der Packung erwärmen, in jeden Wrap etwa die Hälfte der Füllung und des Käses geben und Burrito rollen
+7. Genießen!

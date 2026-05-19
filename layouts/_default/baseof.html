@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{- /* Page title + description (centralised so OG/Twitter can reuse). */ -}}
+  {{- $isRecipe := and (eq .Section "r") .IsPage -}}
+  {{- $title := site.Title -}}
+  {{- $desc  := i18n "meta.description.main" -}}
+  {{- if $isRecipe -}}
+    {{- $title = printf "%s – %s" .Title site.Title -}}
+    {{- $desc  = i18n "meta.description.recipe" (dict "name" .Title) -}}
+  {{- else if not .IsHome -}}
+    {{- $title = printf "%s – %s" .Title site.Title -}}
+  {{- end -}}
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $desc }}">
+
+  {{- /* Canonical link + hreflang alternates for every page. */ -}}
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{- range .AllTranslations -}}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+  {{- end -}}
+  <link rel="alternate" hreflang="x-default" href="{{ "/" | absLangURL }}">
+
+  {{- /* Map short language tags to full OG locales. */ -}}
+  {{- $localeMap := dict "en" "en_US" "de" "de_DE" -}}
+  {{- $ogLocale := index $localeMap site.Language.Lang | default site.Language.Lang -}}
+
+  {{- /* OpenGraph + Twitter Card. */ -}}
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta property="og:title" content="{{ if $isRecipe }}{{ .Title }}{{ else }}{{ site.Title }}{{ end }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:type" content="{{ if $isRecipe }}article{{ else }}website{{ end }}">
+  <meta property="og:locale" content="{{ $ogLocale }}">
+  {{- range .AllTranslations -}}
+  <meta property="og:locale:alternate" content="{{ index $localeMap .Language.Lang | default .Language.Lang }}">
+  {{- end -}}
+  {{- $ogImage := "" -}}
+  {{- $ogW := 0 -}}{{- $ogH := 0 -}}
+  {{- if and $isRecipe .Params.image -}}
+    {{- with .Resources.GetMatch .Params.image -}}
+      {{- $resized := .Process "resize 1200x630 webp q82" -}}
+      {{- $ogImage = $resized.Permalink -}}
+      {{- $ogW = $resized.Width -}}{{- $ogH = $resized.Height -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $ogImage -}}
+  <meta property="og:image" content="{{ $ogImage }}">
+  <meta property="og:image:width" content="{{ $ogW }}">
+  <meta property="og:image:height" content="{{ $ogH }}">
+  <meta property="og:image:type" content="image/webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ $ogImage }}">
+  {{- else -}}
+  <meta name="twitter:card" content="summary">
+  {{- end -}}
+  <meta name="twitter:title" content="{{ if $isRecipe }}{{ .Title }}{{ else }}{{ site.Title }}{{ end }}">
+  <meta name="twitter:description" content="{{ $desc }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "/apple-touch-icon.png" | relURL }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon-32x32.png" | relURL }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ "/favicon-16x16.png" | relURL }}">
+  <link rel="manifest" href="{{ "/site.webmanifest" | relURL }}">
+  <link rel="mask-icon" href="{{ "/safari-pinned-tab.svg" | relURL }}" color="#5686f5">
+  <meta name="msapplication-TileColor" content="#5686f5">
+  <meta name="theme-color" content="#5686f5">
+  {{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+  <link rel="preconnect" href="https://plausible.riesinger.dev" crossorigin>
+  <link rel="dns-prefetch" href="https://plausible.riesinger.dev">
+  {{- block "head" . }}{{ end -}}
+</head>
+<body>
+  {{- partial "icon-sprite.html" . -}}
+  {{- partial "header.html" . -}}
+  <main id="main" class="main">
+    {{- block "main" . }}{{ end -}}
+  </main>
+  {{- partial "footer.html" . -}}
+  {{- $servings := resources.Get "js/servings.js" | minify | fingerprint -}}
+  <script src="{{ $servings.RelPermalink }}" integrity="{{ $servings.Data.Integrity }}" crossorigin="anonymous" defer></script>
+  {{/* renovate: datasource=npm depName=fuse.js */}}
+  {{- $fuse   := resources.Get "vendor/fuse-7.3.0.min.mjs" | fingerprint -}}
+  {{- $search := resources.Get "js/search.js" | minify | fingerprint -}}
+  <script src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}" crossorigin="anonymous" data-fuse-url="{{ $fuse.RelPermalink }}" defer></script>
+  {{- if and (eq .Section "r") .IsNode -}}
+    {{- $recipeList := resources.Get "js/recipe-list.js" | minify | fingerprint -}}
+    <script src="{{ $recipeList.RelPermalink }}" integrity="{{ $recipeList.Data.Integrity }}" crossorigin="anonymous" defer></script>
+  {{- end -}}
+  <script defer data-domain="nononsense.cooking" src="https://plausible.riesinger.dev/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+[
+{{- $first := true -}}
+{{- range where (where site.RegularPages "Section" "r") "Draft" false -}}
+  {{- $p := . -}}
+  {{- with .Resources.GetMatch .Params.image -}}
+    {{- $img := . -}}
+    {{- $widths := slice 320 480 640 960 1280 -}}
+    {{- $sizes := "(min-width: 1024px) 192px, calc(100vw - 4rem)" -}}
+    {{- $maxW := $img.Width -}}
+    {{- $set := slice -}}
+    {{- $fallback := "" -}}
+    {{- range $widths -}}
+      {{- if le . $maxW -}}
+        {{- $thumb := $img.Process (printf "resize %dx webp q80" .) -}}
+        {{- $set = $set | append (printf "%s %dw" $thumb.RelPermalink .) -}}
+        {{- if or (not $fallback) (eq . 640) -}}
+          {{- $fallback = $thumb.RelPermalink -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $fallback -}}
+      {{- $fallback = .RelPermalink -}}
+    {{- end -}}
+    {{- if not $first }},{{ end -}}
+    {{- $first = false -}}
+    {"title":{{ $p.Title | jsonify }},"url":{{ $p.RelPermalink | jsonify }},"image":{{ $fallback | jsonify }},"imageSrcset":{{ delimit $set ", " | jsonify }},"imageSizes":{{ $sizes | jsonify }},"cookTime":{{ $p.Params.cookTime }},"diet":{{ $p.Params.diet | jsonify }}}
+  {{- end -}}
+{{- end -}}
+]

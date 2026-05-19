@@ -1,0 +1,88 @@
+# UI strings. Recipe titles and ingredients live in the content frontmatter.
+
+# Home page
+"home.todaysrecipes"      = "Today's Recipes"
+"home.mostpopularrecipes" = "Most Popular"
+"home.latestrecipes"      = "Latest Recipes"
+"home.allrecipes"         = "All Recipes"
+"home.about.sectiontitle" = "What is NoNonsenseCooking?"
+"home.about.introduction" = 'NoNonsenseCooking has been built because many websites hosting recipes are overloaded with ads and useless features and have dozens of recipes per dish. How would you find the "right one"?'
+"home.about.mission"      = "We made it our mission to curate our favorite recipes to be easy to follow and without the extra fluff and then publish them here"
+"home.about.cta"          = 'You want to stay up-to-date? Subscribe to our <a href="/rss/">RSS feed</a> with your favorite reader. You like what we do? Find out how you can support our work <a href="/donate/">here</a>.'
+
+# All-recipes filter toolbar
+"filters.diet.label"     = "Filter by diet"
+"filters.diet.all"       = "All"
+"filters.cooktime.label" = "Filter by cooking time"
+"filters.cooktime.any"   = "Any time"
+"filters.cooktime.lte15" = "≤ 15 min"
+"filters.cooktime.lte30" = "≤ 30 min"
+"filters.cooktime.lte60" = "≤ 1 h"
+"filters.sort.label"     = "Sort by"
+"filters.sort.title"     = "A – Z"
+"filters.sort.latest"    = "Latest first"
+"filters.sort.cooktime"  = "Quickest first"
+"filters.empty"          = "No recipes match the current filter."
+"filters.count.template" = "Showing {n} of {total} recipes"
+
+# Diet labels
+"diet.meat"       = "Contains Meat"
+"diet.fish"       = "Contains Fish"
+"diet.vegetarian" = "Vegetarian"
+"diet.vegan"      = "Vegan"
+
+# Recipe page
+"recipe.servings"       = "Servings"
+"recipe.servings_less"  = "Fewer servings"
+"recipe.servings_more"  = "More servings"
+"preparationTime.inMinutes" = "{{ .minutes }}min"
+
+# Ingredient unit suffix appended to the (scalable) amount.
+"recipe.suffix.none" = ""
+"recipe.suffix.g"    = "g"
+"recipe.suffix.kg"   = "kg"
+"recipe.suffix.pc"   = "pc"
+"recipe.suffix.ml"   = "ml"
+"recipe.suffix.l"    = "l"
+"recipe.suffix.tbsp" = "tbsp"
+
+# Meta tags
+"meta.description.main"   = "Find simple and delicious recipes on NoNonsenseCooking"
+"meta.description.recipe" = "Cook {{ .name }} with a simple recipe from NoNonsenseCooking"
+
+# Header / search
+"header.link.allrecipes"     = "All recipes"
+"header.link.random"         = "Surprise me"
+"header.searchbar.placeholder" = "Search for recipes"
+"search.pagetitle"           = "Search Results"
+"search.findrecipes"         = "Find your favorite recipes"
+
+# Footer
+"footer.link.legal.text"  = "Legal information"
+"footer.link.donate.text" = "Donate"
+"footer.link.rss.title"   = "Subscribe via RSS"
+"footer.licensenotice"    = 'The content on this page is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a> license'
+
+# 404
+"notfound.pagetitle"        = "Page not found"
+"notfound.displaytitle"     = "404 - Page not found 👀"
+"notfound.explanation"      = "Unfortunately, we couldn't find the page you were looking for. Hopefully, the following links can help you get back on track:"
+"notfound.links.home"       = "Back to the home page"
+"notfound.links.allrecipes" = "All Recipes"
+"notfound.links.github"     = "Submit an issue on GitHub"
+
+# Donate
+"donation.displayPageTitle"        = "Donate ❤️"
+"donation.introduction"            = "NoNonsenseCooking was created because many recipe websites are bloated with ads and trackers and overloaded with dozens of recipes per dish. I'd be thrilled if you want to support publishing curated recipes on an ad-free site!"
+"donation.section.monthly.title"   = "Monthly donations"
+"donation.section.onetime.title"   = "One-time donations"
+
+# Feeds
+"feed.displayPageTitle"          = "Subscribe to our feeds"
+"feed.introduction"              = "Want to stay up to date when we publish a new recipe? Subscribe to our RSS feed in your favorite reader."
+"feed.feedtypes"                 = "RSS is widely supported—use that URL below unless your reader requires something else."
+"feed.feedreader.sectionTitle"   = "Feed readers"
+"feed.feedreader.introduction"   = "You don't use a feed reader yet? Here are some recommendations—none are sponsored."
+"feed.feedreader.android"        = "Android"
+"feed.feedreader.iOS"            = "iOS"
+"feed.feedreader.other"          = "Others"

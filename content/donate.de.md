@@ -1,0 +1,4 @@
+---
+title: "Spenden"
+type: donate
+---

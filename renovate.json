@@ -1,4 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", "local>riesinger/renovate"]
+  "extends": ["config:base", "local>riesinger/renovate"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track the vendored Fuse.js bundle (npm: fuse.js)",
+      "fileMatch": ["^layouts/_default/baseof\\.html$"],
+      "matchStrings": [
+        "renovate:\\s+datasource=(?<datasource>[a-z-]+)\\s+depName=(?<depName>[^\\s*]+)\\s*\\*/\\}\\}\\s*\\n\\s*\\{\\{- \\$fuse\\s+:=\\s+resources\\.Get \"vendor/fuse-(?<currentValue>[0-9.]+)\\.min\\.mjs\""
+      ]
+    }
+  ]
 }

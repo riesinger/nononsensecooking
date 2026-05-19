@@ -1,0 +1,4 @@
+<form class="search-form search-form--standalone" role="search" action="{{ "/search/" | relLangURL }}" method="get">
+  <button type="submit" class="search-form__btn" aria-label="Search">{{ partial "icon-search.svg" . }}</button>
+  <input type="search" class="search-form__input" name="query" placeholder="{{ i18n "header.searchbar.placeholder" }}" autocomplete="off" id="search-input-standalone" />
+</form>

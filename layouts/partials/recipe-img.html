@@ -1,0 +1,60 @@
+{{- /*
+  Renders a recipe image with a Hugo image-processing pipeline.
+
+  Params:
+    page      The page (required, usually passed as ".").
+    variant   "card" | "list" | "hero"
+    eager     bool — if true, load eagerly with fetchpriority=high.
+    alt       optional alt text (defaults to empty)
+*/ -}}
+{{- $page    := .page -}}
+{{- $variant := .variant | default "card" -}}
+{{- $eager   := .eager | default false -}}
+{{- $alt     := .alt | default "" -}}
+{{- $img     := $page.Resources.GetMatch $page.Params.image -}}
+
+{{- $widths := slice 320 480 640 960 -}}
+{{- $sizes  := "(min-width: 1152px) 352px, (min-width: 936px) calc((100vw - 6rem) / 3), (min-width: 640px) calc((100vw - 5rem) / 2), calc(100vw - 4rem)" -}}
+{{- $w := 600 -}}
+{{- $h := 400 -}}
+{{- if eq $variant "hero" -}}
+  {{- $widths = slice 480 720 960 1280 -}}
+  {{- $sizes  = "(min-width: 1088px) 672px, (min-width: 1024px) calc(100vw - 26rem), calc(100vw - 4rem)" -}}
+  {{- $w = 960 -}}{{ $h = 640 }}
+{{- else if eq $variant "list" -}}
+  {{- $widths = slice 320 480 640 960 1280 -}}
+  {{- $sizes  = "(min-width: 1024px) 192px, calc(100vw - 4rem)" -}}
+  {{- $w = 400 -}}{{ $h = 267 }}
+{{- end -}}
+
+{{- if $img -}}
+  {{- /* Cap widths at the source width so Hugo never up-scales. */ -}}
+  {{- $maxW := $img.Width -}}
+  {{- $jpegSet := slice -}}
+  {{- $webpSet := slice -}}
+  {{- $fallback := "" -}}
+  {{- range $widths -}}
+    {{- if le . $maxW -}}
+      {{- $jpeg := $img.Process (printf "resize %dx q82" .) -}}
+      {{- $webp := $img.Process (printf "resize %dx webp q80" .) -}}
+      {{- $jpegSet = $jpegSet | append (printf "%s %dw" $jpeg.RelPermalink .) -}}
+      {{- $webpSet = $webpSet | append (printf "%s %dw" $webp.RelPermalink .) -}}
+      {{- $fallback = $jpeg.RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $fallback -}}
+    {{- /* Source narrower than smallest target — just use original. */ -}}
+    {{- $fallback = $img.RelPermalink -}}
+  {{- end -}}
+  <picture>
+    <source type="image/webp" srcset="{{ delimit $webpSet ", " }}" sizes="{{ $sizes }}">
+    <img src="{{ $fallback }}"
+         srcset="{{ delimit $jpegSet ", " }}"
+         sizes="{{ $sizes }}"
+         alt="{{ $alt }}"
+         width="{{ $w }}" height="{{ $h }}"
+         {{ if $eager }}loading="eager" fetchpriority="high"{{ else }}loading="lazy" decoding="async"{{ end }} />
+  </picture>
+{{- else -}}
+  {{- /* No image resource bound to the page bundle. Render nothing rather than ship a duplicate. */ -}}
+{{- end -}}

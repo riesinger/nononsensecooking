@@ -1,0 +1,11 @@
+{{- $feedURL := "/rss/feed.en-US.xml" -}}
+{{- if eq site.Language.Lang "de" -}}{{- $feedURL = "/rss/feed.de-DE.xml" -}}{{- end -}}
+<footer class="site-footer">
+  <p class="site-footer__license">{{ i18n "footer.licensenotice" | safeHTML }}</p>
+  <nav class="site-footer__nav" aria-label="Footer">
+    <a href="https://github.com/riesinger/nononsensecooking" rel="noopener">GitHub</a>
+    <a href="{{ "/legal/" | relLangURL }}">{{ i18n "footer.link.legal.text" }}</a>
+    <a href="{{ "/donate/" | relLangURL }}">{{ i18n "footer.link.donate.text" }}</a>
+    <a href="{{ $feedURL | relURL }}" title="{{ i18n "footer.link.rss.title" }}">RSS</a>
+  </nav>
+</footer>

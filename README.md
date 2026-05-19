@@ -1,31 +1,71 @@
 # [NoNonsense.cooking](https://nononsense.cooking)
 
-NoNonsenseCooking is a modern website for curated recipes trying to cut out all of the unnecessary bloat of typical cooking websites.
+NoNonsenseCooking is a static site for curated recipes, built with [Hugo](https://gohugo.io/). It keeps pages fast and free of the usual recipe-site bloat.
 
 ## Why?
 
-Simply put: I needed a place to share my favorite recipes with friends & family. I was fed up with existing recipe sites, since they either look horribly outdated and bloated, or use so many trackers that uBlock explodes (or even worse: _both_).
+A place to share favorite recipes without overwhelming ads and trackers.
 
-## Contributing
+## Requirements
 
-Do you want to add your favorite recipe? It's quite easy!
+- [Hugo](https://gohugo.io/installation/) Extended **0.161.1+** (or build with the `Dockerfile`, which uses `ghcr.io/gohugoio/hugo:v0.161.1`)
 
-First, fork this repository and clone it: `gh repo fork riesinger/nononsensecooking`.
-Then, install all the dependencies with `npm install` and run the script `npm run new-recipe`.
-This will ask you a few questions and then creates recipe files in the `recipes` directory.
-Edit the file to contain your recipe. You can take the other recipes as an inspiration on how to fill out the YAML file.
-If you have an image for your recipe, place a 1440x960 version of it in the `public/img/recipes` directory (any resolution will do, but please make it the given aspect ratio of 3:2 🙃).
+## Local development
 
-To run the service locally, run `npm start dev` and head to `http://localhost:3000`. You should be able to see your recipe in the "All Recipes" section or via the search. Note that you need to restart your dev server when you add a new recipe. Also, the search is using the "recipe index", which you can generate using `npm run generate-recipe-index`.
+```bash
+hugo server
+```
 
-_Please don't copy recipes from the internet or cookbooks (without significant modifications). Also, only use images you took yourself._
+Open the URL Hugo prints (usually `http://localhost:1313/`).
+
+## Adding a recipe
+
+Recipes are page bundles under `content/r/<slug>/`:
+
+- `index.en.md` — English (with matching `index.de.md` for German)
+- Shared `translationKey` in front matter (typically the folder name)
+- Optional image file beside the markdown (e.g. `my-dish.jpg` referenced as `image: my-dish.jpg`)
+
+Use `hugo new content/r/<slug>/index.en.md` and edit the front matter; see an existing bundle for the full shape (`ingredients` in front matter, numbered steps in the markdown body).
+
+If the image is not in the bundle, place a **3:2** image under `static/img/recipes/` and reference its filename in `image`.
+
+## “Most popular” recipes (Plausible)
+
+Homepage ordering can use `data/popular.yaml` (`en` / `de` lists of **recipe folder slugs**).
+
+Refresh from your self-hosted Plausible instance:
+
+```bash
+export PLAUSIBLE_API_KEY=...
+# optional: PLAUSIBLE_BASE_URL, SITE_ID, PERIOD, LIMIT
+./scripts/fetch-popular.sh
+```
+
+This writes `data/popular.yaml` and runs `hugo --minify --gc`.
+
+## Production build
+
+```bash
+hugo --minify --gc
+```
+
+Output is in `public/`.
+
+## Docker + Traefik
+
+The image serves the static `public/` tree with **Caddy** on port **8080** (TLS terminates at Traefik).
+
+```bash
+docker build -t nononsensecooking .
+docker run --rm -p 8080:8080 nononsensecooking
+```
+
+Example `docker-compose.yml` (external `traefik` network) is in the repo root—adjust host / cert resolver labels to match your setup.
 
 ## License
 
-This content of this repository is covered under two licenses.
+- **Recipes and images** — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — content under `content/r/` and files in `static/img/recipes/`. See `LICENSE-recipes`.
+- **Site source** — MIT. See `LICENSE-code`.
 
-The recipes and images are licensed under a [Creative Commons Attibution 4.0 license (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). This applies to everything in the `./recipes` and `./public/img/recipes` directories.
-You can find a copy of the license in the `LICENSE-recipes` file.
-
-The source code for the site is licensed under the MIT License.
-You can find a copy of the license in the `LICENSE-code` file.
+_Please don't copy recipes from the internet or cookbooks without significant modifications. Use only images you took yourself._

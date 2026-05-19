@@ -1,0 +1,56 @@
+{{- /*
+  Emits schema.org/Recipe JSON-LD for a recipe single page.
+  Wrapped in <script type="application/ld+json">.
+*/ -}}
+{{- $page := . -}}
+{{- $img := $page.Resources.GetMatch $page.Params.image -}}
+
+{{- /* Ingredients formatted "160g Red Lentils" / "Red Lentils" if no amount. */ -}}
+{{- $ingredients := slice -}}
+{{- range $page.Params.ingredients -}}
+  {{- $line := .name -}}
+  {{- if .amount -}}
+    {{- $unit := default "" .unit -}}
+    {{- if eq $unit "none" -}}{{- $unit = "" -}}{{- end -}}
+    {{- $sep := "" -}}
+    {{- if or (eq $unit "pc") (eq $unit "tbsp") -}}{{- $sep = " " -}}{{- end -}}
+    {{- $line = printf "%v%s%s %s" .amount $sep $unit .name -}}
+  {{- end -}}
+  {{- $ingredients = $ingredients | append $line -}}
+{{- end -}}
+
+{{- /* Instructions: take <li>…</li> blocks and turn each into a HowToStep. */ -}}
+{{- $instructions := slice -}}
+{{- range findRE "(?s)<li>(.*?)</li>" $page.Content -}}
+  {{- $text := replaceRE "(?s)</?li>" "" . -}}
+  {{- $text = replaceRE "<[^>]+>" "" $text -}}
+  {{- $text = trim $text " \r\n\t" -}}
+  {{- if $text -}}
+    {{- $instructions = $instructions | append (dict "@type" "HowToStep" "text" $text) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $diet := $page.Params.diet -}}
+{{- $dietMap := dict "vegan" "https://schema.org/VeganDiet" "vegetarian" "https://schema.org/VegetarianDiet" -}}
+{{- $suitableForDiet := index $dietMap $diet -}}
+{{- $imageUrls := slice -}}
+{{- if $img -}}{{- $imageUrls = $imageUrls | append $img.Permalink -}}{{- end -}}
+
+{{- $data := dict
+  "@context"           "https://schema.org"
+  "@type"              "Recipe"
+  "name"               $page.Title
+  "description"        (i18n "meta.description.recipe" (dict "name" $page.Title))
+  "datePublished"      ($page.Date.Format "2006-01-02T15:04:05Z07:00")
+  "inLanguage"         $page.Language.Lang
+  "recipeYield"        "2 servings"
+  "totalTime"          (printf "PT%dM" (int $page.Params.cookTime))
+  "cookTime"           (printf "PT%dM" (int $page.Params.cookTime))
+  "recipeIngredient"   $ingredients
+  "recipeInstructions" $instructions
+  "url"                $page.Permalink
+  "image"              $imageUrls
+  "suitableForDiet"    $suitableForDiet
+  "keywords"           $diet
+-}}
+<script type="application/ld+json">{{ $data | jsonify | safeJS }}</script>
