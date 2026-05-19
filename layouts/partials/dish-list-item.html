@@ -1,0 +1,14 @@
+<li class="dish-list__item">
+  <a class="dish-list__link" href="{{ .RelPermalink }}">
+    <div class="dish-list__img">
+      {{- partial "recipe-img.html" (dict "page" . "variant" "list") -}}
+    </div>
+    <div>
+      <h3 class="dish-list__title">{{ .Title }}</h3>
+      <div class="dish-list__row">
+        <span>{{ i18n "preparationTime.inMinutes" (dict "minutes" .Params.cookTime) }}</span>
+        {{- partial "icon-diet.html" (dict "diet" .Params.diet "size" 18) -}}
+      </div>
+    </div>
+  </a>
+</li>

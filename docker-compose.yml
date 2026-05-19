@@ -1,0 +1,15 @@
+services:
+  nononsensecooking:
+    image: ghcr.io/riesinger/nononsensecooking:main
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nononsensecooking.rule=Host(`nononsense.cooking`)
+      - traefik.http.routers.nononsensecooking.entrypoints=websecure
+      - traefik.http.routers.nononsensecooking.tls.certresolver=letsencrypt
+      - traefik.http.services.nononsensecooking.loadbalancer.server.port=8080
+
+networks:
+  traefik:
+    external: true

@@ -1,0 +1,12 @@
+{{- $u := default "none" .unit -}}
+<li
+  class="ingredients__item"
+  {{- if .scales }} data-scales="true" data-base-amount="{{ .amount }}" data-unit="{{ $u }}"{{- end -}}
+>
+  <span class="ingredients__amount">
+    {{- if .amount -}}
+      <span data-amount-out>{{ .amount }}</span>{{ i18n (printf "recipe.suffix.%s" $u) }}
+    {{- end -}}
+  </span>
+  <span class="ingredients__name">{{ .name }}</span>
+</li>

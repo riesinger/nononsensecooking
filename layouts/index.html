@@ -1,0 +1,68 @@
+{{ define "main" }}
+{{- $recipes := where site.RegularPages "Section" "r" -}}
+{{- $pub := where $recipes "Draft" false -}}
+{{- /*
+  Deterministic daily rotation: sort by title for a stable order, then rotate by
+  day-of-year so the home page changes once per UTC day instead of every build.
+  Keeping the order stable across rebuilds lets the HTML response be cached.
+*/ -}}
+{{- $sorted := sort $pub "Title" -}}
+{{- $count := len $sorted -}}
+{{- $today := slice -}}
+{{- $latest := first 3 (sort $pub "Date" "desc") -}}
+{{- if gt $count 0 -}}
+  {{- $offset := mod (int (now.Format "2006") | add now.YearDay) $count -}}
+  {{- range $i := seq 0 2 -}}
+    {{- $today = $today | append (index $sorted (mod (add $offset $i) $count)) -}}
+  {{- end -}}
+{{- end -}}
+{{- $popularSlugs := index hugo.Data.popular site.Language.Lang | default slice -}}
+{{- $popular := slice -}}
+{{- range $popularSlugs -}}
+  {{- with site.GetPage (printf "/r/%s" .) -}}
+    {{- $popular = $popular | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $popular = first 3 $popular -}}
+
+<section class="section section--cards">
+  <h2 class="section__title">{{ i18n "home.todaysrecipes" }}</h2>
+  <div class="track">
+    {{- range $i, $p := $today -}}
+      {{- partial "dish-card.html" (dict "page" $p "eager" (eq $i 0)) -}}
+    {{- end -}}
+  </div>
+</section>
+
+<section class="section section--cards">
+  <h2 class="section__title">{{ i18n "home.mostpopularrecipes" }}</h2>
+  <div class="track">
+    {{- if gt (len $popular) 0 -}}
+      {{- range $popular -}}
+        {{- partial "dish-card.html" . -}}
+      {{- end -}}
+    {{- else if gt $count 0 -}}
+      {{- $popOffset := mod (add (int (now.Format "2006") | add now.YearDay) 7) $count -}}
+      {{- range $i := seq 0 2 -}}
+        {{- partial "dish-card.html" (index $sorted (mod (add $popOffset $i) $count)) -}}
+      {{- end -}}
+    {{- end -}}
+  </div>
+</section>
+
+<section class="section section--cards">
+  <h2 class="section__title">{{ i18n "home.latestrecipes" }}</h2>
+  <div class="track">
+    {{- range $latest -}}
+      {{- partial "dish-card.html" . -}}
+    {{- end -}}
+  </div>
+</section>
+
+<section class="section section--about prose">
+  <h2>{{ i18n "home.about.sectiontitle" }}</h2>
+  <p>{{ i18n "home.about.introduction" }}</p>
+  <p>{{ i18n "home.about.mission" }}</p>
+  <p>{{ i18n "home.about.cta" | safeHTML }}</p>
+</section>
+{{ end }}

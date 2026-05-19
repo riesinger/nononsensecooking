@@ -1,0 +1,33 @@
+baseURL = 'https://nononsense.cooking/'
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = true
+enableRobotsTXT = false
+title = 'NoNonsenseCooking'
+disableKinds = ['taxonomy', 'term']
+
+[taxonomies]
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[outputs]
+home = ['HTML', 'RSS', 'SEARCHINDEX']
+
+[outputFormats.searchindex]
+mediaType = 'application/json'
+baseName = 'search-index'
+isPlainText = true
+notAlternative = true
+
+[mediaTypes.'application/json']
+suffixes = ['json']
+
+[languages.en]
+label = 'English'
+locale = 'en-US'
+weight = 1
+
+[languages.de]
+label = 'Deutsch'
+locale = 'de-DE'
+weight = 2

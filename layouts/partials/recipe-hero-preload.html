@@ -1,0 +1,23 @@
+{{- /*
+  Emits a <link rel="preload" as="image"> for the recipe hero so the LCP
+  image starts downloading as early as the CSS does. Matches the widths
+  emitted by recipe-img.html for the "hero" variant.
+*/ -}}
+{{- $img := .Resources.GetMatch .Params.image -}}
+{{- if $img -}}
+  {{- $widths := slice 480 720 960 1280 -}}
+  {{- $sizes  := "(min-width: 1088px) 672px, (min-width: 1024px) calc(100vw - 26rem), calc(100vw - 4rem)" -}}
+  {{- $maxW := $img.Width -}}
+  {{- $set := slice -}}
+  {{- $fallback := "" -}}
+  {{- range $widths -}}
+    {{- if le . $maxW -}}
+      {{- $w := $img.Process (printf "resize %dx webp q80" .) -}}
+      {{- $set = $set | append (printf "%s %dw" $w.RelPermalink .) -}}
+      {{- $fallback = $w.RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $fallback -}}
+  <link rel="preload" as="image" type="image/webp" href="{{ $fallback }}" {{ printf "imagesrcset=%q" (delimit $set ", ") | safeHTMLAttr }} imagesizes="{{ $sizes }}" fetchpriority="high">
+  {{- end -}}
+{{- end -}}

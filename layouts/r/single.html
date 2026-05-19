@@ -1,0 +1,46 @@
+{{ define "head" }}
+{{- partial "recipe-hero-preload.html" . -}}
+{{- partial "recipe-jsonld.html" . -}}
+{{ end }}
+
+{{ define "main" }}
+<article class="recipe" data-default-servings="2">
+  <header class="recipe__header">
+    <h1 class="recipe__title">{{ .Title }}</h1>
+    <div class="recipe__meta">
+      <span class="recipe__time">
+        {{- partial "icon.html" (dict "id" "clock" "size" 20) -}}
+        {{ .Params.cookTime }}min
+      </span>
+      {{ partial "icon-diet.html" (dict "diet" .Params.diet "size" 22) }}
+    </div>
+  </header>
+
+  <div class="recipe__intro">
+    <div class="recipe__hero">
+      {{- partial "recipe-img.html" (dict "page" . "variant" "hero" "eager" true) -}}
+    </div>
+
+    <div class="recipe__side">
+      <div class="servings" id="servings-control">
+        <h2 class="servings__label">{{ i18n "recipe.servings" }}</h2>
+        <div class="servings__controls">
+          <button type="button" class="servings__btn" id="servings-minus" aria-label="{{ i18n "recipe.servings_less" }}">−</button>
+          <span class="servings__value" id="servings-value">2</span>
+          <button type="button" class="servings__btn" id="servings-plus" aria-label="{{ i18n "recipe.servings_more" }}">+</button>
+        </div>
+      </div>
+
+      <ul class="ingredients">
+        {{- range .Params.ingredients -}}
+          {{- partial "ingredient-item.html" . -}}
+        {{- end -}}
+      </ul>
+    </div>
+  </div>
+
+  <div class="recipe__steps prose">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

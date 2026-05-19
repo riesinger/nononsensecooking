@@ -1,0 +1,34 @@
+---
+title: Spinatwraps mit Dillcreme
+translationKey: spinach-wraps-filled-with-dill-cream
+date: '2021-08-18T20:08:13.465Z'
+image: spinatwraps.jpg
+cookTime: 35
+diet: vegetarian
+draft: false
+ingredients:
+- name: Frischer Blattspinat
+  amount: 400
+  unit: g
+  scales: true
+- name: Ei
+  amount: 4
+  scales: true
+- name: Crème fraîche
+  amount: 300
+  unit: g
+  scales: true
+- name: Dill
+- name: Pfeffer
+- name: Salz
+---
+
+1. Heize deinen Ofen auf 200°C auf Ober- & Unterhitze vor
+2. Wasche dann den Spinat, gebe ihn in ein Sieb und übergieße ihn mit kochendem Wasser
+3. Drücke mit den Händen so viel Wasser wie möglich aus dem Spinat
+4. Jetzt kannst du den Spinat pürieren, dann die Eier, Salz und Pfeffer hinzugeben und erneut pürieren
+5. Verteile jetzt die Masse möglichst gleichmäßig auf einem Backbleck, auf welches du ein Backpapier gelegt hast und backe den Wrap für ca 10-15 Minuten, bis die Masse stockt
+6. Mische in der Zwischenzeit Crème fraîche, Salz, Pfeffer und Dill in einer Schüssel
+7. Sobald der Wrap stockt, nehme ihn aus dem Ofen und lege ihn vorsichtig auf ein Gitter. Um ihn vom Backpapier zu lösen kanst du einen Pfannenwender oder Spatel nutzen. Falls du kein Gitter zur Hand hast, geht auch ein Schneidebrett, dann solltest du den Wrap jedoch ab und zu wenden
+8. Lasse den Wrap auf dem Gitter vollständig auskühlen. Tupfe ihn nach ca. 5 Minuten mit einem Küchenpapier ab, um die sich bildende Feuchtigkeit aufzufangen
+9. Sobald der Wrap gekühlt ist, kannst du die Crème darauf verteilen, den Wrap rollen und ihn genießen

@@ -1,0 +1,88 @@
+# UI strings. Recipe titles and ingredients live in the content frontmatter.
+
+# Home page
+"home.todaysrecipes"      = "Rezepte des Tages"
+"home.mostpopularrecipes" = "Beliebteste Rezepte"
+"home.latestrecipes"      = "Neueste Rezepte"
+"home.allrecipes"         = "Alle Rezepte"
+"home.about.sectiontitle" = "Was ist NoNonsenseCooking?"
+"home.about.introduction" = 'NoNonsenseCooking wurde gebaut, weil viele Rezept-Websites mit Werbung und unnützen Features überladen sind und es dutzende Rezepte für jedes Gericht gibt. Wie soll man da nur "das Richtige" auswählen?'
+"home.about.mission"      = "Wir haben uns zur Mission gemacht, unsere Lieblingsrezepte einfach und ohne unnötigen Schnickschnack aufzubereiten und hier zu veröffentlichen"
+"home.about.cta"          = 'Du willst immer auf dem Laufenden bleiben? Dann abonniere doch unseren <a href="/rss/">RSS-Feed</a> mit deinem Lieblings-Reader. Dir gefällt, was wir machen? <a href="/donate/">Hier</a> erfährst du, wie du uns unterstützen kannst.'
+
+# All-recipes filter toolbar
+"filters.diet.label"     = "Nach Ernährung filtern"
+"filters.diet.all"       = "Alle"
+"filters.cooktime.label" = "Nach Zubereitungszeit filtern"
+"filters.cooktime.any"   = "Beliebig"
+"filters.cooktime.lte15" = "≤ 15 min"
+"filters.cooktime.lte30" = "≤ 30 min"
+"filters.cooktime.lte60" = "≤ 1 h"
+"filters.sort.label"     = "Sortieren"
+"filters.sort.title"     = "A – Z"
+"filters.sort.latest"    = "Neueste zuerst"
+"filters.sort.cooktime"  = "Schnellste zuerst"
+"filters.empty"          = "Keine Rezepte mit diesem Filter."
+"filters.count.template" = "{n} von {total} Rezepten"
+
+# Diet labels
+"diet.meat"       = "Enthält Fleisch"
+"diet.fish"       = "Enthält Fisch"
+"diet.vegetarian" = "Vegetarisch"
+"diet.vegan"      = "Vegan"
+
+# Recipe page
+"recipe.servings"       = "Portionen"
+"recipe.servings_less"  = "Weniger Portionen"
+"recipe.servings_more"  = "Mehr Portionen"
+"preparationTime.inMinutes" = "{{ .minutes }}min"
+
+# Ingredient unit suffix appended to the (scalable) amount.
+"recipe.suffix.none" = ""
+"recipe.suffix.g"    = "g"
+"recipe.suffix.kg"   = "kg"
+"recipe.suffix.pc"   = " Stück"
+"recipe.suffix.ml"   = "ml"
+"recipe.suffix.l"    = "l"
+"recipe.suffix.tbsp" = " Esslöffel"
+
+# Meta tags
+"meta.description.main"   = "Finde simple und leckere Rezepte auf NoNonsenseCooking"
+"meta.description.recipe" = "Koche {{ .name }} mit einem simplen Rezept auf NoNonsenseCooking"
+
+# Header / search
+"header.link.allrecipes"     = "Alle Rezepte"
+"header.link.random"         = "Überrasch mich"
+"header.searchbar.placeholder" = "Suche nach Rezepten"
+"search.pagetitle"           = "Suchergebnisse"
+"search.findrecipes"         = "Finde deine Lieblingsrezepte"
+
+# Footer
+"footer.link.legal.text"  = "Datenschutz & Impressum"
+"footer.link.donate.text" = "Spenden"
+"footer.link.rss.title"   = "Per RSS abonieren"
+"footer.licensenotice"    = 'Die Inhalte auf dieser Seite unterliegen der <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a> Lizenz'
+
+# 404
+"notfound.pagetitle"        = "Seite nicht gefunden"
+"notfound.displaytitle"     = "404 - Seite nicht gefunden 👀"
+"notfound.explanation"      = "Leider konnten wir die Seite, die Du besuchen möchtest nicht finden. Hoffentlich helfen dir diese Links weiter:"
+"notfound.links.home"       = "Zurück zur Startseite"
+"notfound.links.allrecipes" = "Alle Rezepte"
+"notfound.links.github"     = "Fehler auf GitHub melden"
+
+# Donate
+"donation.displayPageTitle"        = "Spenden ❤️"
+"donation.introduction"            = "NoNonsenseCooking wurde gebaut, weil viele Rezept-Websites mit Werbung und Trackern überladen sind und es dutzende Rezepte für jedes Gericht gibt. Ich würde mich sehr freuen, wenn Du mich dabei unterstützt, kurierte Rezepte werbe- und trackingfrei ins Internet zu bringen!"
+"donation.section.monthly.title"   = "Monatlich spenden"
+"donation.section.onetime.title"   = "Einmalig spenden"
+
+# Feeds
+"feed.displayPageTitle"          = "Abonniere unsere Feeds"
+"feed.introduction"              = "Du möchtest mitbekommen, wenn wir ein neues Rezept veröffentlichen? Abonniere unseren RSS-Feed in deinem Feedreader."
+"feed.feedtypes"                 = "Die meisten Reader unterstützen RSS — nutze zuerst die RSS-URL unten."
+"feed.feedreader.sectionTitle"   = "Feedreader"
+"feed.feedreader.introduction"   = "Du hast noch keinen Feedreader? Hier sind Empfehlungen — keine sind gesponsert."
+"feed.feedreader.android"        = "Android"
+"feed.feedreader.iOS"            = "iOS"
+"feed.feedreader.other"          = "Sonstige"

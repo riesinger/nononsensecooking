@@ -1,0 +1,1 @@
+{{- partial "icon.html" (dict "id" "menu" "size" 24) -}}

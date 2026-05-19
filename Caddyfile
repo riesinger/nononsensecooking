@@ -1,0 +1,52 @@
+:8080 {
+	encode zstd gzip
+	root * /site
+
+	@root path /
+	@german header Accept-Language *de*
+	handle @root {
+		redir @german /de/ 302
+		redir /en/ 302
+	}
+
+	@enu path_regexp enu ^/en-US/(.*)$
+	redir @enu /en/{re.enu.1} 301
+
+	@deu path_regexp deu ^/de-DE/(.*)$
+	redir @deu /de/{re.deu.1} 301
+
+	@rssEn path /rss/feed.en-US.xml /rss/feed.en.xml /feed.xml /rss/feed.xml
+	rewrite @rssEn /en/index.xml
+
+	@rssDe path /rss/feed.de-DE.xml /rss/feed.de.xml
+	rewrite @rssDe /de/index.xml
+
+	# Fingerprinted CSS / JS (Hugo emits *.min.<hash>.{css,js,mjs}) are
+	# content-addressed and safe to cache forever.
+	@hashedAssets path_regexp hashed ^/(css|js|vendor)/.*\.min\.[a-f0-9]{8,}\.(css|js|mjs)$
+	header @hashedAssets Cache-Control "public, max-age=31536000, immutable"
+
+	# Make sure ES modules are served with the correct MIME so dynamic
+	# import() doesn't fail on strict browsers / older file_server defaults.
+	@mjs path *.mjs
+	header @mjs Content-Type "text/javascript; charset=utf-8"
+
+	# Other static assets (fonts, raw images under /img/).
+	@assets path /img/* /fonts/*
+	header @assets Cache-Control "public, max-age=2592000"
+
+	# Hugo image-pipeline output lives under /<lang>/r/<slug>/<hash>.{jpg,webp}
+	# and the hash makes the URL content-addressed.
+	@processedImages path_regexp images \.(jpg|jpeg|png|webp|avif|svg|ico)$
+	header @processedImages Cache-Control "public, max-age=2592000"
+
+	# HTML pages get a short freshness window with stale-while-revalidate.
+	@html path *.html /
+	header @html Cache-Control "public, max-age=300, stale-while-revalidate=86400"
+
+	# Search index changes per deploy; serve fresh-ish.
+	@searchIndex path */search-index.json
+	header @searchIndex Cache-Control "public, max-age=300, stale-while-revalidate=86400"
+
+	file_server
+}

@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="section search-page" id="search-page">
+  <div class="search-page__empty prose" id="search-empty">
+    <h1>{{ i18n "search.pagetitle" }}</h1>
+    <p class="search-page__prompt">{{ i18n "search.findrecipes" }}</p>
+    {{ partial "search-form-only.html" . }}
+  </div>
+  <div id="search-results-wrap" class="search-page__results" hidden>
+    <div class="prose">
+      <h1 class="search-page__heading" id="search-heading"></h1>
+    </div>
+    <ul class="dish-list" id="search-results-list"></ul>
+  </div>
+</div>
+{{ end }}

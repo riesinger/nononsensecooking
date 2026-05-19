@@ -1,0 +1,77 @@
+{{ define "main" }}
+{{- $pub := where .Pages "Draft" false -}}
+<div class="section">
+  <div class="recipes-toolbar">
+    <h1 class="section__title section__title--page recipes-toolbar__title">{{ i18n "home.allrecipes" }}</h1>
+    <div class="recipes-toolbar__controls" data-recipe-filters>
+      <fieldset class="filter-chips" role="group" aria-label="{{ i18n "filters.diet.label" }}">
+        <legend class="visually-hidden">{{ i18n "filters.diet.label" }}</legend>
+        <button type="button" class="filter-chip is-active" data-filter-diet="all" aria-pressed="true">{{ i18n "filters.diet.all" }}</button>
+        <button type="button" class="filter-chip" data-filter-diet="vegan" aria-pressed="false">
+          {{- partial "icon.html" (dict "id" "vegan" "size" 16) -}}
+          <span>{{ i18n "diet.vegan" }}</span>
+        </button>
+        <button type="button" class="filter-chip" data-filter-diet="vegetarian" aria-pressed="false">
+          {{- partial "icon.html" (dict "id" "vegetarian" "size" 16) -}}
+          <span>{{ i18n "diet.vegetarian" }}</span>
+        </button>
+        <button type="button" class="filter-chip" data-filter-diet="fish" aria-pressed="false">
+          {{- partial "icon.html" (dict "id" "fish" "size" 16) -}}
+          <span>{{ i18n "diet.fish" }}</span>
+        </button>
+        <button type="button" class="filter-chip" data-filter-diet="meat" aria-pressed="false">
+          {{- partial "icon.html" (dict "id" "meat" "size" 16) -}}
+          <span>{{ i18n "diet.meat" }}</span>
+        </button>
+      </fieldset>
+      <fieldset class="filter-chips" role="group" aria-label="{{ i18n "filters.cooktime.label" }}">
+        <legend class="visually-hidden">{{ i18n "filters.cooktime.label" }}</legend>
+        <button type="button" class="filter-chip is-active" data-filter-cooktime="all" aria-pressed="true">{{ i18n "filters.cooktime.any" }}</button>
+        <button type="button" class="filter-chip" data-filter-cooktime="15" aria-pressed="false">{{ i18n "filters.cooktime.lte15" }}</button>
+        <button type="button" class="filter-chip" data-filter-cooktime="30" aria-pressed="false">{{ i18n "filters.cooktime.lte30" }}</button>
+        <button type="button" class="filter-chip" data-filter-cooktime="60" aria-pressed="false">{{ i18n "filters.cooktime.lte60" }}</button>
+      </fieldset>
+      <label class="sort-select">
+        <span class="sort-select__label">{{ i18n "filters.sort.label" }}</span>
+        <select data-recipe-sort>
+          <option value="title">{{ i18n "filters.sort.title" }}</option>
+          <option value="latest" selected>{{ i18n "filters.sort.latest" }}</option>
+          <option value="cooktime">{{ i18n "filters.sort.cooktime" }}</option>
+        </select>
+      </label>
+    </div>
+    <p class="recipes-toolbar__count"
+       data-recipe-count
+       data-template="{{ i18n "filters.count.template" }}"
+       role="status"
+       aria-live="polite"></p>
+  </div>
+
+  <ul class="dish-list" data-recipe-list>
+    {{- range $p := sort $pub "Date" "desc" -}}
+      {{- $title := $p.Title -}}
+      {{- $date  := $p.Date.Format "2006-01-02T15:04:05Z07:00" -}}
+      <li class="dish-list__item"
+          data-diet="{{ $p.Params.diet }}"
+          data-cooktime="{{ $p.Params.cookTime }}"
+          data-date="{{ $date }}"
+          data-title="{{ lower $title }}">
+        <a class="dish-list__link" href="{{ $p.RelPermalink }}">
+          <div class="dish-list__img">
+            {{- partial "recipe-img.html" (dict "page" $p "variant" "list") -}}
+          </div>
+          <div>
+            <h3 class="dish-list__title">{{ $title }}</h3>
+            <div class="dish-list__row">
+              <span>{{ i18n "preparationTime.inMinutes" (dict "minutes" $p.Params.cookTime) }}</span>
+              {{- partial "icon-diet.html" (dict "diet" $p.Params.diet "size" 18) -}}
+            </div>
+          </div>
+        </a>
+      </li>
+    {{- end -}}
+  </ul>
+
+  <p class="dish-list__empty" data-recipe-empty hidden>{{ i18n "filters.empty" }}</p>
+</div>
+{{ end }}

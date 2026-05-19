@@ -1,0 +1,12 @@
+{{- /*
+  Renders an inline SVG that references a symbol from the page-level sprite.
+
+  Params:
+    id     The symbol id without the leading "#" (e.g. "menu", "search", "clock").
+    size   Pixel size for both width/height (default 24).
+    class  Optional CSS class.
+*/ -}}
+{{- $id    := .id -}}
+{{- $size  := .size | default 24 -}}
+{{- $class := .class | default "" -}}
+<svg{{ if $class }} class="{{ $class }}"{{ end }} width="{{ $size }}" height="{{ $size }}" fill="currentColor" aria-hidden="true"><use href="#i-{{ $id }}"/></svg>
