@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/gohugoio/hugo:v0.163.0 AS builder
+FROM ghcr.io/gohugoio/hugo:v0.163.1 AS builder
 USER root
 WORKDIR /src
 COPY . .
