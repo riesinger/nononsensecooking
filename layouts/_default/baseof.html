@@ -81,7 +81,7 @@
   {{- $servings := resources.Get "js/servings.js" | minify | fingerprint -}}
   <script src="{{ $servings.RelPermalink }}" integrity="{{ $servings.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{/* renovate: datasource=npm depName=fuse.js */}}
-  {{- $fuse   := resources.Get "vendor/fuse-7.3.0.min.mjs" | fingerprint -}}
+  {{- $fuse   := resources.Get "vendor/fuse-7.4.2.min.mjs" | fingerprint -}}
   {{- $search := resources.Get "js/search.js" | minify | fingerprint -}}
   <script src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}" crossorigin="anonymous" data-fuse-url="{{ $fuse.RelPermalink }}" defer></script>
   {{- if and (eq .Section "r") .IsNode -}}
